@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView"
+        android:id="@+id/main_title_TV"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/app_name"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/main_email_ET"
         android:layout_marginTop="33dp"
         android:textSize="20sp"
         android:layout_below="@+id/textView2"
@@ -37,9 +37,9 @@
         android:id="@+id/textView2"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
+        android:layout_below="@+id/main_title_TV"
+        android:layout_alignLeft="@+id/main_email_ET"
+        android:layout_alignStart="@+id/main_email_ET"
         android:layout_marginTop="35dp" />
 
     <EditText
@@ -49,30 +49,30 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
+        android:id="@+id/main_password_ET"
+        android:layout_below="@+id/main_email_ET"
+        android:layout_alignLeft="@+id/main_email_ET"
+        android:layout_alignStart="@+id/main_email_ET"
         android:layout_marginTop="38dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signInBtnText"
-        android:id="@+id/button"
+        android:id="@+id/main_login_image_button"
         android:layout_marginTop="46dp"
-        android:layout_below="@+id/editText2"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/main_password_ET"
+        android:layout_alignLeft="@+id/main_title_TV"
+        android:layout_alignStart="@+id/main_title_TV"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signUpBtnText"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:id="@+id/main_register_image_button"
+        android:layout_alignTop="@+id/main_login_image_button"
+        android:layout_alignRight="@+id/main_title_TV"
+        android:layout_alignEnd="@+id/main_title_TV" />
 
 </RelativeLayout>

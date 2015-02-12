@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView"
+        android:id="@+id/main_title_TV"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/app_name"
@@ -23,9 +23,9 @@
         android:background="@drawable/rounded_edittext"
         android:hint="@string/email"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/main_email_ET"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/main_title_TV"
         android:layout_alignParentStart="true"
         android:inputType="textEmailAddress" />
 
@@ -36,36 +36,38 @@
         android:background="@drawable/rounded_edittext"
         android:hint="@string/passwordHint"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/main_password_ET"
         android:layout_marginTop="8dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/main_email_ET"
         android:layout_centerHorizontal="true" />
 
     <View
-        android:id="@+id/fakeView"
-        android:layout_width="2dp"
+        android:id="@+id/fake_view"
+        android:layout_width="5dp"
         android:layout_height="5dp"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/main_password_ET"
         android:layout_centerHorizontal="true"
         android:background="#FFAABB"
         android:visibility="invisible"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:src="@drawable/login_grey"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/signInBtnText"
-        android:id="@+id/button"
-        android:layout_alignTop="@id/fakeView"
-        android:layout_toStartOf="@id/fakeView" />
+        android:id="@+id/main_login_image_button"
+        android:layout_alignTop="@id/fake_view"
+        android:layout_toStartOf="@id/fake_view" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:src="@drawable/register_blue"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/signUpBtnText"
-        android:id="@+id/button2"
+        android:id="@+id/main_register_image_button"
         android:onClick="callSignUpPage"
-        android:layout_alignTop="@id/fakeView"
-        android:layout_toEndOf="@id/fakeView" />
+        android:layout_alignTop="@id/fake_view"
+        android:layout_toEndOf="@id/fake_view" />
 
 </RelativeLayout>
