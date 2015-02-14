@@ -53,8 +53,10 @@
         android:background="#FFAABB"
         android:visibility="invisible"/>
 
+    <!-- DEVICE DEFAULT BUTTONS-->
+
     <Button
-        style="@android:style/Widget.Holo.Light.Button.Small"
+        style="@android:style/Widget.DeviceDefault.Light.Button.Small"
         android:text="@string/login"
         android:textStyle="bold"
         android:layout_width="100dp"
@@ -65,7 +67,7 @@
         android:layout_toLeftOf="@id/fake_view"/>
 
     <Button
-        style="@android:style/Widget.Holo.Light.Button.Small"
+        style="@android:style/Widget.DeviceDefault.Light.Button.Small"
         android:text="@string/register"
         android:textStyle="bold"
         android:src="@drawable/register_blue"
