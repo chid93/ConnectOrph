@@ -3,13 +3,18 @@
 
     <string name="app_name">ConnectOrph</string>
     <string name="action_settings">Settings</string>
+
     <string name="name">Name</string>
     <string name="nameHint">Your Full Name</string>
+
     <string name="email">Email Address</string>
     <string name="emailHint">someone@example.com</string>
+    <string name="orphanage_id">Orphanage ID</string>
+
     <string name="password">Password</string>
     <string name="passwordHint">Password</string>
     <string name="retypePasswordHint">Retype Password</string>
+
     <string name="phoneNumberHint">Phone Number</string>
     <string name="address">Address</string>
     <string name="addressLine1">Street Address</string>
@@ -18,7 +23,8 @@
     <string name="state">State/Province</string>
     <string name="zipCode">Postal/Zip Code</string>
     <string name="country">Country</string>
-    <string name="signInBtnText">Login</string>
-    <string name="signUpBtnText">Sign up</string>
+
+    <string name="registerOrphanage">Register as an Orphanage</string>
+    <string name="registerDonor">Register as a Donor</string>
 
 </resources>
