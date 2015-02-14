@@ -1,14 +1,18 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
-        <!-- <item name="android:actionBarStyle">@style/MyActionBar</item> -->
+        <!-- Customize your theme here.
+        <item name="android:actionBarStyle"   tools:ignore="NewApi">@style/MyActionBar</item>
+        <item name="actionBarStyle">@style/MyActionBar</item> -->
     </style>
 
-    <!-- ActionBar styles
-    <style name="MyActionBar"
-        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <!--
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="android:background"  tools:ignore="NewApi">@color/sa_blue</item>
+        <item name="background">@color/sa_blue</item>
     </style> -->
 
-</resources>
+    </resources>

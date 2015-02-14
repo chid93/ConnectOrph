@@ -2,9 +2,6 @@ package com.hprotcennoc.frostic3.connectorph;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-/**
- * Created by frostic3 on 2/14/2015.
- */
 public class TabsAdapterLaunch extends FragmentStatePagerAdapter{
     private int TOTAL_TABS = 2;
 
@@ -19,11 +16,9 @@ public class TabsAdapterLaunch extends FragmentStatePagerAdapter{
         switch (index) {
             case 0:
                 return new DonorFragmentLaunch();
-
             case 1:
                 return new OrphanageFragmentLaunch();
         }
-
         return null;
     }
 

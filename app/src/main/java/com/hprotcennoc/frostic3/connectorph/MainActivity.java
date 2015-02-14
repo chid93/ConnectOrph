@@ -1,6 +1,8 @@
 package com.hprotcennoc.frostic3.connectorph;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -25,7 +27,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         tabsviewPager.setAdapter(mTabsAdapter);
 
         getSupportActionBar().setHomeButtonEnabled(false);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33B5E5")));
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         ActionBar.Tab donorstab = getSupportActionBar().newTab().setText("Donor").setTabListener(this);
         ActionBar.Tab orphanagetab = getSupportActionBar().newTab().setText("Orphanage").setTabListener(this);
