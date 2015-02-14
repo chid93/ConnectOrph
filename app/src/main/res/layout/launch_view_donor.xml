@@ -53,15 +53,20 @@
         android:background="#FFAABB"
         android:visibility="invisible"/>
 
-    <ImageButton
-        android:src="@drawable/login_grey"
+    <Button
+        style="@android:style/Widget.Holo.Light.Button.Small"
+        android:text="@string/login"
+        android:textStyle="bold"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:id="@+id/view_donor_login_image_button"
         android:layout_alignTop="@id/fake_view"
         android:layout_toStartOf="@id/fake_view" />
 
-    <ImageButton
+    <Button
+        style="@android:style/Widget.Holo.Light.Button.Small"
+        android:text="@string/register"
+        android:textStyle="bold"
         android:src="@drawable/register_blue"
         android:layout_width="100dp"
         android:layout_height="50dp"

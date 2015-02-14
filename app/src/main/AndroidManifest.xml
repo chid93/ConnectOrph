@@ -16,9 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpPage" />
-        <activity android:name=".UserRegForm" />
-        <activity android:name=".OrphRegForm" />
+        <activity
+            android:name=".UserRegForm"
+            android:label="@string/registerDonor"/>
+        <activity
+            android:name=".OrphRegForm"
+            android:label="@string/registerOrphanage" />
     </application>
 
 </manifest>

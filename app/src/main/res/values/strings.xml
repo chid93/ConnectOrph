@@ -3,7 +3,7 @@
 
     <string name="app_name">ConnectOrph</string>
     <string name="action_settings">Settings</string>
-
+    <!-- Form Registeration -->
     <string name="name">Name</string>
     <string name="nameHint">Your Full Name</string>
 
@@ -24,6 +24,8 @@
     <string name="zipCode">Postal/Zip Code</string>
     <string name="country">Country</string>
 
+    <string name="login">Login</string>
+    <string name="register">Register</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
 

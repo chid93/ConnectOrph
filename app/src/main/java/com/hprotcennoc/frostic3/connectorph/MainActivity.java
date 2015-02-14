@@ -6,16 +6,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
 
     private ViewPager tabsviewPager;
-    private TabsAdapterLaunch mTabsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +20,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
 
-        mTabsAdapter = new TabsAdapterLaunch(getSupportFragmentManager());
+        TabsAdapterLaunch mTabsAdapter = new TabsAdapterLaunch(getSupportFragmentManager());
 
         tabsviewPager.setAdapter(mTabsAdapter);
 
