@@ -39,7 +39,7 @@ public class UserRegForm extends ActionBarActivity{
                     layout.addView(validation_req,lParams);/**/
                 }
                 else{
-                    
+
                     name.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
                 }
             }
