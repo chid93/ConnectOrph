@@ -169,22 +169,21 @@
                 android:layout_below="@id/fr_user_street_address_line_2_ET"
                 android:orientation="horizontal">
 
-                <EditText
+                <Spinner
+                    style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:id="@+id/fr_user_state_spinner"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_edittext"
-                    android:id="@+id/editText11"
-                    android:hint="@string/city"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="4dp" />
-                <EditText
+                    android:layout_marginRight="4dp"/>
+
+                <Spinner
+                    style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:id="@+id/fr_user_city_spinner"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_edittext"
-                    android:id="@+id/editText12"
-                    android:hint="@string/state"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="4dp" />
 
