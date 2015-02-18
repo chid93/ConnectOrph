@@ -69,7 +69,6 @@
         style="@android:style/Widget.DeviceDefault.Light.Button.Small"
         android:text="@string/register"
         android:textStyle="bold"
-        android:src="@drawable/register_blue"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:id="@+id/view_donor_register_image_button"
