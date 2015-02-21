@@ -48,7 +48,7 @@
         android:id="@+id/fake_view"
         android:layout_width="5dp"
         android:layout_height="5dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/view_orphanage_password_ET"
         android:layout_centerHorizontal="true"
         android:background="#FFAABB"

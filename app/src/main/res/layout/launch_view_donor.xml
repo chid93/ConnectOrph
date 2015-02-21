@@ -46,7 +46,7 @@
         android:id="@+id/fake_view"
         android:layout_width="5dp"
         android:layout_height="5dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/view_donor_password_ET"
         android:layout_centerHorizontal="true"
         android:background="#FFAABB"
@@ -76,5 +76,36 @@
         android:layout_alignTop="@id/fake_view"
         android:layout_toEndOf="@id/fake_view"
         android:layout_toRightOf="@id/fake_view"/>
+
+    <!-- Button bar
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:background="@drawable/ab_solid_bluewhite"
+        style="@style/ButtonBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@android:id/button1"
+            style="@style/ButtonBarButton"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/login" />
+        <Button
+            android:id="@android:id/button2"
+            style="@style/ButtonBarButton"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:text="@string/register" />
+    </LinearLayout> -->
 
 </RelativeLayout>
