@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hprotcennoc.frostic3.connectorph" >
+    package="com.hprotcennoc.frostic3.connectorph"
+    android:installLocation="auto">
 
     <application
         android:allowBackup="true"
@@ -19,12 +20,14 @@
         </activity>
         <activity
             android:name=".UserRegForm"
+            android:parentActivityName=".MainActivity"
             android:label="@string/registerDonor"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".OrphRegForm"
+            android:parentActivityName=".MainActivity"
             android:label="@string/registerOrphanage"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
