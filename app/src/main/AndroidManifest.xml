@@ -28,6 +28,11 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/registerOrphanage"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".OrphRegForm1"
+            android:parentActivityName=".OrphRegForm"
+            android:label="@string/orphanageContact"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

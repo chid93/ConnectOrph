@@ -5,7 +5,6 @@
     <string name="action_settings">Settings</string>
     <!-- Form Registeration -->
     <string name="name">Name*</string>
-    <string name="nameHint">Your Full Name</string>
     <string name="nameOrph">Name of Orphanage*</string>
 
     <string name="email">Email Address</string>
@@ -17,17 +16,22 @@
     <string name="retypePasswordHint">Retype Password</string>
 
     <string name="phoneNumberHint">Phone Number*</string>
-    <string name="address">Address</string>
+    <string name="address">Address*</string>
     <string name="addressLine1">Street Address</string>
     <string name="addressLine2">Street Address Line 2</string>
     <string name="city">City</string>
     <string name="state">State/Province</string>
     <string name="zipCode">Postal/Zip Code</string>
 
+    <string name="mission">Purpose/Objective/Mission*</string>
+    <string name="website">Website</string>
+    <string name="websiteHint">website or facebook/twitter page</string>
+
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
     <string name="next">NEXT</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
+    <string name="orphanageContact">Contact details</string>
 
     </resources>

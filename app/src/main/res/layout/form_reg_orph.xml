@@ -27,7 +27,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/nameOrph"
                 android:id="@+id/fr_orph_label_name_TV"
-                android:labelFor="@+id/fr_user_name_ET"
+                android:labelFor="@+id/fr_orph_name_ET"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
@@ -97,93 +97,6 @@
                 android:layout_below="@+id/fr_orph_password_ET"
                 android:layout_marginTop="5dp"/>
 
-            <!--  Phone Number Label -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/phoneNumberHint"
-                android:id="@+id/fr_orph_label_phone_number_TV"
-                android:labelFor="@+id/fr_orph_phone_number_ET"
-                android:layout_below="@id/fr_orph_retype_password_ET"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:background="@drawable/rounded_edittext"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:ems="10"
-                android:id="@+id/fr_orph_phone_number_ET"
-                android:layout_below="@+id/fr_orph_label_phone_number_TV"
-                android:maxLength="10" />
-
-            <!--  Address Label -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/address"
-                android:id="@+id/fr_orph_label_address_TV"
-                android:layout_below="@id/fr_orph_phone_number_ET"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext"
-                android:id="@+id/fr_orph_street_address_ET"
-                android:hint="@string/addressLine1"
-                android:layout_below="@id/fr_orph_label_address_TV"
-                android:inputType="textPostalAddress" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext"
-                android:id="@+id/fr_orph_street_address_line_2_ET"
-                android:layout_below="@id/fr_orph_street_address_ET"
-                android:hint="@string/addressLine2"
-                android:layout_marginTop="5dp"
-                android:inputType="textPostalAddress" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/fr_orph_state_city_linear_layout"
-                android:layout_below="@id/fr_orph_street_address_line_2_ET"
-                android:orientation="horizontal">
-                <Spinner
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/fr_orph_state_spinner"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="4dp"/>
-
-                <Spinner
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/fr_orph_city_spinner"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="4dp" />
-            </LinearLayout>
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext"
-                android:id="@+id/fr_pincode_ET"
-                android:layout_below="@+id/fr_orph_state_city_linear_layout"
-                android:hint="@string/zipCode"
-                android:layout_marginTop="5dp"
-                android:inputType="number" />
-
         </RelativeLayout>
     </ScrollView>
 
@@ -204,6 +117,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:onClick="callOrphRegForm1"
         android:text="@string/next" />
 
     </LinearLayout>
