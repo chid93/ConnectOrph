@@ -1,69 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
-    <EditText
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/orphanage_id"
-        android:ems="10"
-        android:id="@+id/view_orphanage_orph_id_ET"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lv_orph_scrollView"
         android:layout_alignParentStart="true"
-        android:inputType="textEmailAddress" />
+        android:layout_alignParentLeft="true">
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/passwordHint"
-        android:ems="10"
-        android:id="@+id/view_orphanage_password_ET"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/view_orphanage_orph_id_ET"
-        android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin" >
 
-    <View
-        android:id="@+id/fake_view"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/view_orphanage_password_ET"
-        android:layout_centerHorizontal="true"
-        android:background="#FFAABB"
-        android:visibility="invisible"/>
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/orphanage_id"
+                android:ems="10"
+                android:id="@+id/view_orphanage_orph_id_ET"
+                android:layout_marginTop="34dp"
+                android:inputType="textEmailAddress" />
 
-    <!-- DEVICE DEFAULT BUTTONS-->
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/passwordHint"
+                android:ems="10"
+                android:id="@+id/view_orphanage_password_ET"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/view_orphanage_orph_id_ET"
+                android:layout_centerHorizontal="true" />
 
-    <Button
-        style="@android:style/Widget.DeviceDefault.Light.Button.Small"
-        android:text="@string/login"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/view_orphanage_login_image_button"
-        android:layout_alignTop="@id/fake_view"
-        android:layout_toStartOf="@id/fake_view"
-        android:layout_toLeftOf="@id/fake_view"/>
+            <View
+                android:id="@+id/fake_view"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/view_orphanage_password_ET"
+                android:layout_centerHorizontal="true"
+                android:background="#FFAABB"
+                android:visibility="invisible"/>
 
-    <Button
-        style="@android:style/Widget.DeviceDefault.Light.Button.Small"
-        android:text="@string/register"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/view_orphanage_register_image_button"
-        android:onClick="callOrphRegForm"
-        android:layout_alignTop="@id/fake_view"
-        android:layout_toEndOf="@id/fake_view"
-        android:layout_toRightOf="@id/fake_view"/>
+            <!-- DEVICE DEFAULT BUTTONS-->
+
+            <Button
+                style="@android:style/Widget.DeviceDefault.Light.Button.Small"
+                android:text="@string/login"
+                android:textStyle="bold"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/lv_orphanage_login_button"
+                android:layout_alignTop="@id/fake_view"
+                android:layout_toStartOf="@id/fake_view"
+                android:layout_toLeftOf="@id/fake_view"/>
+
+            <Button
+                style="@android:style/Widget.DeviceDefault.Light.Button.Small"
+                android:text="@string/register"
+                android:textStyle="bold"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/lv_orphanage_register_button"
+                android:onClick="callOrphRegForm"
+                android:layout_alignTop="@id/fake_view"
+                android:layout_toEndOf="@id/fake_view"
+                android:layout_toRightOf="@id/fake_view"/>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

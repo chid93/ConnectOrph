@@ -9,8 +9,7 @@
         android:layout_marginTop="16dp"
         android:id="@+id/lv_donor_scrollView"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/lv_donor_footer">
+        android:layout_alignParentLeft="true">
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -27,7 +26,7 @@
                 android:hint="@string/email"
                 android:ems="10"
                 android:id="@+id/view_donor_email_ET"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="34dp"
                 android:inputType="textEmailAddress" />
 
             <EditText
@@ -52,7 +51,7 @@
                 android:background="#FFAABB"
                 android:visibility="invisible"/>
 
-            <!-- DEVICE DEFAULT BUTTONS
+            <!-- DEVICE DEFAULT BUTTONS -->
 
             <Button
                 style="@android:style/Widget.DeviceDefault.Light.Button.Small"
@@ -60,7 +59,7 @@
                 android:textStyle="bold"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:id="@+id/view_donor_login_image_button"
+                android:id="@+id/lv_donor_login_button"
                 android:layout_alignTop="@id/fake_view"
                 android:layout_toStartOf="@id/fake_view"
                 android:layout_toLeftOf="@id/fake_view"/>
@@ -71,44 +70,13 @@
                 android:textStyle="bold"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:id="@+id/view_donor_register_image_button"
+                android:id="@+id/lv_donor_register_button"
                 android:onClick="callUserRegForm"
                 android:layout_alignTop="@id/fake_view"
                 android:layout_toEndOf="@id/fake_view"
-                android:layout_toRightOf="@id/fake_view"/>-->
+                android:layout_toRightOf="@id/fake_view"/>
 
         </RelativeLayout>
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/lv_donor_footer"
-        android:background="@drawable/ab_stacked_solid_bluewhite"
-        style="@style/ButtonBar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/lv_donor_login_buttonbar"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#FFF"
-            style="@style/ButtonBarButton"
-            android:textStyle="bold"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/login" />
-        <Button
-            android:id="@+id/lv_donor_register_buttonbar"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#FFF"
-            style="@style/ButtonBarButton"
-            android:textStyle="bold"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:onClick="callUserRegForm"
-            android:text="@string/register" />
-
-    </LinearLayout>
 
 </RelativeLayout>
