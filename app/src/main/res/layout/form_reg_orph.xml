@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/nameOrph"
+                android:text="@string/nameOrphRequired"
                 android:id="@+id/fr_orph_label_name_TV"
                 android:labelFor="@+id/fr_orph_name_ET"
                 android:layout_alignParentTop="true"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/email"
+                android:text="@string/emailRequired"
                 android:id="@+id/fr_orph_label_email_TV"
                 android:layout_below="@id/fr_orph_name_ET"
                 android:layout_marginTop="10dp"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/password"
+                android:text="@string/passwordRequired"
                 android:id="@+id/fr_orph_label_password_TV"
                 android:labelFor="@+id/fr_orph_password_ET"
                 android:layout_below="@id/fr_orph_email_ET"
@@ -100,6 +100,7 @@
         </RelativeLayout>
     </ScrollView>
 
+    <!-- Button bar -->
     <LinearLayout
         android:id="@+id/fr_orph_footer"
         android:background="@drawable/ab_stacked_solid_bluewhite"

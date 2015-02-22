@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/mission"
+                android:text="@string/missionRequired"
                 android:id="@+id/fr_orph_1_label_mission_TV"
                 android:labelFor="@+id/fr_orph_1_mission_ET"
                 android:layout_alignParentTop="true"
@@ -48,8 +48,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/website"
-                android:id="@+id/fr_orph_1_label_name_TV"
-                android:labelFor="@+id/fr_orph_1_name_ET"
+                android:id="@+id/fr_orph_1_label_website_TV"
+                android:labelFor="@+id/fr_orph_1_website_ET"
                 android:layout_below="@+id/fr_orph_1_mission_ET"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp" />
@@ -60,19 +60,19 @@
                 android:background="@drawable/rounded_edittext"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/fr_orph_1_name_ET"
+                android:id="@+id/fr_orph_1_website_ET"
                 android:hint="@string/websiteHint"
-                android:layout_below="@id/fr_orph_1_label_name_TV"/>
+                android:layout_below="@id/fr_orph_1_label_website_TV"/>
 
             <!--  Phone Number Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/phoneNumberHint"
+                android:text="@string/phoneNumberRequired"
                 android:id="@+id/fr_orph_1_label_phone_number_TV"
                 android:labelFor="@+id/fr_orph_1_phone_number_ET"
-                android:layout_below="@+id/fr_orph_1_name_ET"
+                android:layout_below="@+id/fr_orph_1_website_ET"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/address"
+                android:text="@string/addressRequired"
                 android:id="@+id/fr_orph_1_label_address_TV"
                 android:layout_below="@+id/fr_orph_1_phone_number_ET"
                 android:layout_marginTop="10dp"
@@ -116,6 +116,7 @@
                 android:layout_marginTop="5dp"
                 android:inputType="textPostalAddress" />
 
+            <!-- State/City Spinners -->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -141,6 +142,7 @@
                     android:layout_marginLeft="4dp" />
             </LinearLayout>
 
+            <!-- Pincode -->
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -154,6 +156,7 @@
         </RelativeLayout>
     </ScrollView>
 
+    <!-- Button bar -->
     <LinearLayout
         android:id="@+id/fr_orph_1_footer"
         android:background="@drawable/ab_stacked_solid_bluewhite"

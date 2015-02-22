@@ -4,26 +4,30 @@
     <string name="app_name">ConnectOrph</string>
     <string name="action_settings">Settings</string>
     <!-- Form Registeration -->
-    <string name="name">Name*</string>
-    <string name="nameOrph">Name of Orphanage*</string>
+    <string name="nameRequired">Name*</string>
+    <string name="nameOrphRequired">Name of Orphanage*</string>
 
     <string name="email">Email Address</string>
+    <string name="emailRequired">Email Address*</string>
     <string name="emailHint">someone@example.com</string>
     <string name="orphanage_id">Orphanage ID</string>
 
-    <string name="password">Password*</string>
+    <string name="passwordRequired">Password*</string>
     <string name="passwordHint">Password</string>
     <string name="retypePasswordHint">Retype Password</string>
 
-    <string name="phoneNumberHint">Phone Number*</string>
-    <string name="address">Address*</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="phoneNumberRequired">Phone Number*</string>
+
+    <string name="address">Address</string>
+    <string name="addressRequired">Address*</string>
     <string name="addressLine1">Street Address</string>
     <string name="addressLine2">Street Address Line 2</string>
     <string name="city">City</string>
     <string name="state">State/Province</string>
     <string name="zipCode">Postal/Zip Code</string>
 
-    <string name="mission">Purpose/Objective/Mission*</string>
+    <string name="missionRequired">Purpose/Objective/Mission*</string>
     <string name="website">Website</string>
     <string name="websiteHint">website or facebook/twitter page</string>
 
