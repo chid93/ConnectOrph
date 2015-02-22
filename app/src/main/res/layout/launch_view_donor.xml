@@ -1,67 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" >
+    android:layout_height="match_parent" >
 
-    <EditText
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lv_donor_scrollView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/lv_donor_footer">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            >
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/email"
+                android:ems="10"
+                android:id="@+id/view_donor_email_ET"
+                android:layout_marginTop="50dp"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/passwordHint"
+                android:ems="10"
+                android:id="@+id/view_donor_password_ET"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/view_donor_email_ET"
+                android:layout_centerHorizontal="true" />
+
+            <View
+                android:id="@+id/fake_view"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/view_donor_password_ET"
+                android:layout_centerHorizontal="true"
+                android:background="#FFAABB"
+                android:visibility="invisible"/>
+
+            <!-- DEVICE DEFAULT BUTTONS
+
+            <Button
+                style="@android:style/Widget.DeviceDefault.Light.Button.Small"
+                android:text="@string/login"
+                android:textStyle="bold"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/view_donor_login_image_button"
+                android:layout_alignTop="@id/fake_view"
+                android:layout_toStartOf="@id/fake_view"
+                android:layout_toLeftOf="@id/fake_view"/>
+
+            <Button
+                style="@android:style/Widget.DeviceDefault.Light.Button.Small"
+                android:text="@string/register"
+                android:textStyle="bold"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/view_donor_register_image_button"
+                android:onClick="callUserRegForm"
+                android:layout_alignTop="@id/fake_view"
+                android:layout_toEndOf="@id/fake_view"
+                android:layout_toRightOf="@id/fake_view"/>-->
+
+        </RelativeLayout>
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/lv_donor_footer"
+        android:background="@drawable/ab_stacked_solid_bluewhite"
+        style="@style/ButtonBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/email"
-        android:ems="10"
-        android:id="@+id/view_donor_email_ET"
-        android:layout_marginTop="50dp"
-        android:inputType="textEmailAddress" />
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/lv_donor_login_buttonbar"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FFF"
+            style="@style/ButtonBarButton"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/login" />
+        <Button
+            android:id="@+id/lv_donor_register_buttonbar"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FFF"
+            style="@style/ButtonBarButton"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:onClick="callUserRegForm"
+            android:text="@string/register" />
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/passwordHint"
-        android:ems="10"
-        android:id="@+id/view_donor_password_ET"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/view_donor_email_ET"
-        android:layout_centerHorizontal="true" />
-
-    <View
-        android:id="@+id/fake_view"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/view_donor_password_ET"
-        android:layout_centerHorizontal="true"
-        android:background="#FFAABB"
-        android:visibility="invisible"/>
-
-    <!-- DEVICE DEFAULT BUTTONS-->
-
-    <Button
-        style="@android:style/Widget.DeviceDefault.Light.Button.Small"
-        android:text="@string/login"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/view_donor_login_image_button"
-        android:layout_alignTop="@id/fake_view"
-        android:layout_toStartOf="@id/fake_view"
-        android:layout_toLeftOf="@id/fake_view"/>
-
-    <Button
-        style="@android:style/Widget.DeviceDefault.Light.Button.Small"
-        android:text="@string/register"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:id="@+id/view_donor_register_image_button"
-        android:onClick="callUserRegForm"
-        android:layout_alignTop="@id/fake_view"
-        android:layout_toEndOf="@id/fake_view"
-        android:layout_toRightOf="@id/fake_view"/>
+    </LinearLayout>
 
 </RelativeLayout>

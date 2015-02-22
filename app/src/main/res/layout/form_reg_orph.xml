@@ -103,7 +103,7 @@
     <!-- Button bar -->
     <LinearLayout
         android:id="@+id/fr_orph_footer"
-        android:background="@drawable/ab_stacked_solid_bluewhite"
+        android:background="@drawable/ab_solid_bluewhite"
         style="@style/ButtonBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
