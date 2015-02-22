@@ -37,7 +37,7 @@
 
     <style name="ActionBar.Solid.Bluewhite" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/ab_solid_bluewhite</item>
-        <item name="backgroundStacked">@drawable/ab_stacked_solid_bluewhite</item>
+        <item name="backgroundStacked">@drawable/ab_solid_bluewhite</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_bluewhite</item>
         <item name="progressBarStyle">@style/ProgressBar.Bluewhite</item>
     </style>
