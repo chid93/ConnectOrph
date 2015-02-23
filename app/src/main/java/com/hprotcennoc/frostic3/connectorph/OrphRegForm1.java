@@ -6,15 +6,64 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
+
+    // Validation starts here
+    public final static boolean isValidEmail(CharSequence target) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    private View.OnFocusChangeListener mOnFocusChangeListener
+            = new View.OnFocusChangeListener() {
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            //Get the view called and store it as an edit text
+            EditText view = (EditText) v;
+            if(!hasFocus){
+                //Check for Null value
+                if(view.length() == 0) {
+                    view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                    view.setError("Required");
+                }
+                //Check for Valid Phone Number
+                else if(v == findViewById(R.id.fr_orph_1_phone_number_ET)){
+                    String phoneNumber = ((EditText) v).getText().toString();
+                    if(phoneNumber.length()<8){
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Invalid Phone Number");
+                    }
+                    else{
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                        view.setError(null);
+                    }
+                }
+                //Clear error
+                else{
+                    view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                    view.setError(null);
+                }
+            }
+        }
+    };
+    // Validation ends here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_reg_orph_1);
-        //Populate state spinner using an adapter
 
+        EditText mission = (EditText) findViewById(R.id.fr_orph_1_mission_ET);
+        EditText address = (EditText) findViewById(R.id.fr_orph_1_street_address_ET);
+        EditText phoneNumber = (EditText) findViewById(R.id.fr_orph_1_phone_number_ET);
+
+        mission.setOnFocusChangeListener(mOnFocusChangeListener);
+        address.setOnFocusChangeListener(mOnFocusChangeListener);
+        phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
+
+        //Populate state spinner using an adapter
         Spinner stateSpinner = (Spinner) findViewById(R.id.fr_orph_1_state_spinner);
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_item);
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
