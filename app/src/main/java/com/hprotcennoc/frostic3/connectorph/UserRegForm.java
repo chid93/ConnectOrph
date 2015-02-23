@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.security.KeyStore;
-
 public class UserRegForm extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
     // Validation starts here
@@ -83,11 +81,13 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
 
         EditText name = (EditText) findViewById(R.id.fr_user_name_ET);
         EditText email = (EditText) findViewById(R.id.fr_user_email_ET);
+        EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
         EditText retypePass = (EditText) findViewById(R.id.fr_user_retype_password_ET);
         EditText phoneNumber = (EditText) findViewById(R.id.fr_user_phone_number_ET);
 
         name.setOnFocusChangeListener(mOnFocusChangeListener);
         email.setOnFocusChangeListener(mOnFocusChangeListener);
+        password.setOnFocusChangeListener(mOnFocusChangeListener);
         retypePass.setOnFocusChangeListener(mOnFocusChangeListener);
         phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
 
