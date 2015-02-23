@@ -8,36 +8,88 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.security.KeyStore;
+
 public class UserRegForm extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
-    private EditText name;
+    // Validation starts here
+    public final static boolean isValidEmail(CharSequence target) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
 
-     // Validation starts here
-     private View.OnFocusChangeListener mOnFocusChangeListener
-            = new View.OnFocusChangeListener() {
+    private View.OnFocusChangeListener mOnFocusChangeListener
+           = new View.OnFocusChangeListener() {
+
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            /* String check = name.getText().toString(); */
+            //Get the view called and store it as an edit text
+            EditText view = (EditText) v;
             if(!hasFocus){
-                if(name.length() == 0) {
-                    name.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
-                    name.setError("Required");
+                //Check for Null value
+                if(view.length() == 0) {
+                    view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                    view.setError("Required");
                 }
+                //Check if it is a valid Email id
+                else if(v == findViewById(R.id.fr_user_email_ET)){
+                    String emailText = view.getText().toString();
+                    if(!isValidEmail(emailText)){
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Invalid Email");
+                    }
+                    else{
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                        view.setError(null);
+                    }
+                }
+                //Check if both Passwords match
+                else if(v == findViewById(R.id.fr_user_retype_password_ET)){
+                    EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
+                    if(!(view.getText().toString().equals(password.getText().toString()))){
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Passwords does not match");
+                    }
+                    else{
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                        view.setError(null);
+                    }
+                }
+                //Check for Valid Phone Number
+                else if(v == findViewById(R.id.fr_user_phone_number_ET)){
+                    String phoneNumber = ((EditText) v).getText().toString();
+                    if(phoneNumber.length()<8){
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Invalid Phone Number");
+                    }
+                    else{
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                        view.setError(null);
+                    }
+                }
+                //Clear error
                 else{
-                    name.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
-                    name.setError(null);
+                    view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                    view.setError(null);
                 }
             }
         }
     };
+    // Validation ends here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_reg_user);
 
-        name = (EditText) findViewById(R.id.fr_user_name_ET);
+        EditText name = (EditText) findViewById(R.id.fr_user_name_ET);
+        EditText email = (EditText) findViewById(R.id.fr_user_email_ET);
+        EditText retypePass = (EditText) findViewById(R.id.fr_user_retype_password_ET);
+        EditText phoneNumber = (EditText) findViewById(R.id.fr_user_phone_number_ET);
+
         name.setOnFocusChangeListener(mOnFocusChangeListener);
+        email.setOnFocusChangeListener(mOnFocusChangeListener);
+        retypePass.setOnFocusChangeListener(mOnFocusChangeListener);
+        phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
 
         Spinner stateSpinner = (Spinner) findViewById(R.id.fr_user_state_spinner);
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_item);
