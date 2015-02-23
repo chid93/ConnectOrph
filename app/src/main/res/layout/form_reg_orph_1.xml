@@ -142,17 +142,6 @@
                     android:layout_marginLeft="4dp" />
             </LinearLayout>
 
-            <!-- Pincode -->
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext"
-                android:id="@+id/fr_orph_1_pincode_ET"
-                android:layout_below="@+id/fr_orph_1_state_city_linear_layout"
-                android:hint="@string/zipCode"
-                android:layout_marginTop="5dp"
-                android:inputType="number" />
-
         </RelativeLayout>
     </ScrollView>
 

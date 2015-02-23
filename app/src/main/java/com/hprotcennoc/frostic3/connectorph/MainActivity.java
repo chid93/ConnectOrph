@@ -42,19 +42,16 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
             @Override
             public void onPageSelected(int position) {
-                // TODO Auto-generated method stub
                 getSupportActionBar().setSelectedNavigationItem(position);
             }
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-                // TODO Auto-generated method stub
 
             }
 
             @Override
             public void onPageScrollStateChanged(int arg0) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -62,19 +59,16 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
     @Override
     public void onTabReselected(ActionBar.Tab arg0, FragmentTransaction arg1) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onTabSelected(ActionBar.Tab selectedtab, FragmentTransaction arg1) {
-        // TODO Auto-generated method stub
         tabsviewPager.setCurrentItem(selectedtab.getPosition()); //update tab position on tap
     }
 
     @Override
     public void onTabUnselected(ActionBar.Tab arg0, FragmentTransaction arg1) {
-        // TODO Auto-generated method stub
 
     }
 
