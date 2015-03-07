@@ -123,6 +123,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
          * Before starting background thread Show Progress Dialog
          * */
 
+        int flag=0;
          @Override
         protected void onPreExecute() {
              Log.i("MainActivity1","In onPreExecute");
@@ -174,6 +175,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                 } else {
                     // failed to login
                     Log.d("Failed to Login user", json.toString());
+                    flag=1;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -188,8 +190,10 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-            Toast toast = Toast.makeText(MainActivity.this,"Incorrect username/password" , Toast.LENGTH_LONG);
-            toast.show();
+            if(flag == 1) {
+                Toast toast = Toast.makeText(MainActivity.this, "Incorrect username/password", Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
 
     }
