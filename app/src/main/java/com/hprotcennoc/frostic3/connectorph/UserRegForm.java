@@ -1,16 +1,54 @@
 package com.hprotcennoc.frostic3.connectorph;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserRegForm extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
-    // Validation starts here
+    //DATABASE STARTS HERE
+    // Progress Dialog
+    private ProgressDialog pDialog;
+
+    JSONParser jsonParser = new JSONParser();
+
+    EditText name;
+    EditText email;
+    EditText password;
+    EditText retypePass;
+    EditText phoneNumber;
+    EditText address1;
+    EditText address2;
+    Spinner state;
+    Spinner city;
+
+    Button btnreg;
+
+    // url to create new product
+    private static String url_new_user = "http://192.168.0.101/connectorph/new_user.php";
+
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
+
+
+    // VALIDATION STARTS HERE
     public final static boolean isValidEmail(CharSequence target) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
@@ -42,7 +80,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
                 }
                 //Check if both Passwords match
                 else if(v == findViewById(R.id.fr_user_retype_password_ET)){
-                    EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
+                    password = (EditText) findViewById(R.id.fr_user_password_ET);
                     if(!(view.getText().toString().equals(password.getText().toString()))){
                         view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
                         view.setError("Passwords does not match");
@@ -72,34 +110,138 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
             }
         }
     };
-    // Validation ends here
+    // VALIDATION ENDS HERE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_reg_user);
 
-        EditText name = (EditText) findViewById(R.id.fr_user_name_ET);
-        EditText email = (EditText) findViewById(R.id.fr_user_email_ET);
-        EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
-        EditText retypePass = (EditText) findViewById(R.id.fr_user_retype_password_ET);
-        EditText phoneNumber = (EditText) findViewById(R.id.fr_user_phone_number_ET);
+        name = (EditText) findViewById(R.id.fr_user_name_ET);
+        email = (EditText) findViewById(R.id.fr_user_email_ET);
+        password = (EditText) findViewById(R.id.fr_user_password_ET);
+        retypePass = (EditText) findViewById(R.id.fr_user_retype_password_ET);
+        phoneNumber = (EditText) findViewById(R.id.fr_user_phone_number_ET);
+        address1 = (EditText) findViewById(R.id.fr_user_street_address_ET);
+        address2= (EditText) findViewById(R.id.fr_user_street_address_line_2_ET);
+        state= (Spinner) findViewById(R.id.fr_user_state_spinner);
+        city= (Spinner) findViewById(R.id.fr_user_city_spinner);
 
         name.setOnFocusChangeListener(mOnFocusChangeListener);
         email.setOnFocusChangeListener(mOnFocusChangeListener);
         password.setOnFocusChangeListener(mOnFocusChangeListener);
         retypePass.setOnFocusChangeListener(mOnFocusChangeListener);
         phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
-
+        //State/City data loader
         Spinner stateSpinner = (Spinner) findViewById(R.id.fr_user_state_spinner);
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_item);
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         stateSpinner.setAdapter(stateAdapter);
         stateSpinner.setOnItemSelectedListener(this);
-        /* */
+
+        // Create button
+        btnreg = (Button) findViewById(R.id.fr_user_buttonbar);
+
+        // button click event
+        btnreg.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // creating new product in background thread
+                new CreateNewProduct().execute();
+            }
+        });
+
     }
 
+    //DATABASE STARTS HERE
+    /**
+     * Background Async Task to Create new product
+     * */
+    class CreateNewProduct extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(UserRegForm.this);
+            pDialog.setMessage("Registering New User..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Creating product
+         * */
+        protected String doInBackground(String... args) {
+            String dname = name.getText().toString();
+            String demail = email.getText().toString();
+            String dpassword = password.getText().toString();
+            String dphoneNumber = phoneNumber.getText().toString();
+            String daddress1 = address1.getText().toString();
+            String daddress2 = address2.getText().toString();
+            String dstate = state.getSelectedItem().toString();
+            String dcity = city.getSelectedItem().toString();
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("name", dname));
+            params.add(new BasicNameValuePair("email", demail));
+            params.add(new BasicNameValuePair("password", dpassword));
+            params.add(new BasicNameValuePair("phoneNumber", dphoneNumber));
+            params.add(new BasicNameValuePair("address1", daddress1));
+            params.add(new BasicNameValuePair("address2", daddress2));
+            params.add(new BasicNameValuePair("state", dstate));
+            params.add(new BasicNameValuePair("city", dcity));
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONObject json = JSONParser.makeHttpRequest(url_new_user,
+                    "POST", params);
+
+            // check log cat from response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // successfully created a user
+                    Intent i = new Intent(getApplicationContext(), UserRegForm.class);
+                    startActivity(i);
+
+                    // closing this screen
+                    finish();
+                } else {
+                    // failed to create user
+                    Log.d("failed to create user", json.toString());
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+        }
+
+    }
+    //DATABASE ENDS HERE
+
+    //STATE/CITY DATA LOADER STARTS HERE
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner citySpinner = (Spinner) findViewById(R.id.fr_user_city_spinner);
@@ -182,4 +324,5 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    //STATE/CITY DATA LOADER ENDS HERE
 }

@@ -54,7 +54,7 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/fr_user_name_ET"
-                android:layout_below="@id/fr_user_label_name_TV"/>
+                android:layout_below="@+id/fr_user_label_name_TV"/>
 
             <!--  Email Label -->
             <TextView
@@ -63,7 +63,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/emailRequired"
                 android:id="@+id/fr_user_label_email_TV"
-                android:layout_below="@id/fr_user_name_ET"
+                android:layout_below="@+id/fr_user_name_ET"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp" />
 
@@ -140,7 +140,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/address"
                 android:id="@+id/fr_user_label_address_TV"
-                android:layout_below="@id/fr_user_phone_number_ET"
+                android:layout_below="@+id/fr_user_phone_number_ET"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp" />
 
@@ -150,7 +150,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:id="@+id/fr_user_street_address_ET"
                 android:hint="@string/addressLine1"
-                android:layout_below="@id/fr_user_label_address_TV"
+                android:layout_below="@+id/fr_user_label_address_TV"
                 android:inputType="textPostalAddress" />
 
             <EditText
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:id="@+id/fr_user_street_address_line_2_ET"
-                android:layout_below="@id/fr_user_street_address_ET"
+                android:layout_below="@+id/fr_user_street_address_ET"
                 android:hint="@string/addressLine2"
                 android:layout_marginTop="5dp"
                 android:inputType="textPostalAddress" />
@@ -167,7 +167,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/fr_user_state_city_linear_layout"
-                android:layout_below="@id/fr_user_street_address_line_2_ET"
+                android:layout_below="@+id/fr_user_street_address_line_2_ET"
                 android:orientation="horizontal">
                 <Spinner
                     style="@android:style/Widget.Holo.Light.Spinner"
