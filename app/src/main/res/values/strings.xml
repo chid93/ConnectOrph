@@ -38,5 +38,6 @@
     <string name="registerDonor">Register as a Donor</string>
     <string name="orphanageContact">Contact details</string>
     <string name="userProfile">User Profile</string>
+    <string name="orphProfile">Orph Profile</string>
 
     </resources>

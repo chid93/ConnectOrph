@@ -60,6 +60,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:id="@+id/lv_orphanage_login_button"
+                android:onClick="callOrphProfile"
                 android:layout_alignTop="@id/fake_view"
                 android:layout_toStartOf="@id/fake_view"
                 android:layout_toLeftOf="@id/fake_view"/>

@@ -41,6 +41,11 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/userProfile"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".OrphProfile"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/orphProfile"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

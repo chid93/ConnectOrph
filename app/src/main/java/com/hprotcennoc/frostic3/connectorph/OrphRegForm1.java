@@ -1,15 +1,53 @@
 package com.hprotcennoc.frostic3.connectorph;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
+
+    String name;
+    String email;
+    String password;
+    EditText website;
+    EditText mission;
+    EditText phoneNumber;
+    EditText address1;
+    EditText address2;
+    Spinner state;
+    Spinner city;
+    Button btnreg;
+
+    //DATABASE STARTS HERE
+    // Progress Dialog
+    private ProgressDialog pDialog;
+    JSONParser jsonParser = new JSONParser();
+
+    // url to create new product
+    private static String url_new_orph = "http://192.168.0.101/connectorph_php/new_orph.php";
+
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
+    //DATABASE CONTINUES LATER
 
     // Validation starts here
     public final static boolean isValidEmail(CharSequence target) {
@@ -50,17 +88,24 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
         }
     };
     // Validation ends here
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_reg_orph_1);
-
-        EditText mission = (EditText) findViewById(R.id.fr_orph_1_mission_ET);
-        EditText address = (EditText) findViewById(R.id.fr_orph_1_street_address_ET);
-        EditText phoneNumber = (EditText) findViewById(R.id.fr_orph_1_phone_number_ET);
+        name = getIntent().getStringExtra("name");
+        email = getIntent().getStringExtra("email");
+        password = getIntent().getStringExtra("password");
+        mission = (EditText) findViewById(R.id.fr_orph_1_mission_ET);
+        website = (EditText) findViewById(R.id.fr_orph_1_website_ET);
+        address1 = (EditText) findViewById(R.id.fr_orph_1_street_address_ET);
+        address2 = (EditText) findViewById(R.id.fr_orph_1_street_address_line_2_ET);
+        phoneNumber = (EditText) findViewById(R.id.fr_orph_1_phone_number_ET);
+        state = (Spinner) findViewById(R.id.fr_orph_1_state_spinner);
+        city = (Spinner) findViewById(R.id.fr_orph_1_city_spinner);
 
         mission.setOnFocusChangeListener(mOnFocusChangeListener);
-        address.setOnFocusChangeListener(mOnFocusChangeListener);
+        address1.setOnFocusChangeListener(mOnFocusChangeListener);
         phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
 
         //Populate state spinner using an adapter
@@ -70,8 +115,119 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
         stateSpinner.setAdapter(stateAdapter);
         //Create a onItemSelectedListener for dynamically adding cities after states has been selected
         stateSpinner.setOnItemSelectedListener(this);
-    }
 
+        // Create button
+        btnreg = (Button) findViewById(R.id.fr_orph_1_buttonbar);
+
+        // button click event
+        btnreg.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // creating new product in background thread
+                new CreateNewProduct().execute();
+            }
+        });
+    }
+    //DATABASE CONTINUES HERE
+    /**
+     * Background Async Task to Create new product
+     * */
+    class CreateNewProduct extends AsyncTask<String, String, String> {
+
+        int flag = 0;
+        String message;
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(OrphRegForm1.this);
+            pDialog.setMessage("Registering New User..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Creating product
+         * */
+        protected String doInBackground(String... args) {
+            String dname = name;
+            String demail = email;
+            String dpassword = password;
+            String dwebsite = website.getText().toString();
+            String dmission = mission.getText().toString();
+            String dphoneNumber = phoneNumber.getText().toString();
+            String daddress1 = address1.getText().toString();
+            String daddress2 = address2.getText().toString();
+            String dstate = state.getSelectedItem().toString();
+            String dcity = city.getSelectedItem().toString();
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("name", dname));
+            params.add(new BasicNameValuePair("email", demail));
+            params.add(new BasicNameValuePair("password", dpassword));
+            params.add(new BasicNameValuePair("mission", dmission));
+            params.add(new BasicNameValuePair("website", dwebsite));
+            params.add(new BasicNameValuePair("phoneNumber", dphoneNumber));
+            params.add(new BasicNameValuePair("address1", daddress1));
+            params.add(new BasicNameValuePair("address2", daddress2));
+            params.add(new BasicNameValuePair("state", dstate));
+            params.add(new BasicNameValuePair("city", dcity));
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONObject json = JSONParser.makeHttpRequest(url_new_orph,
+                    "POST", params);
+
+            // check log cat from response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+                message = json.getString(TAG_MESSAGE);
+
+                if (success == 1) {
+                    // successfully created a user
+                    Intent i = new Intent(getApplicationContext(), OrphRegForm1.class);
+                    startActivity(i);
+
+                    // closing this screen
+                    finish();
+                } else {
+                    // failed to create user
+                    Log.d("failed to create new orphanage", json.toString());
+                    flag = 1;
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+            if(flag == 1) {
+                Toast toast = Toast.makeText(OrphRegForm1.this, message, Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+
+    }
+    //DATABASE ENDS HERE
+
+    //STATE/CITY DATA LOADER STARTS HERE
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner citySpinner = (Spinner) findViewById(R.id.fr_orph_1_city_spinner);

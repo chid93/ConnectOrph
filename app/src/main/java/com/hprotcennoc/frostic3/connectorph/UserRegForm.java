@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -23,12 +24,6 @@ import java.util.List;
 
 public class UserRegForm extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
-    //DATABASE STARTS HERE
-    // Progress Dialog
-    private ProgressDialog pDialog;
-
-    JSONParser jsonParser = new JSONParser();
-
     EditText name;
     EditText email;
     EditText password;
@@ -38,14 +33,19 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     EditText address2;
     Spinner state;
     Spinner city;
-
     Button btnreg;
+
+    //DATABASE STARTS HERE
+    // Progress Dialog
+    private ProgressDialog pDialog;
+    JSONParser jsonParser = new JSONParser();
 
     // url to create new product
     private static String url_new_user = "http://192.168.0.101/connectorph_php/new_user.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
     //DATABASE CONTINUES LATER
 
     // VALIDATION STARTS HERE
@@ -161,6 +161,8 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
      * */
     class CreateNewProduct extends AsyncTask<String, String, String> {
 
+        int flag = 0;
+        String message;
         /**
          * Before starting background thread Show Progress Dialog
          * */
@@ -210,6 +212,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
             // check for success tag
             try {
                 int success = json.getInt(TAG_SUCCESS);
+                message = json.getString(TAG_MESSAGE);
 
                 if (success == 1) {
                     // successfully created a user
@@ -221,7 +224,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
                 } else {
                     // failed to create user
                     Log.d("failed to create user", json.toString());
-
+                    flag = 1;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -236,6 +239,10 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
+            if(flag == 1) {
+                Toast toast = Toast.makeText(UserRegForm.this, message, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
 
     }

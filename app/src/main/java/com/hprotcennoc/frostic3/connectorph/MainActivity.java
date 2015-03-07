@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
     // url to create new product
     private static String url_login_user = "http://192.168.0.101/connectorph_php/login_user.php";
-
+    private static String url_login_orph = "http://192.168.0.101/connectorph_php/login_orph.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     //DATABASE CONTINUES LATER
@@ -109,13 +109,17 @@ public class MainActivity extends ActionBarActivity implements android.support.v
 
     public void callUserProfile(View view) {
         // get user details from email and password in background thread
-        Log.i("MainActivity1","In callUserProfile");
         new getUserByEmailAndPassword().execute();
+    }
+
+    public void callOrphProfile(View view) {
+        // get user details from email and password in background thread
+        new getOrphByEmailAndPassword().execute();
     }
 
     //DATABASE CONTINUES HERE
     /**
-     * Background Async Task to Create new product
+     * Background Async Task to getUserByEmailAndPassword
      * */
     class getUserByEmailAndPassword extends AsyncTask<String, String, String> {
 
@@ -174,7 +178,91 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     finish();
                 } else {
                     // failed to login
-                    Log.d("Failed to Login user", json.toString());
+                    Log.d("Failed to Login User", json.toString());
+                    flag=1;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+            if(flag == 1) {
+                Toast toast = Toast.makeText(MainActivity.this, "Incorrect username/password", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+
+    }
+
+    /**
+     * Background Async Task to getOrphByEmailAndPassword
+     * */
+    class getOrphByEmailAndPassword extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+
+        int flag=0;
+        @Override
+        protected void onPreExecute() {
+            Log.i("MainActivity1","In onPreExecute");
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Logging in..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Sending email and password for verification
+         * */
+        protected String doInBackground(String... args) {
+            Log.i("MainActivity1","In doInBackground");
+
+            EditText email = (EditText) findViewById(R.id.view_orphanage_orph_id_ET);
+            EditText password = (EditText) findViewById(R.id.view_orphanage_password_ET);
+            String demail = email.getText().toString();
+            String dpassword = password.getText().toString();
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("email", demail));
+            params.add(new BasicNameValuePair("password", dpassword));
+
+            Log.i("MainActivity1","In doInBackground1");
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONObject json = JSONParser.makeHttpRequest(url_login_orph,
+                    "POST", params);
+
+            Log.i("MainActivity1","In doInBackground2");
+            // check log cat from response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // successfully logged in
+                    Intent UserProfileIntent = new Intent(MainActivity.this, OrphProfile.class);
+                    startActivity(UserProfileIntent);
+
+                    // closing this screen
+                    finish();
+                } else {
+                    // failed to login
+                    Log.d("Failed to Login Orphanage", json.toString());
                     flag=1;
                 }
             } catch (JSONException e) {
