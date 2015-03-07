@@ -42,11 +42,11 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     Button btnreg;
 
     // url to create new product
-    private static String url_new_user = "http://192.168.0.101/connectorph/new_user.php";
+    private static String url_new_user = "http://192.168.0.101/connectorph_php/new_user.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-
+    //DATABASE CONTINUES LATER
 
     // VALIDATION STARTS HERE
     public final static boolean isValidEmail(CharSequence target) {
@@ -155,7 +155,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
 
     }
 
-    //DATABASE STARTS HERE
+    //DATABASE CONTINUES HERE
     /**
      * Background Async Task to Create new product
      * */

@@ -91,6 +91,7 @@ public class JSONParser{
             String line1=null;
             while ((line = reader.readLine()) != null) {
                 line1 = line;
+                //sb.append(line + "\n");
             }
             sb.append(line1 + "\n");
             //THE BEST CODE EVER ENDS HERE
@@ -106,6 +107,7 @@ public class JSONParser{
         try {
             Log.i("JSONParser", "In next next try");
             jObj = new JSONObject(json);
+            Log.d("JSONParser3", json );
             Log.i("JSONParser", "In next next try1");
         } catch (JSONException e) {
             Log.i("JSONParser", "In next next catch");
