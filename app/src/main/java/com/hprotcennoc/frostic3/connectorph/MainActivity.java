@@ -1,12 +1,9 @@
 package com.hprotcennoc.frostic3.connectorph;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -26,10 +23,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +30,6 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
 
     private ViewPager tabsviewPager;
-    int chooseTab = 0;
 
     //DATABASE STARTS HERE
     // Progress Dialog
@@ -116,75 +108,14 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     }
 
     public void callUserProfile(View view) {
-        chooseTab = 1;
-        new NetCheck().execute();
+        // get user details from email and password in background thread
+        new getUserByEmailAndPassword().execute();
     }
 
     public void callOrphProfile(View view) {
-        chooseTab = 2;
-        new NetCheck().execute();
+        // get user details from email and password in background thread
+        new getOrphByEmailAndPassword().execute();
     }
-
-    //NET CHECK STARTS HERE
-    private class NetCheck extends AsyncTask<String,String,Boolean>
-    {
-        private ProgressDialog nDialog;
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            nDialog = new ProgressDialog(MainActivity.this);
-            nDialog.setMessage("Loading..");
-            nDialog.setTitle("Checking Network");
-            nDialog.setIndeterminate(false);
-            nDialog.setCancelable(true);
-            nDialog.show();
-        }
-
-        @Override
-        protected Boolean doInBackground(String... args){
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()) {
-                try {
-                    URL url = new URL("http://www.google.com");
-                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                    urlc.setConnectTimeout(3000);
-                    urlc.connect();
-                    if (urlc.getResponseCode() == 200) {
-                        return true;
-                    }
-                } catch (MalformedURLException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return false;
-        }
-        @Override
-        protected void onPostExecute(Boolean th){
-
-            if(th == true){
-                nDialog.dismiss();
-                if(chooseTab == 1){
-                    // get user details from email and password in background thread
-                    new getUserByEmailAndPassword().execute();
-                }
-                else if (chooseTab == 2){
-                    // get orph details from email and password in background thread
-                    new getOrphByEmailAndPassword().execute();
-                }
-            }
-            else{
-                nDialog.dismiss();
-                Toast toast = Toast.makeText(MainActivity.this, "Error in Network Connection", Toast.LENGTH_LONG);
-                toast.show();
-
-            }
-        }
-    }
-    //NET CHECK ENDS HERE
 
     //DATABASE CONTINUES HERE
     /**
