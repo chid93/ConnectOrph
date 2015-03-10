@@ -95,7 +95,7 @@ public class JSONParser{
             }
             sb.append(line1);
             //THE BEST CODE EVER ENDS HERE
-            Log.d("JSONParser2", sb.toString() );
+            Log.d("JSONParser", sb.toString() );
             is.close();
             Log.i("JSONParser", "In next try");
             json = sb.toString();
@@ -109,7 +109,7 @@ public class JSONParser{
             Log.d("JSONParser json try", json );
         } catch (JSONException e) {
             Log.d("JSONParser json catch", json );
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
+            Log.e("JSONParser", "Error parsing data " + e.toString());
         }
 
         // return JSON String
