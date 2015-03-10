@@ -2,8 +2,6 @@ package com.hprotcennoc.frostic3.connectorph;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -12,10 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -34,8 +29,6 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-
-    JSONParser jsonParser = new JSONParser();
 
     // url to create new product
     private static String url_login_user = "http://192.168.0.102/connectorph_php/login_user.php";
@@ -152,7 +145,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             String dpassword = password.getText().toString();
 
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
 
@@ -232,7 +225,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             String dpassword = password.getText().toString();
 
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
 

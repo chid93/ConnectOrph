@@ -38,7 +38,6 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-    JSONParser jsonParser = new JSONParser();
 
     // url to create new product
     private static String url_new_user = "http://192.168.0.102/connectorph_php/new_user.php";
@@ -49,7 +48,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     //DATABASE CONTINUES LATER
 
     // VALIDATION STARTS HERE
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
@@ -132,13 +131,13 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
         password.setOnFocusChangeListener(mOnFocusChangeListener);
         retypePass.setOnFocusChangeListener(mOnFocusChangeListener);
         phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
+
         //State/City data loader
-        Spinner stateSpinner = (Spinner) findViewById(R.id.fr_user_state_spinner);
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_item);
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        stateSpinner.setAdapter(stateAdapter);
-        stateSpinner.setOnItemSelectedListener(this);
+        state.setAdapter(stateAdapter);
+        state.setOnItemSelectedListener(this);
 
         // Create button
         btnreg = (Button) findViewById(R.id.fr_user_buttonbar);
@@ -191,7 +190,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
 
 
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("name", dname));
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
@@ -251,7 +250,6 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     //STATE/CITY DATA LOADER STARTS HERE
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Spinner citySpinner = (Spinner) findViewById(R.id.fr_user_city_spinner);
         ArrayAdapter<CharSequence> cityAdapter;
 
         switch (position){
@@ -325,7 +323,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
         }
 
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(cityAdapter);
+        city.setAdapter(cityAdapter);
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

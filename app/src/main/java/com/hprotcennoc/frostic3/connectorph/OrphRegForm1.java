@@ -39,7 +39,6 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-    JSONParser jsonParser = new JSONParser();
 
     // url to create new product
     private static String url_new_orph = "http://192.168.0.102/connectorph_php/new_orph.php";
@@ -50,10 +49,6 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     //DATABASE CONTINUES LATER
 
     // Validation starts here
-    public final static boolean isValidEmail(CharSequence target) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-    }
-
     private View.OnFocusChangeListener mOnFocusChangeListener
             = new View.OnFocusChangeListener() {
 
@@ -109,12 +104,11 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
         phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
 
         //Populate state spinner using an adapter
-        Spinner stateSpinner = (Spinner) findViewById(R.id.fr_orph_1_state_spinner);
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_item);
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        stateSpinner.setAdapter(stateAdapter);
+        state.setAdapter(stateAdapter);
         //Create a onItemSelectedListener for dynamically adding cities after states has been selected
-        stateSpinner.setOnItemSelectedListener(this);
+        state.setOnItemSelectedListener(this);
 
         // Create button
         btnreg = (Button) findViewById(R.id.fr_orph_1_buttonbar);
@@ -167,7 +161,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
 
 
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("name", dname));
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
@@ -230,7 +224,6 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     //STATE/CITY DATA LOADER STARTS HERE
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Spinner citySpinner = (Spinner) findViewById(R.id.fr_orph_1_city_spinner);
         ArrayAdapter<CharSequence> cityAdapter;
 
         switch (position){
@@ -304,7 +297,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
         }
 
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(cityAdapter);
+        city.setAdapter(cityAdapter);
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

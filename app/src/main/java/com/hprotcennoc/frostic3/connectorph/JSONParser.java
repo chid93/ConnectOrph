@@ -43,7 +43,7 @@ public class JSONParser{
         try {
 
             // check for request method
-            if(method == "POST"){
+            if(method.equals("POST")){
                 Log.i("JSONParser", "In Post condition");
                 // request method is POST
                 // defaultHttpClient
@@ -55,7 +55,7 @@ public class JSONParser{
                 HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
 
-            }else if(method == "GET"){
+            }else if(method.equals("GET")){
                 Log.i("JSONParser", "In Get condition");
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -86,14 +86,14 @@ public class JSONParser{
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
-            String line = null;
+            String line;
             //THE BEST CODE EVER STARTS HERE
             String line1=null;
             while ((line = reader.readLine()) != null) {
                 line1 = line;
                 //sb.append(line + "\n");
             }
-            sb.append(line1 + "\n");
+            sb.append(line1);
             //THE BEST CODE EVER ENDS HERE
             Log.d("JSONParser2", sb.toString() );
             is.close();

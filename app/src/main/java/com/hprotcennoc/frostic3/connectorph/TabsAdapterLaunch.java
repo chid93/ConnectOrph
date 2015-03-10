@@ -7,12 +7,10 @@ public class TabsAdapterLaunch extends FragmentStatePagerAdapter{
 
     public TabsAdapterLaunch(FragmentManager fm) {
         super(fm);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public Fragment getItem(int index) {
-        // TODO Auto-generated method stub
         switch (index) {
             case 0:
                 return new DonorFragmentLaunch();
@@ -24,7 +22,6 @@ public class TabsAdapterLaunch extends FragmentStatePagerAdapter{
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return TOTAL_TABS;
     }
 

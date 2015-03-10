@@ -15,7 +15,7 @@ public class OrphRegForm extends ActionBarActivity{
     EditText retypePass;
 
     // Validation starts here
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
