@@ -42,7 +42,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     JSONParser jsonParser = new JSONParser();
 
     // url to create new product
-    private static String url_new_orph = "http://192.168.0.101/connectorph_php/new_orph.php";
+    private static String url_new_orph = "http://192.168.0.102/connectorph_php/new_orph.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

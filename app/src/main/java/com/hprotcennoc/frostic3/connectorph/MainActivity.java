@@ -38,10 +38,11 @@ public class MainActivity extends ActionBarActivity implements android.support.v
     JSONParser jsonParser = new JSONParser();
 
     // url to create new product
-    private static String url_login_user = "http://192.168.0.101/connectorph_php/login_user.php";
-    private static String url_login_orph = "http://192.168.0.101/connectorph_php/login_orph.php";
+    private static String url_login_user = "http://192.168.0.102/connectorph_php/login_user.php";
+    private static String url_login_orph = "http://192.168.0.102/connectorph_php/login_orph.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
     //DATABASE CONTINUES LATER
 
     @Override
@@ -126,8 +127,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         /**
          * Before starting background thread Show Progress Dialog
          * */
-
         int flag=0;
+        String message;
          @Override
         protected void onPreExecute() {
              Log.i("MainActivity1","In onPreExecute");
@@ -162,8 +163,6 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     "POST", params);
 
             Log.i("MainActivity1","In doInBackground2");
-            // check log cat from response
-            Log.d("Create Response", json.toString());
 
             // check for success tag
             try {
@@ -174,11 +173,9 @@ public class MainActivity extends ActionBarActivity implements android.support.v
                     Intent UserProfileIntent = new Intent(MainActivity.this, UserProfile.class);
                     startActivity(UserProfileIntent);
 
-                    // closing this screen
-                    finish();
                 } else {
                     // failed to login
-                    Log.d("Failed to Login User", json.toString());
+                    message = json.getString(TAG_MESSAGE);
                     flag=1;
                 }
             } catch (JSONException e) {
@@ -195,7 +192,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             // dismiss the dialog once done
             pDialog.dismiss();
             if(flag == 1) {
-                Toast toast = Toast.makeText(MainActivity.this, "Incorrect username/password", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG);
                 toast.show();
             }
         }
@@ -210,8 +207,8 @@ public class MainActivity extends ActionBarActivity implements android.support.v
         /**
          * Before starting background thread Show Progress Dialog
          * */
-
         int flag=0;
+        String message;
         @Override
         protected void onPreExecute() {
             Log.i("MainActivity1","In onPreExecute");
@@ -252,17 +249,14 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             // check for success tag
             try {
                 int success = json.getInt(TAG_SUCCESS);
-
                 if (success == 1) {
                     // successfully logged in
                     Intent UserProfileIntent = new Intent(MainActivity.this, OrphProfile.class);
                     startActivity(UserProfileIntent);
 
-                    // closing this screen
-                    finish();
                 } else {
                     // failed to login
-                    Log.d("Failed to Login Orphanage", json.toString());
+                    message = json.getString(TAG_MESSAGE);
                     flag=1;
                 }
             } catch (JSONException e) {
@@ -279,7 +273,7 @@ public class MainActivity extends ActionBarActivity implements android.support.v
             // dismiss the dialog once done
             pDialog.dismiss();
             if(flag == 1) {
-                Toast toast = Toast.makeText(MainActivity.this, "Incorrect username/password", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG);
                 toast.show();
             }
         }

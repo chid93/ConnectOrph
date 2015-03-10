@@ -105,13 +105,10 @@ public class JSONParser{
 
         // try parse the string to a JSON object
         try {
-            Log.i("JSONParser", "In next next try");
             jObj = new JSONObject(json);
-            Log.d("JSONParser3", json );
-            Log.i("JSONParser", "In next next try1");
+            Log.d("JSONParser json try", json );
         } catch (JSONException e) {
-            Log.i("JSONParser", "In next next catch");
-            Log.d("JSONParser1", json );
+            Log.d("JSONParser json catch", json );
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
