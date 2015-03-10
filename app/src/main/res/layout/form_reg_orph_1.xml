@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/missionRequired"
+                android:text="@string/mission"
                 android:id="@+id/fr_orph_1_label_mission_TV"
                 android:labelFor="@+id/fr_orph_1_mission_ET"
                 android:layout_alignParentTop="true"

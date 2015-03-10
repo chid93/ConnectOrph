@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -49,6 +49,35 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     //DATABASE CONTINUES LATER
 
     // Validation starts here
+    public boolean clientSideCheck(EditText view) {
+        if(view.length() == 0) {
+            view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+            view.setError("Required");
+            return false;
+        }
+        if(view == findViewById(R.id.fr_orph_1_phone_number_ET)) {
+            String phoneNumber = view.getText().toString();
+            if (phoneNumber.length() < 8) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Invalid Phone Number");
+                return false;
+            }
+        }
+        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+        view.setError(null);
+        return true;
+    }
+    public boolean clientSideCheck(Spinner view) {
+        View selectedView = view.getSelectedView();
+        TextView selectedTextView = (TextView) selectedView;
+        if (selectedTextView.getText().toString().equals("[State]") || selectedTextView.getText().toString().equals("[City]")) {
+            String errorString = "Required";
+            selectedTextView.setError(errorString);
+            return false;
+        }
+        selectedTextView.setError(null);
+        return true;
+    }
     private View.OnFocusChangeListener mOnFocusChangeListener
             = new View.OnFocusChangeListener() {
 
@@ -99,7 +128,6 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
         state = (Spinner) findViewById(R.id.fr_orph_1_state_spinner);
         city = (Spinner) findViewById(R.id.fr_orph_1_city_spinner);
 
-        mission.setOnFocusChangeListener(mOnFocusChangeListener);
         address1.setOnFocusChangeListener(mOnFocusChangeListener);
         phoneNumber.setOnFocusChangeListener(mOnFocusChangeListener);
 
@@ -118,9 +146,20 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
 
             @Override
             public void onClick(View view) {
-                // creating new product in background thread
-                new CreateNewProduct().execute();
+                if( clientSideCheck(address1) && clientSideCheck(phoneNumber) && clientSideCheck(state) && clientSideCheck(city)) {
+                    // creating new product in background thread
+                    new CreateNewProduct().execute();
+                    Intent i = new Intent(OrphRegForm1.this, MainActivity.class);
+                    startActivity(i);
+                }
+                else{
+                    clientSideCheck(address1);
+                    clientSideCheck(phoneNumber);
+                    clientSideCheck(state);
+                    clientSideCheck(city);
+                }
             }
+
         });
     }
     //DATABASE CONTINUES HERE
@@ -188,10 +227,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
 
                 if (success == 1) {
                     // successfully created a user
-                    Intent i = new Intent(getApplicationContext(), OrphRegForm1.class);
-                    startActivity(i);
-
-                    // closing this screen
+                    // closing this screen. Back to MainActivity
                     finish();
                 } else {
                     // failed to create user
@@ -212,8 +248,13 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
+            Toast toast;
             if(flag == 1) {
-                Toast toast = Toast.makeText(OrphRegForm1.this, message, Toast.LENGTH_LONG);
+                toast = Toast.makeText(OrphRegForm1.this, message, Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else{
+                toast = Toast.makeText(OrphRegForm1.this, "Successfully Registered", Toast.LENGTH_LONG);
                 toast.show();
             }
         }

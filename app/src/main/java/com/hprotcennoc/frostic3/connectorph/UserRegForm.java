@@ -1,7 +1,6 @@
 package com.hprotcennoc.frostic3.connectorph;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -50,6 +49,41 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     // VALIDATION STARTS HERE
     public static boolean isValidEmail(CharSequence target) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    public boolean clientSideCheck(EditText view) {
+        if(view.length() == 0) {
+            view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+            view.setError("Required");
+            return false;
+        }
+        else if(view == findViewById(R.id.fr_user_email_ET)) {
+            String emailText = view.getText().toString();
+            if (!isValidEmail(emailText)) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Invalid Email");
+                return false;
+            }
+        }
+        else if(view == findViewById(R.id.fr_user_retype_password_ET)) {
+            EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
+            if (!(view.getText().toString().equals(password.getText().toString()))) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Passwords does not match");
+                return false;
+            }
+        }
+        else if(view == findViewById(R.id.fr_user_phone_number_ET)) {
+            String phoneNumber = view.getText().toString();
+            if (phoneNumber.length() < 8) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Invalid Phone Number");
+                return false;
+            }
+        }
+        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+        view.setError(null);
+        return true;
     }
 
     private View.OnFocusChangeListener mOnFocusChangeListener
@@ -147,8 +181,17 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
 
             @Override
             public void onClick(View view) {
-                // creating new product in background thread
-                new CreateNewProduct().execute();
+                if( clientSideCheck(name) && clientSideCheck(email) && clientSideCheck(password) && clientSideCheck(retypePass) && clientSideCheck(phoneNumber) ) {
+                    // creating new product in background thread
+                    new CreateNewProduct().execute();
+                }
+                else {
+                    clientSideCheck(name);
+                    clientSideCheck(email);
+                    clientSideCheck(password);
+                    clientSideCheck(retypePass);
+                    clientSideCheck(phoneNumber);
+                }
             }
         });
 
@@ -215,10 +258,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
 
                 if (success == 1) {
                     // successfully created a user
-                    Intent i = new Intent(getApplicationContext(), UserRegForm.class);
-                    startActivity(i);
-
-                    // closing this screen
+                    // closing this screen. Back to MainActivity
                     finish();
                 } else {
                     // failed to create user
@@ -238,8 +278,13 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
+            Toast toast;
             if(flag == 1) {
-                Toast toast = Toast.makeText(UserRegForm.this, message, Toast.LENGTH_LONG);
+                toast = Toast.makeText(UserRegForm.this, message, Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else{
+                toast = Toast.makeText(UserRegForm.this, "Successfully Registered", Toast.LENGTH_LONG);
                 toast.show();
             }
         }

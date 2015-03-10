@@ -27,7 +27,7 @@
     <string name="state">State/Province</string>
     <string name="zipCode">Postal/Zip Code</string>
 
-    <string name="missionRequired">Purpose/Objective/Mission*</string>
+    <string name="mission">Purpose/Objective/Mission</string>
     <string name="website">Website</string>
     <string name="websiteHint">website or facebook/twitter page</string>
 

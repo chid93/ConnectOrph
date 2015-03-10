@@ -19,6 +19,31 @@ public class OrphRegForm extends ActionBarActivity{
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
+    public boolean clientSideCheck(EditText view) {
+        if(view.length() == 0) {
+            view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+            view.setError("Required");
+            return false;
+        }
+        if(view == findViewById(R.id.fr_orph_email_ET)) {
+            String emailText = view.getText().toString();
+            if (!isValidEmail(emailText)) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Invalid Email");
+                return false;
+            }
+        }
+        if(view == findViewById(R.id.fr_orph_retype_password_ET)) {
+            EditText password = (EditText) findViewById(R.id.fr_orph_password_ET);
+            if (!(view.getText().toString().equals(password.getText().toString()))) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Passwords does not match");
+                return false;
+            }
+        }
+        return true;
+    }
+
     private View.OnFocusChangeListener mOnFocusChangeListener
             = new View.OnFocusChangeListener() {
 
@@ -83,10 +108,19 @@ public class OrphRegForm extends ActionBarActivity{
     }
 
     public void callOrphRegForm1(View view) {
-        Intent OrphRegFormIntent1 = new Intent(this, OrphRegForm1.class);
-        OrphRegFormIntent1.putExtra("name", name.getText().toString());
-        OrphRegFormIntent1.putExtra("email", email.getText().toString());
-        OrphRegFormIntent1.putExtra("password", password.getText().toString());
-        startActivity(OrphRegFormIntent1);
+
+        if( clientSideCheck(name) && clientSideCheck(email) && clientSideCheck(password) && clientSideCheck(retypePass) ) {
+            Intent OrphRegFormIntent1 = new Intent(this, OrphRegForm1.class);
+            OrphRegFormIntent1.putExtra("name", name.getText().toString());
+            OrphRegFormIntent1.putExtra("email", email.getText().toString());
+            OrphRegFormIntent1.putExtra("password", password.getText().toString());
+            startActivity(OrphRegFormIntent1);
+        }
+        else{
+            clientSideCheck(name);
+            clientSideCheck(email);
+            clientSideCheck(password);
+            clientSideCheck(retypePass);
+        }
     }
 }
