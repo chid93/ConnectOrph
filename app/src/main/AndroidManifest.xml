@@ -46,6 +46,11 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/orphProfile"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ResetPassword"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/resetPassword"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

@@ -72,6 +72,8 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
          * */
         int flag=0;
         String message;
+        EditText email;
+        EditText password;
         @Override
         protected void onPreExecute() {
             Log.i("OrphanageFragmentLaunch", "In onPreExecute");
@@ -89,8 +91,8 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
         protected String doInBackground(String... args) {
             Log.i("OrphanageFragmentLaunch","In doInBackground");
 
-            EditText email = (EditText) rootView.findViewById(R.id.view_orphanage_orph_id_ET);
-            EditText password = (EditText) rootView.findViewById(R.id.view_orphanage_password_ET);
+            email = (EditText) rootView.findViewById(R.id.view_orphanage_orph_id_ET);
+            password = (EditText) rootView.findViewById(R.id.view_orphanage_password_ET);
             String demail = email.getText().toString();
             String dpassword = password.getText().toString();
 
@@ -113,6 +115,7 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
             try {
                 int success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
+                    flag=0;
                     // successfully logged in
                     Intent UserProfileIntent = new Intent(getActivity(), OrphProfile.class);
                     startActivity(UserProfileIntent);
@@ -139,6 +142,11 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
             if(flag == 1) {
                 Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
                 toast.show();
+            }
+            else{
+                //Reset Email and Password editText
+                email.setText("");
+                password.setText("");
             }
         }
 

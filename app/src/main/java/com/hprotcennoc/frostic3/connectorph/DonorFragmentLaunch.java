@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -28,11 +29,15 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
     private static String url_login_user = "http://192.168.0.102/connectorph_php/login_user.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+    private static String tag;
+    private static final String login_tag = "login";
+    private static final String forgotPassword_tag = "forgotPassword";
     //DATABASE CONTINUES LATER
 
     View rootView;
     Button btnlogin;
     Button btnreg;
+    TextView TVforgotpass;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,11 +45,13 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
 
         btnlogin = (Button) rootView.findViewById(R.id.lv_donor_login_button);
         btnreg = (Button) rootView.findViewById(R.id.lv_donor_register_button);
+        TVforgotpass = (TextView) rootView.findViewById(R.id.lv_donor_forgot_password_TV);
         //Login Listener
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 // get user details from email and password in background thread
+                tag=login_tag;
                 new getUserByEmailAndPassword().execute();
             }
         });
@@ -54,6 +61,14 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             public void onClick(View arg0) {
                 Intent UserRegFormIntent = new Intent(getActivity(), UserRegForm.class);
                 startActivity(UserRegFormIntent);
+            }
+        });
+        TVforgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                tag=forgotPassword_tag;
+                // get email from user and check if it exists in database
+                new getUserByEmailAndPassword().execute();
             }
         });
 
@@ -71,12 +86,17 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
          * */
         int flag=0;
         String message;
+        EditText email;
+        EditText password;
         @Override
         protected void onPreExecute() {
             Log.i("DonorFragmentLaunch", "In onPreExecute");
             super.onPreExecute();
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Logging in..");
+            if(tag.equals(login_tag))
+                pDialog.setMessage("Logging in..");
+            else
+                pDialog.setMessage("We are resetting your password..");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -88,13 +108,14 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
         protected String doInBackground(String... args) {
             Log.i("DonorFragmentLaunch","In doInBackground");
 
-            EditText email = (EditText) rootView.findViewById(R.id.view_donor_email_ET);
-            EditText password = (EditText) rootView.findViewById(R.id.view_donor_password_ET);
+            email = (EditText) rootView.findViewById(R.id.view_donor_email_ET);
+            password = (EditText) rootView.findViewById(R.id.view_donor_password_ET);
             String demail = email.getText().toString();
             String dpassword = password.getText().toString();
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<>();
+            params.add(new BasicNameValuePair("tag", tag));
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
 
@@ -110,10 +131,17 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             try {
                 int success = json.getInt(TAG_SUCCESS);
 
-                if (success == 1) {
+                if (success == 1 && tag.equals(login_tag)) {
                     // successfully logged in
                     Intent UserProfileIntent = new Intent(getActivity(), UserHome.class);
                     startActivity(UserProfileIntent);
+                }
+                else if (success == 1 && tag.equals(forgotPassword_tag)) {
+                    flag=0;
+                    // Email found. Reset password mail sent. Go to page to enter code.
+                    Intent ForgotPasswordIntent = new Intent(getActivity(), ResetPassword.class);
+                    ForgotPasswordIntent.putExtra("email", demail);
+                    startActivity(ForgotPasswordIntent);
 
                 } else {
                     // failed to login
@@ -137,6 +165,11 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             if(flag == 1) {
                 Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
                 toast.show();
+            }
+            else{
+                //Reset Email and Password editText
+                email.setText("");
+                password.setText("");
             }
         }
 
