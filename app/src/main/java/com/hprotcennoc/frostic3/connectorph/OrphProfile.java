@@ -8,6 +8,6 @@ public class OrphProfile extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_orph);
+        setContentView(R.layout.home_orph);
     }
 }

@@ -30,17 +30,17 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
     private static final String TAG_MESSAGE = "message";
     //DATABASE CONTINUES LATER
 
-    View view;
+    View rootView;
     Button btnlogin;
     Button btnreg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.launch_view_orphanage, container, false);
+        rootView = inflater.inflate(R.layout.launch_view_orphanage, container, false);
 
-        btnlogin = (Button) view.findViewById(R.id.lv_orphanage_login_button);
-        btnreg = (Button) view.findViewById(R.id.lv_orphanage_register_button);
+        btnlogin = (Button) rootView.findViewById(R.id.lv_orphanage_login_button);
+        btnreg = (Button) rootView.findViewById(R.id.lv_orphanage_register_button);
         //Login Listener
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +58,7 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
             }
         });
 
-        return view;
+        return rootView;
     }
 
     //DATABASE CONTINUES HERE
@@ -89,8 +89,8 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
         protected String doInBackground(String... args) {
             Log.i("OrphanageFragmentLaunch","In doInBackground");
 
-            EditText email = (EditText) view.findViewById(R.id.view_orphanage_orph_id_ET);
-            EditText password = (EditText) view.findViewById(R.id.view_orphanage_password_ET);
+            EditText email = (EditText) rootView.findViewById(R.id.view_orphanage_orph_id_ET);
+            EditText password = (EditText) rootView.findViewById(R.id.view_orphanage_password_ET);
             String demail = email.getText().toString();
             String dpassword = password.getText().toString();
 

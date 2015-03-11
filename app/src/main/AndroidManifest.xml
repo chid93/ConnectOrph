@@ -37,9 +37,9 @@
             android:label="@string/orphanageContact"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".UserProfile"
+            android:name=".UserHome"
             android:parentActivityName=".MainActivity"
-            android:label="@string/userProfile"
+            android:label="@string/userHome"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".OrphProfile"

@@ -175,6 +175,7 @@
                 android:layout_below="@+id/fr_user_street_address_line_2_ET"
                 android:orientation="horizontal">
                 <Spinner
+                    android:spinnerMode="dialog"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -184,6 +185,7 @@
                     android:layout_marginRight="4dp"/>
 
                 <Spinner
+                    android:spinnerMode="dialog"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

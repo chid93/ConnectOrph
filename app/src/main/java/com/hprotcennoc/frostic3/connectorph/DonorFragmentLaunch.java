@@ -30,16 +30,16 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
     private static final String TAG_MESSAGE = "message";
     //DATABASE CONTINUES LATER
 
-    View view;
+    View rootView;
     Button btnlogin;
     Button btnreg;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.launch_view_donor, container, false);
+        rootView = inflater.inflate(R.layout.launch_view_donor, container, false);
 
-        btnlogin = (Button) view.findViewById(R.id.lv_donor_login_button);
-        btnreg = (Button) view.findViewById(R.id.lv_donor_register_button);
+        btnlogin = (Button) rootView.findViewById(R.id.lv_donor_login_button);
+        btnreg = (Button) rootView.findViewById(R.id.lv_donor_register_button);
         //Login Listener
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             }
         });
 
-        return view;
+        return rootView;
     }
 
     //DATABASE CONTINUES HERE
@@ -88,8 +88,8 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
         protected String doInBackground(String... args) {
             Log.i("DonorFragmentLaunch","In doInBackground");
 
-            EditText email = (EditText) view.findViewById(R.id.view_donor_email_ET);
-            EditText password = (EditText) view.findViewById(R.id.view_donor_password_ET);
+            EditText email = (EditText) rootView.findViewById(R.id.view_donor_email_ET);
+            EditText password = (EditText) rootView.findViewById(R.id.view_donor_password_ET);
             String demail = email.getText().toString();
             String dpassword = password.getText().toString();
 
@@ -112,7 +112,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
 
                 if (success == 1) {
                     // successfully logged in
-                    Intent UserProfileIntent = new Intent(getActivity(), UserProfile.class);
+                    Intent UserProfileIntent = new Intent(getActivity(), UserHome.class);
                     startActivity(UserProfileIntent);
 
                 } else {
