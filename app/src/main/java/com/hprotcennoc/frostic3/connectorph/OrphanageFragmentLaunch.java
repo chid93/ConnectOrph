@@ -117,7 +117,7 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
                 if (success == 1) {
                     flag=0;
                     // successfully logged in
-                    Intent UserProfileIntent = new Intent(getActivity(), OrphProfile.class);
+                    Intent UserProfileIntent = new Intent(getActivity(), OrphHome.class);
                     startActivity(UserProfileIntent);
 
                 } else {

@@ -87,14 +87,9 @@ public class JSONParser{
                     is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
             String line;
-            //THE BEST CODE EVER STARTS HERE
-            String line1=null;
             while ((line = reader.readLine()) != null) {
-                line1 = line;
-                //sb.append(line + "\n");
+                sb.append(line + "\n");
             }
-            sb.append(line1);
-            //THE BEST CODE EVER ENDS HERE
             Log.d("JSONParser", sb.toString() );
             is.close();
             Log.i("JSONParser", "In next try");
