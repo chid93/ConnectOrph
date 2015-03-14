@@ -34,6 +34,15 @@
     <string name="website">Website</string>
     <string name="websiteHint">website or facebook/twitter page</string>
 
+
+    <string name="materialType">Material Type</string>
+    <string name="numberOfItems">Number of items</string>
+    <string name="donateDesc">Description</string>
+    <string name="descHint">Explain about your donation..</string>
+    <string name="collectionAddress">Collection Address</string>
+    <string name="availableTime">Available Time(your availability)</string>
+    <string name="timeHint">example: 9:00 to 13:00</string>
+
     <!-- Button/Title strings -->
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
@@ -41,7 +50,9 @@
     <string name="resetPassword">Reset Password</string>
     <string name="resetPasswordButton">RESET PASSWORD</string>
     <string name="next">NEXT</string>
-    <string name="donate">MAKE A DONATION</string>
+    <string name="donateButton">MAKE A DONATION</string>
+    <string name="submitDonationButton">SUBMIT DONATION</string>
+    <string name="DonationDesc">Donation Description</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
     <string name="orphanageContact">Contact details</string>

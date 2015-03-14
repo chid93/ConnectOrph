@@ -134,6 +134,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
                 if (success == 1 && tag.equals(login_tag)) {
                     // successfully logged in
                     Intent UserProfileIntent = new Intent(getActivity(), UserHome.class);
+                    UserProfileIntent.putExtra("email", demail);
                     startActivity(UserProfileIntent);
                 }
                 else if (success == 1 && tag.equals(forgotPassword_tag)) {

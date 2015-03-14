@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="16dp"
+        android:id="@+id/donation_add_scrollView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/donation_add_footer">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/materialType"
+                android:id="@+id/donation_add_material_Type_TV"
+                android:labelFor="@+id/donation_add_material_type_spinner"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="5dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/donation_add_categories_linear_layout"
+                android:layout_below="@+id/donation_add_material_Type_TV"
+                android:orientation="horizontal">
+                <Spinner
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/donation_add_categories_spinner"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="4dp"/>
+
+                <Spinner
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/donation_add_subCategories_spinner"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="4dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/numberOfItems"
+                android:layout_below="@id/donation_add_categories_linear_layout"
+                android:id="@+id/donation_add_no_of_items_TV"
+                android:labelFor="@+id/donation_add_no_of_items_ET"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:id="@+id/donation_add_no_of_items_ET"
+                android:hint="Count"
+                android:maxLength="4"
+                android:layout_below="@+id/donation_add_no_of_items_TV"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/donateDesc"
+                android:layout_below="@id/donation_add_no_of_items_ET"
+                android:id="@+id/donation_add_desc_TV"
+                android:labelFor="@+id/donation_add_donate_desc_ET"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/donation_add_desc_ET"
+                android:layout_below="@+id/donation_add_desc_TV"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/descHint"
+                android:lines="2"
+                android:minLines="2"
+                android:maxLength="500"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/collectionAddress"
+                android:id="@+id/donation_add_label_address_TV"
+                android:layout_below="@+id/donation_add_desc_ET"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:id="@+id/donation_add_street_address_ET"
+                android:hint="@string/addressLine1"
+                android:layout_below="@+id/donation_add_label_address_TV"
+                android:inputType="textPostalAddress"
+                android:maxLength="108"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:id="@+id/donation_add_street_address_line_2_ET"
+                android:layout_below="@+id/donation_add_street_address_ET"
+                android:hint="@string/addressLine2"
+                android:layout_marginTop="5dp"
+                android:inputType="textPostalAddress"
+                android:maxLength="108"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fr_donor_state_city_linear_layout"
+                android:layout_below="@+id/donation_add_street_address_line_2_ET"
+                android:orientation="horizontal">
+                <Spinner
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/donation_add_state_spinner"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="4dp"/>
+
+                <Spinner
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/donation_add_city_spinner"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="4dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/donation_add_footer"
+        android:background="@drawable/ab_solid_bluewhite"
+        style="@style/ButtonBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/donation_add_buttonbar"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#FFF"
+            style="@style/ButtonBarButton"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/submitDonationButton" />
+
+    </LinearLayout>
+
+</RelativeLayout>
