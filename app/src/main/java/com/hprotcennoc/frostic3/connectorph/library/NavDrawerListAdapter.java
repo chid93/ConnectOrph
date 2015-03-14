@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph;
+package com.hprotcennoc.frostic3.connectorph.library;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.hprotcennoc.frostic3.connectorph.R;
 
 import java.util.ArrayList;
 

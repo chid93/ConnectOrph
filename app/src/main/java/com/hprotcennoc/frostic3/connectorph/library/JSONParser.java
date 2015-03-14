@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph;
+package com.hprotcennoc.frostic3.connectorph.library;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -22,18 +22,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserRegForm"
+            android:name=".registration_forms.UserRegForm"
             android:parentActivityName=".MainActivity"
             android:label="@string/registerDonor"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".OrphRegForm"
+            android:name=".registration_forms.OrphRegForm"
             android:parentActivityName=".MainActivity"
             android:label="@string/registerOrphanage"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".OrphRegForm1"
-            android:parentActivityName=".OrphRegForm"
+            android:name=".registration_forms.OrphRegForm1"
+            android:parentActivityName=".registration_forms.OrphRegForm"
             android:label="@string/orphanageContact"
             android:windowSoftInputMode="adjustPan" />
         <activity

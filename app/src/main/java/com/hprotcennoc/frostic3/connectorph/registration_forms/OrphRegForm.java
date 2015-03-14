@@ -1,10 +1,12 @@
-package com.hprotcennoc.frostic3.connectorph;
+package com.hprotcennoc.frostic3.connectorph.registration_forms;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
+
+import com.hprotcennoc.frostic3.connectorph.R;
 
 
 public class OrphRegForm extends ActionBarActivity{

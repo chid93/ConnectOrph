@@ -14,6 +14,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.hprotcennoc.frostic3.connectorph.fragments.BrowseOrphanagesFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.DonateFeedFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.ProfileSettingsFragment;
+import com.hprotcennoc.frostic3.connectorph.library.NavDrawerItem;
+import com.hprotcennoc.frostic3.connectorph.library.NavDrawerListAdapter;
+
 import java.util.ArrayList;
 
 public class UserHome extends ActionBarActivity{

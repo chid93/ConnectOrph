@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph;
+package com.hprotcennoc.frostic3.connectorph.registration_forms;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +14,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.hprotcennoc.frostic3.connectorph.MainActivity;
+import com.hprotcennoc.frostic3.connectorph.R;
+import com.hprotcennoc.frostic3.connectorph.library.JSONParser;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;

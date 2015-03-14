@@ -1,7 +1,11 @@
-package com.hprotcennoc.frostic3.connectorph;
+package com.hprotcennoc.frostic3.connectorph.library;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.hprotcennoc.frostic3.connectorph.fragments.DonorFragmentLaunch;
+import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageFragmentLaunch;
+
 public class TabsAdapterLaunch extends FragmentStatePagerAdapter{
     private int TOTAL_TABS = 2;
 

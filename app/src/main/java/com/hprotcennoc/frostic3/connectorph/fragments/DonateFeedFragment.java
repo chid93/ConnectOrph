@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph;
+package com.hprotcennoc.frostic3.connectorph.fragments;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;
@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.hprotcennoc.frostic3.connectorph.AddDonation;
+import com.hprotcennoc.frostic3.connectorph.R;
+import com.hprotcennoc.frostic3.connectorph.library.JSONParser;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;

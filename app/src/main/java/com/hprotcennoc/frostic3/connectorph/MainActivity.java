@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
+import com.hprotcennoc.frostic3.connectorph.library.TabsAdapterLaunch;
+
 
 public class MainActivity extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener{
 
