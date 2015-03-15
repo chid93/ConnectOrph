@@ -4,6 +4,7 @@ import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,11 +47,13 @@ public class OrphanageDonateFeedFragment extends ListFragment {
     private static final String TAG_MESSAGE = "message";
     private static final String TAG_DONATIONS = "donations";
     private static final String TAG_DONATIONID = "donationid";
+    private static final String TAG_SMS_BODY = "body";
     private static final String TAG_CREATED_AT = "created_at";
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_SUB_CATEGORY = "subCategory";
     private static final String TAG_DESC = "description";
     private static final String TAG_NUM_OF_ITEMS = "numberOfItems";
+    private static final String TAG_PHONE_NUMBER = "phoneNumber";
     private static final String TAG_ADDRESS_LINE_1 = "caddress1";
     private static final String TAG_ADDRESS_LINE_2 = "caddress2";
     private static final String TAG_STATE = "cstate";
@@ -60,10 +63,11 @@ public class OrphanageDonateFeedFragment extends ListFragment {
 
     View rootView;
     Button claimADontaion;
-    String demail;
+    String demail, phoneNumber, smsBody;
     CheckBox cb;
     ListView lv;
     TextView donationid;
+    int MAX_SMS_MESSAGE_LENGTH = 160;
     static int selectedIndex;
 
     public OrphanageDonateFeedFragment(){}
@@ -275,8 +279,7 @@ public class OrphanageDonateFeedFragment extends ListFragment {
 
             // getting JSON Object
             // Note that create product url accepts POST method
-            JSONObject json = JSONParser.makeHttpRequest(url_claim_donation,
-                    "POST", params);
+            JSONObject json = JSONParser.makeHttpRequest(url_claim_donation, "POST", params);
 
             // check log cat from response
             Log.d("Create Response", json.toString());
@@ -288,7 +291,8 @@ public class OrphanageDonateFeedFragment extends ListFragment {
 
                 if (success == 1) {
                     // successfully claimed donation. View Claimed Donations
-
+                    phoneNumber = json.getString(TAG_PHONE_NUMBER);
+                    smsBody = json.getString(TAG_SMS_BODY);
                 } else {
                     // failed to create user
                     Log.d("Failed to claim donation", json.toString());
@@ -313,6 +317,26 @@ public class OrphanageDonateFeedFragment extends ListFragment {
                 toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
                 toast.show();
             } else {
+                //SMS send start
+                try {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    if(smsBody.length() > MAX_SMS_MESSAGE_LENGTH)
+                    {
+                        ArrayList<String> messagelist = smsManager.divideMessage(smsBody);
+
+                        smsManager.sendMultipartTextMessage(phoneNumber, null, messagelist, null, null);
+                    }
+                    else
+                    {
+                        smsManager.sendTextMessage(phoneNumber, null, smsBody, null, null);
+                    }
+                    //smsManager.sendTextMessage(phoneNumber, null, smsBody, null, null);
+                    Toast.makeText(getActivity(), "SMS Sent to the donor!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "SMS failed, please try again later!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+                // SMS send Close
                 toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
                 toast.show();
             }
