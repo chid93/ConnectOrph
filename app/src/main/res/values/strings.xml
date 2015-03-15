@@ -11,7 +11,7 @@
     <string name="email">Email Address</string>
     <string name="emailRequired">Email Address*</string>
     <string name="emailHint">someone@example.com</string>
-    <string name="orphanage_id">Orphanage ID</string>
+    <string name="orphanage_id">Orphanage Email</string>
 
     <string name="enterCode">Enter code</string>
     <string name="passwordRequired">Password*</string>
@@ -36,6 +36,7 @@
 
 
     <string name="materialType">Material Type</string>
+    <string name="claimCode">Claim Code</string>
     <string name="numberOfItems">Number of items</string>
     <string name="donateDesc">Description</string>
     <string name="descHint">Explain about your donation..</string>
@@ -51,18 +52,28 @@
     <string name="resetPasswordButton">RESET PASSWORD</string>
     <string name="next">NEXT</string>
     <string name="donateButton">MAKE A DONATION</string>
+    <string name="claimButton">CLAIM</string>
     <string name="submitDonationButton">SUBMIT DONATION</string>
+    <string name="claimDonationButton">CLAIM DONATION</string>
     <string name="DonationDesc">Donation Description</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
     <string name="orphanageContact">Contact details</string>
     <string name="userHome">Home</string>
-    <string name="orphProfile">Orph Profile</string>
+    <string name="orphHome">Home</string>
 
     <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
+    <string-array name="nav_drawer_items_user">
         <item >Donation Feed</item>
         <item >Browse Orphanages</item>
+        <item >Profile Settings</item>
+    </string-array>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items_orphanage">
+        <item >Donation Feed</item>
+        <item >Claimed Donations</item>
+        <item >Immediate Needs</item>
         <item >Profile Settings</item>
     </string-array>
     <!-- Content Description -->
