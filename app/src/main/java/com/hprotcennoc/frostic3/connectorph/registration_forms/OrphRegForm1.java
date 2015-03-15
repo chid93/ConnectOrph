@@ -1,7 +1,6 @@
 package com.hprotcennoc.frostic3.connectorph.registration_forms;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hprotcennoc.frostic3.connectorph.MainActivity;
 import com.hprotcennoc.frostic3.connectorph.R;
 import com.hprotcennoc.frostic3.connectorph.library.JSONParser;
 
@@ -46,7 +44,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     private ProgressDialog pDialog;
 
     // url to create new product
-    private static String url_new_orph = "http://192.168.0.102/connectorph_php/new_orph.php";
+    private static String url_new_orph = "http://192.168.0.100/connectorph_php/new_orph.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -154,8 +152,6 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
                 if( clientSideCheck(address1) && clientSideCheck(phoneNumber) && clientSideCheck(state) && clientSideCheck(city)) {
                     // creating new product in background thread
                     new CreateNewProduct().execute();
-                    Intent i = new Intent(OrphRegForm1.this, MainActivity.class);
-                    startActivity(i);
                 }
                 else{
                     clientSideCheck(address1);

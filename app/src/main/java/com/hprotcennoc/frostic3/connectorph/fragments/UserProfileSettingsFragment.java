@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 
 import com.hprotcennoc.frostic3.connectorph.R;
 
-public class ProfileSettingsFragment extends Fragment{
+public class UserProfileSettingsFragment extends Fragment{
 
     View rootView;
 
-    public ProfileSettingsFragment(){}
+    public UserProfileSettingsFragment(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_profile_settings, container, false);
+        rootView = inflater.inflate(R.layout.fragment_user_profile_settings, container, false);
 
         return rootView;
     }

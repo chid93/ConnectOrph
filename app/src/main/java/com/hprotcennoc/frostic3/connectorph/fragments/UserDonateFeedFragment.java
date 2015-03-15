@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DonateFeedFragment extends ListFragment {
+public class UserDonateFeedFragment extends ListFragment {
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -35,7 +35,7 @@ public class DonateFeedFragment extends ListFragment {
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_donation = "http://192.168.0.102/connectorph_php/feed_donation.php";
+    private static String url_feed_donation = "http://192.168.0.100/connectorph_php/feed_donation.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -57,10 +57,10 @@ public class DonateFeedFragment extends ListFragment {
     Button makeADontaion;
     String demail;
 
-    public DonateFeedFragment(){}
+    public UserDonateFeedFragment(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_donate_feed, container, false);
+        rootView = inflater.inflate(R.layout.fragment_user_donate_feed, container, false);
 
         demail = getActivity().getIntent().getStringExtra("email");
         // Hashmap for ListView
@@ -87,7 +87,7 @@ public class DonateFeedFragment extends ListFragment {
             }
         }); */
 
-        makeADontaion = (Button) rootView.findViewById(R.id.fragment_donate_feed_buttonbar);
+        makeADontaion = (Button) rootView.findViewById(R.id.fragment_user_donate_feed_buttonbar);
         makeADontaion.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -215,9 +215,7 @@ public class DonateFeedFragment extends ListFragment {
                     /**
                      * Updating parsed JSON data into ListView
                      * */
-
-
-                     ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_donation_feed,
+                     ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_user_donation_feed,
                             new String[] { TAG_DONATIONID, TAG_CREATED_AT, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS},
                             new int[] { R.id.LT_donationid, R.id.LT_timestamp, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems });
                     // updating listview

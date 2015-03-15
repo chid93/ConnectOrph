@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 
 import com.hprotcennoc.frostic3.connectorph.R;
 
-public class BrowseOrphanagesFragment extends Fragment{
+public class UserBrowseOrphanagesFragment extends Fragment{
 
     View rootView;
 
-    public BrowseOrphanagesFragment(){}
+    public UserBrowseOrphanagesFragment(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_browse_orphanages, container, false);
+        rootView = inflater.inflate(R.layout.fragment_user_browse_orphanages, container, false);
 
         return rootView;
     }

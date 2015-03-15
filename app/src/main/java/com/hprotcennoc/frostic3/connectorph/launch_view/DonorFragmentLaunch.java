@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.fragments;
+package com.hprotcennoc.frostic3.connectorph.launch_view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -32,7 +32,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-    private static String url_login_user = "http://192.168.0.102/connectorph_php/login_user.php";
+    private static String url_login_user = "http://192.168.0.100/connectorph_php/login_user.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     private static String tag;

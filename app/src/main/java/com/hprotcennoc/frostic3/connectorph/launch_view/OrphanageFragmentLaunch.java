@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.fragments;
+package com.hprotcennoc.frostic3.connectorph.launch_view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -30,7 +30,7 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-    private static String url_login_orph = "http://192.168.0.102/connectorph_php/login_orph.php";
+    private static String url_login_orph = "http://192.168.0.100/connectorph_php/login_orph.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     //DATABASE CONTINUES LATER
@@ -123,6 +123,7 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
                     flag=0;
                     // successfully logged in
                     Intent UserProfileIntent = new Intent(getActivity(), OrphHome.class);
+                    UserProfileIntent.putExtra("email", demail);
                     startActivity(UserProfileIntent);
 
                 } else {

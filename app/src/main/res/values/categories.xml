@@ -9,12 +9,12 @@
         <item>[Type]</item>
         <item>Apparel and Clothes</item>
 		<item>Baby Learning Toys</item>
-		<item>Beauty Personal Care </item>
-        <item>Books Music and DVDs </item>
-        <item>Electronics </item>
-        <item>Gourmet Food </item>
+		<item>Beauty Personal Care</item>
+        <item>Books Music and DVDs</item>
+        <item>Electronics</item>
+        <item>Gourmet Food</item>
         <item>Household items</item>
-		<item>Sports and Fitness </item>
+		<item>Sports and Fitness</item>
 		<item>Others</item>
     </string-array>
 
@@ -26,7 +26,7 @@
 
     <string-array name="subCategories_Apparel_and_Clothes">
         <item>Female-greater than 40</item>
-		<item>Female-between 18 to 40 </item>
+		<item>Female-between 18 to 40</item>
 		<item>Female-less than 18</item>
 		<item>Male-greater than 40</item>
 		<item>Male-between 18 to 40</item>

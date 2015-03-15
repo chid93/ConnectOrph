@@ -14,9 +14,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.hprotcennoc.frostic3.connectorph.fragments.BrowseOrphanagesFragment;
-import com.hprotcennoc.frostic3.connectorph.fragments.DonateFeedFragment;
-import com.hprotcennoc.frostic3.connectorph.fragments.ProfileSettingsFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.UserBrowseOrphanagesFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.UserDonateFeedFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
 import com.hprotcennoc.frostic3.connectorph.library.NavDrawerItem;
 import com.hprotcennoc.frostic3.connectorph.library.NavDrawerListAdapter;
 
@@ -48,7 +48,7 @@ public class UserHome extends ActionBarActivity{
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
-        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items_user);
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -76,23 +76,25 @@ public class UserHome extends ActionBarActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        //ON DRAWER TOGGLE, DO WHATEVER YOU WISH TO DO, HERE!
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.app_name, // nav drawer open - description for accessibility
                 R.string.app_name // nav drawer close - description for accessibility
         ) {
             public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(mTitle);
+                //getSupportActionBar().setTitle(mTitle);
                 // calling onPrepareOptionsMenu() to show action bar icons
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(mDrawerTitle);
+                //getSupportActionBar().setTitle(mDrawerTitle);
                 // calling onPrepareOptionsMenu() to hide action bar icons
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        //END DRAWER TOGGLE
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
@@ -153,13 +155,13 @@ public class UserHome extends ActionBarActivity{
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new DonateFeedFragment();
+                fragment = new UserDonateFeedFragment();
                 break;
             case 1:
-                fragment = new BrowseOrphanagesFragment();
+                fragment = new UserBrowseOrphanagesFragment();
                 break;
             case 2:
-                fragment = new ProfileSettingsFragment();
+                fragment = new UserProfileSettingsFragment();
                 break;
 
             default:
