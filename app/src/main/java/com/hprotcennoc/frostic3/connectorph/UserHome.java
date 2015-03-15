@@ -17,8 +17,8 @@ import android.widget.ListView;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserBrowseOrphanagesFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
-import com.hprotcennoc.frostic3.connectorph.library.NavDrawerItem;
-import com.hprotcennoc.frostic3.connectorph.library.NavDrawerListAdapter;
+import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
+import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
 import java.util.ArrayList;
 

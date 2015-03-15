@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.library;
+package com.hprotcennoc.frostic3.connectorph.library.model;
 
 public class NavDrawerItem {
 

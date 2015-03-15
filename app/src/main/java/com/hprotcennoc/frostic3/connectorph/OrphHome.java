@@ -18,8 +18,8 @@ import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageClaimedDonationsF
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageProfileSettingsFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
-import com.hprotcennoc.frostic3.connectorph.library.NavDrawerItem;
-import com.hprotcennoc.frostic3.connectorph.library.NavDrawerListAdapter;
+import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
+import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
 import java.util.ArrayList;
 
