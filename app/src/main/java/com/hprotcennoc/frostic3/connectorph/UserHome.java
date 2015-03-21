@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 public class UserHome extends ActionBarActivity{
 
+    //NAVIGATION DRAWER STARTS HERE
+    private static String demail;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -39,12 +41,16 @@ public class UserHome extends ActionBarActivity{
 
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+    //NAVIGATION DRAWER CONTINUES LATER
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_user);
 
+
+        //NAVIGATION DRAWER CONTINUES HERE
+        demail = getIntent().getStringExtra("email");
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
@@ -52,7 +58,7 @@ public class UserHome extends ActionBarActivity{
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.home_user_list_slidermenu);
+        mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
         navDrawerItems = new ArrayList<>();
 
@@ -100,8 +106,10 @@ public class UserHome extends ActionBarActivity{
             // on first time display view for first nav item
             displayView(0);
         }
+        //NAVIGATION DRAWER CONTINUES LATER
     }
 
+    //NAVIGATION DRAWER CONTINUES HERE
     /**
      * Slide menu item click listener
      * */
@@ -157,9 +165,17 @@ public class UserHome extends ActionBarActivity{
             case 0:
                 fragment = new UserDonateFeedFragment();
                 break;
+            case 1:
+                Intent UserMyDonationsIntent = new Intent(this, UserMyDonations.class);
+                UserMyDonationsIntent.putExtra("email", demail);
+                startActivity(UserMyDonationsIntent);
+                mDrawerLayout.closeDrawers();
+                break;
             case 2:
                 Intent OrphanagesNearYouFragmentActivity = new Intent(this, FindOrphanages.class);
+                OrphanagesNearYouFragmentActivity.putExtra("position", position);
                 startActivity(OrphanagesNearYouFragmentActivity);
+                mDrawerLayout.closeDrawers();
                 break;
             case 3:
                 fragment = new UserProfileSettingsFragment();
@@ -172,7 +188,7 @@ public class UserHome extends ActionBarActivity{
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.home_user_frame_container, fragment).commit();
+                    .replace(R.id.frame_container, fragment).commit();
 
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
@@ -181,7 +197,7 @@ public class UserHome extends ActionBarActivity{
             mDrawerLayout.closeDrawer(mDrawerList);
         } else {
             // error in creating fragment
-            Log.e("UserHome", "Error in creating fragment or OrphanagesNearYou called!");
+            Log.e("UserHome", "Error in creating fragment or OrphanagesNearYou, UserMyDonations called!");
         }
     }
 
@@ -209,4 +225,5 @@ public class UserHome extends ActionBarActivity{
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    //NAVIGATION DRAWER ENDS HERE
 }
