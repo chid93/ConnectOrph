@@ -50,6 +50,7 @@
     <string name="forgotPassword">Forgot Password?</string>
     <string name="resetPassword">Reset Password</string>
     <string name="resetPasswordButton">RESET PASSWORD</string>
+    <string name="editButton">EDIT</string>
     <string name="next">NEXT</string>
     <string name="donateButton">MAKE A DONATION</string>
     <string name="claimButton">CLAIM</string>
@@ -58,6 +59,7 @@
     <string name="DonationDesc">Donation Description</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
+    <string name="orphanageContactLT">Orphanage Contact details</string>
     <string name="orphanageContact">Contact details</string>
     <string name="userHome">Home</string>
     <string name="orphHome">Home</string>
@@ -82,5 +84,8 @@
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
+
+    <string name="tab_words">"Words"</string>
+    <string name="tab_numbers">"Numbers"</string>
 
     </resources>

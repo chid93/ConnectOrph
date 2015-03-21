@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.hprotcennoc.frostic3.connectorph.AddDonation;
 import com.hprotcennoc.frostic3.connectorph.R;
@@ -39,6 +40,7 @@ public class UserDonateFeedFragment extends ListFragment {
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
     private static final String TAG_DONATIONS = "donations";
     private static final String TAG_DONATIONID = "donationid";
     private static final String TAG_CREATED_AT = "created_at";
@@ -113,6 +115,8 @@ public class UserDonateFeedFragment extends ListFragment {
      * */
     class LoadAllProducts extends AsyncTask<String, String, String> {
 
+        int flag=0;
+        String message;
         /**
          * Before starting background thread Show Progress Dialog
          * */
@@ -190,6 +194,8 @@ public class UserDonateFeedFragment extends ListFragment {
                     }
                 } else {
                     // no Donations found
+                    message = json.getString(TAG_MESSAGE);
+                    flag=1;
                     // Launch Add New Donations Activity
                     //Intent i = new Intent(getActivity(), NewProductActivity.class);
                     // Closing all previous activities
@@ -209,6 +215,10 @@ public class UserDonateFeedFragment extends ListFragment {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
+
+            if(flag == 1) {
+                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+            }
             // updating UI from Background Thread
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {

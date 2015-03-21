@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.hprotcennoc.frostic3.connectorph.R;
 import com.hprotcennoc.frostic3.connectorph.library.JSONParser;
@@ -37,6 +38,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
     private static final String TAG_CLAIMED_DONATIONS = "claimedDonations";
     private static final String TAG_CLAIM_CODE = "claim_code";
     private static final String TAG_DONATIONID = "donationid";
@@ -83,6 +85,8 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
      * */
     class LoadAllProducts extends AsyncTask<String, String, String> {
 
+        int flag=0;
+        String message;
         /**
          * Before starting background thread Show Progress Dialog
          * */
@@ -171,11 +175,8 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
                     }
                 } else {
                     // no Donations found
-                    // Launch Add New Donations Activity
-                    //Intent i = new Intent(getActivity(), NewProductActivity.class);
-                    // Closing all previous activities
-                    //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //startActivity(i);
+                    message = json.getString(TAG_MESSAGE);
+                    flag=1;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -190,18 +191,21 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
+            if(flag == 1) {
+                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+            }
             // updating UI from Background Thread
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     /**
                      * Updating parsed JSON data into ListView
                      * */
-                     ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_orphanage_claimed_donation_feed,
+                     ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_claimed_donation_feed,
                             new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_PHONE_NUMBER, TAG_CLAIM_CODE,
                             TAG_ADDRESS_LINE_1, TAG_ADDRESS_LINE_2, TAG_CITY, TAG_STATE, TAG_CLAIMED_AT},
                             new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems,
                                     R.id.LT_phoneNumber, R.id.LT_claimCode, R.id.LT_addressLine1, R.id.LT_addressLine2, R.id.LT_city, R.id.LT_state,
-                                    R.id.LT_timestampClaim });
+                                    R.id.LT_timestamp });
                     // updating listview
                     setListAdapter(adapter);
                 }
