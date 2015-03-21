@@ -30,7 +30,7 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-    private static String url_login_orph = "http://192.168.0.100/connectorph_php/login_orph.php";
+    private static String url_login_orph = "http://192.168.0.101/connectorph_php/login_orph.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     //DATABASE CONTINUES LATER

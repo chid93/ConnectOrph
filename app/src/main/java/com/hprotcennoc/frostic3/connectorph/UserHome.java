@@ -2,6 +2,7 @@ package com.hprotcennoc.frostic3.connectorph;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.hprotcennoc.frostic3.connectorph.fragments.UserBrowseOrphanagesFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.UserBrowseOrphanagesFragmentActivity;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
@@ -157,10 +158,11 @@ public class UserHome extends ActionBarActivity{
             case 0:
                 fragment = new UserDonateFeedFragment();
                 break;
-            case 1:
-                fragment = new UserBrowseOrphanagesFragment();
-                break;
             case 2:
+                Intent OrphanagesNearYouFragmentActivity = new Intent(this, UserBrowseOrphanagesFragmentActivity.class);
+                startActivity(OrphanagesNearYouFragmentActivity);
+                break;
+            case 3:
                 fragment = new UserProfileSettingsFragment();
                 break;
 
@@ -180,7 +182,7 @@ public class UserHome extends ActionBarActivity{
             mDrawerLayout.closeDrawer(mDrawerList);
         } else {
             // error in creating fragment
-            Log.e("UserHome", "Error in creating fragment");
+            Log.e("UserHome", "Error in creating fragment or OrphanagesNearYou called!");
         }
     }
 

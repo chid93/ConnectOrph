@@ -61,11 +61,13 @@
     <string name="orphanageContact">Contact details</string>
     <string name="userHome">Home</string>
     <string name="orphHome">Home</string>
+    <string name="orphanagesNearYou">Orphanages Near You</string>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items_user">
         <item >Donation Feed</item>
-        <item >Browse Orphanages</item>
+        <item >My Donations</item>
+        <item >Orphanages Near You</item>
         <item >Profile Settings</item>
     </string-array>
 
