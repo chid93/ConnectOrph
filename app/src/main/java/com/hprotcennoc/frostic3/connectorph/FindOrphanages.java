@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.fragments;
+package com.hprotcennoc.frostic3.connectorph;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,10 +18,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.hprotcennoc.frostic3.connectorph.R;
 import com.hprotcennoc.frostic3.connectorph.google_places.GooglePlacesReadTask;
 
-public class UserBrowseOrphanagesFragmentActivity extends ActionBarActivity implements LocationListener {
+public class FindOrphanages extends ActionBarActivity implements LocationListener {
 
     private static final String GOOGLE_API_KEY = "AIzaSyABxEhA3abVcf0BbWXzBZTKKvmclx9Ibak";
     GoogleMap googleMap;
@@ -39,10 +38,10 @@ public class UserBrowseOrphanagesFragmentActivity extends ActionBarActivity impl
 
         //show error dialog if GoolglePlayServices not available
         if (!isGooglePlayServicesAvailable()) {
-            Toast.makeText(UserBrowseOrphanagesFragmentActivity.this, "Google Play Services is not available!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(FindOrphanages.this, "Google Play Services is not available!!", Toast.LENGTH_LONG).show();
             finish();
         }
-        setContentView(R.layout.fragment_activity_user_browse_orphanages);
+        setContentView(R.layout.orphanages_find);
 
         SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googleMap);
         googleMap = fragment.getMap();
@@ -54,14 +53,14 @@ public class UserBrowseOrphanagesFragmentActivity extends ActionBarActivity impl
 
         Location location = locationManager.getLastKnownLocation(bestProvider);
         if (location != null) {
-            Toast.makeText(UserBrowseOrphanagesFragmentActivity.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FindOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
             onLocationChanged(location);
         }
 
         //If Location is not enabled, then prompt the user to enable it by taking them to the location settings.
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             //All location services are disabled
-            AlertDialog.Builder builder = new AlertDialog.Builder(UserBrowseOrphanagesFragmentActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(FindOrphanages.this);
             builder.setTitle("Location must be ON for this feature to work!");
             builder.setMessage("Would you like to enable it now?"); // Want to enable?
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -95,7 +94,7 @@ public class UserBrowseOrphanagesFragmentActivity extends ActionBarActivity impl
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(UserBrowseOrphanagesFragmentActivity.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
+        Toast.makeText(FindOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
@@ -111,7 +110,7 @@ public class UserBrowseOrphanagesFragmentActivity extends ActionBarActivity impl
 
         Log.i("Google Places Chid url", googlePlacesUrl.toString());
 
-        GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask(UserBrowseOrphanagesFragmentActivity.this);
+        GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask(FindOrphanages.this);
         Object[] toPass = new Object[2];
         toPass[0] = googleMap;
         toPass[1] = googlePlacesUrl.toString();

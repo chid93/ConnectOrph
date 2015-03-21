@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.hprotcennoc.frostic3.connectorph.fragments.UserBrowseOrphanagesFragmentActivity;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
@@ -159,7 +158,7 @@ public class UserHome extends ActionBarActivity{
                 fragment = new UserDonateFeedFragment();
                 break;
             case 2:
-                Intent OrphanagesNearYouFragmentActivity = new Intent(this, UserBrowseOrphanagesFragmentActivity.class);
+                Intent OrphanagesNearYouFragmentActivity = new Intent(this, FindOrphanages.class);
                 startActivity(OrphanagesNearYouFragmentActivity);
                 break;
             case 3:

@@ -70,7 +70,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".fragments.UserBrowseOrphanagesFragmentActivity"
+            android:name=".FindOrphanages"
             android:parentActivityName=".UserHome"
             android:label="@string/orphanagesNearYou"
             android:windowSoftInputMode="adjustPan" />
