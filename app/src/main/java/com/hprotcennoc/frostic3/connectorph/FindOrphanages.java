@@ -72,6 +72,9 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
             builder.create().show();
             return;
         }
+        else{
+            Toast.makeText(FindOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
+        }
 
         //Refresh every 60 seconds!!
         //locationManager.requestLocationUpdates(bestProvider, 60000, 0, this);
@@ -94,7 +97,6 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(FindOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
