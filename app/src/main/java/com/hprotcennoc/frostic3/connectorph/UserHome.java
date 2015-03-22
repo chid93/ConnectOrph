@@ -48,7 +48,6 @@ public class UserHome extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_user);
 
-
         //NAVIGATION DRAWER CONTINUES HERE
         demail = getIntent().getStringExtra("email");
         mTitle = mDrawerTitle = getTitle();
@@ -169,12 +168,19 @@ public class UserHome extends ActionBarActivity{
                 Intent UserMyDonationsIntent = new Intent(this, UserMyDonations.class);
                 UserMyDonationsIntent.putExtra("email", demail);
                 startActivity(UserMyDonationsIntent);
+                mDrawerList.setItemChecked(0, true);
+                mDrawerList.setSelection(0);
+                setTitle(navMenuTitles[0]);
                 mDrawerLayout.closeDrawers();
                 break;
             case 2:
                 Intent OrphanagesNearYouFragmentActivity = new Intent(this, FindOrphanages.class);
                 OrphanagesNearYouFragmentActivity.putExtra("position", position);
+                OrphanagesNearYouFragmentActivity.putExtra("email", demail);
                 startActivity(OrphanagesNearYouFragmentActivity);
+                mDrawerList.setItemChecked(0, true);
+                mDrawerList.setSelection(0);
+                setTitle(navMenuTitles[0]);
                 mDrawerLayout.closeDrawers();
                 break;
             case 3:

@@ -252,6 +252,10 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
                 Intent UserMyDonationsIntent = new Intent(this, UserMyDonations.class);
                 UserMyDonationsIntent.putExtra("email", demail);
                 startActivity(UserMyDonationsIntent);
+                mDrawerList.setItemChecked(2, true);
+                mDrawerList.setSelection(2);
+                setTitle(navMenuTitles[2]);
+                mDrawerLayout.closeDrawers();
                 break;
             case 2:
                 mDrawerLayout.closeDrawer(mDrawerList);

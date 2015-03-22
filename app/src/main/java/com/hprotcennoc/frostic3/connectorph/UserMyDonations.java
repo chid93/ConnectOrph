@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 import com.hprotcennoc.frostic3.connectorph.library.TabsAdapterLaunchDonationFeed;
 
@@ -50,6 +51,16 @@ public class UserMyDonations extends ActionBarActivity implements android.suppor
             }
         });
         //TABS CONTINUES LATER
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return(super.onOptionsItemSelected(item));
     }
 
     //TABS CONTINUE HERE
