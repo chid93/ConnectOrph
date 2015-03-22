@@ -40,6 +40,7 @@
     <string name="numberOfItems">Number of items</string>
     <string name="donateDesc">Description</string>
     <string name="descHint">Explain about your donation..</string>
+    <string name="needDescHint">Explain about your needs</string>
     <string name="collectionAddress">Collection Address</string>
     <string name="availableTime">Available Time(your availability)</string>
     <string name="timeHint">example: 9:00 to 13:00</string>
@@ -53,10 +54,12 @@
     <string name="editButton">EDIT</string>
     <string name="next">NEXT</string>
     <string name="donateButton">MAKE A DONATION</string>
+    <string name="addButton">ADD</string>
     <string name="claimButton">CLAIM</string>
     <string name="submitDonationButton">SUBMIT DONATION</string>
     <string name="claimDonationButton">CLAIM DONATION</string>
     <string name="DonationDesc">Donation Description</string>
+    <string name="addNeed">Add Need</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
     <string name="orphanageContactLT">Orphanage Contact details</string>
@@ -77,15 +80,12 @@
     <string-array name="nav_drawer_items_orphanage">
         <item >Donation Feed</item>
         <item >Claimed Donations</item>
-        <item >Immediate Needs</item>
+        <item >Needs List</item>
         <item >Profile Settings</item>
     </string-array>
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
-
-    <string name="tab_words">"Words"</string>
-    <string name="tab_numbers">"Numbers"</string>
 
     </resources>

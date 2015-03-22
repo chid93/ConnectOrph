@@ -68,13 +68,16 @@
             android:parentActivityName=".UserHome"
             android:label="@string/DonationDesc"
             android:windowSoftInputMode="adjustPan" />
-
+        <activity
+            android:name=".AddNeed"
+            android:parentActivityName=".OrphHome"
+            android:label="@string/addNeed"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".FindOrphanages"
             android:parentActivityName=".UserHome"
             android:label="@string/orphanagesNearYou"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".UserMyDonations"
             android:parentActivityName=".UserHome"

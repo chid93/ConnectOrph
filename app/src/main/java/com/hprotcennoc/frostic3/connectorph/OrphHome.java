@@ -16,8 +16,8 @@ import android.widget.ListView;
 
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageClaimedDonationsFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageDonateFeedFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageNeedFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageProfileSettingsFragment;
-import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
@@ -164,10 +164,10 @@ public class OrphHome extends ActionBarActivity {
                 fragment = new OrphanageClaimedDonationsFeedFragment();
                 break;
             case 2:
-                fragment = new OrphanageProfileSettingsFragment();
+                fragment = new OrphanageNeedFeedFragment();
                 break;
             case 3:
-                fragment = new UserProfileSettingsFragment();
+                fragment = new OrphanageProfileSettingsFragment();
                 break;
 
             default:
