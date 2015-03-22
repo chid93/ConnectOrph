@@ -203,7 +203,7 @@ public class UserHome extends ActionBarActivity{
             mDrawerLayout.closeDrawer(mDrawerList);
         } else {
             // error in creating fragment
-            Log.e("UserHome", "Error in creating fragment or OrphanagesNearYou, UserMyDonations called!");
+            Log.e("UserHome", "Error in creating fragment or Intent Called!");
         }
     }
 

@@ -146,12 +146,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="2dp" />
 
-                <TextView
-                    android:id="@+id/LT_orphName"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
 
                 <!-- <TextView
                     android:text="@string/phoneNumber"
@@ -170,6 +164,12 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="2dp" /> -->
 
+                <TextView
+                    android:id="@+id/LT_orphName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
                 <TextView
                     android:id="@+id/LT_orphAddressLine1"
                     android:layout_width="fill_parent"
