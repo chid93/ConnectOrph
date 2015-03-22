@@ -2,6 +2,7 @@ package com.hprotcennoc.frostic3.connectorph;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -17,7 +18,7 @@ import android.widget.ListView;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageClaimedDonationsFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageNeedFeedFragment;
-import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageProfileSettingsFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageMyProfileFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 
 public class OrphHome extends ActionBarActivity {
 
+    //NAVIGATION DRAWER STARTS HERE
+    private static String demail;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -40,12 +43,16 @@ public class OrphHome extends ActionBarActivity {
 
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
+    //NAVIGATION DRAWER CONTINUES LATER
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_orph);
 
+
+        //NAVIGATION DRAWER CONTINUES HERE
+        demail = getIntent().getStringExtra("email");
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
@@ -103,8 +110,10 @@ public class OrphHome extends ActionBarActivity {
             // on first time display view for first nav item
             displayView(0);
         }
+        //NAVIGATION DRAWER CONTINUES LATER
     }
 
+    //NAVIGATION DRAWER CONTINUES HERE
     /**
      * Slide menu item click listener
      * */
@@ -149,13 +158,14 @@ public class OrphHome extends ActionBarActivity {
         menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
-
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
     public void displayView(int position) {
         // update the main content by replacing fragments
+
         Fragment fragment = null;
+
         switch (position) {
             case 0:
                 fragment = new OrphanageDonateFeedFragment();
@@ -167,7 +177,14 @@ public class OrphHome extends ActionBarActivity {
                 fragment = new OrphanageNeedFeedFragment();
                 break;
             case 3:
-                fragment = new OrphanageProfileSettingsFragment();
+                Intent OrphanageMyProfileFragment = new Intent(this, OrphanageMyProfileFragment.class);
+                OrphanageMyProfileFragment.putExtra("position", position);
+                OrphanageMyProfileFragment.putExtra("email", demail);
+                startActivity(OrphanageMyProfileFragment);
+                mDrawerList.setItemChecked(0, true);
+                mDrawerList.setSelection(0);
+                setTitle(navMenuTitles[0]);
+                mDrawerLayout.closeDrawers();
                 break;
 
             default:
@@ -184,9 +201,19 @@ public class OrphHome extends ActionBarActivity {
             mDrawerList.setSelection(position);
             setTitle(navMenuTitles[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
-        } else {
+        } /*else if (fragmentSA != null) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.home_orph_frame_container, fragmentSA).commit();
+
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerList.setSelection(position);
+            setTitle(navMenuTitles[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }*/ else {
             // error in creating fragment
-            Log.e("OrphHome", "Error in creating fragment");
+            Log.e("OrphHome", "Error in creating fragment or Intent Called!");
         }
     }
 
@@ -214,4 +241,5 @@ public class OrphHome extends ActionBarActivity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    //NAVIGATION DRAWER ENDS HERE
 }

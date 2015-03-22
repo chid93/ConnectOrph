@@ -83,7 +83,11 @@
             android:parentActivityName=".UserHome"
             android:label="My Donations"
             android:windowSoftInputMode="adjustPan" />
-
+        <activity
+            android:name=".fragments.OrphanageMyProfileFragment"
+            android:parentActivityName=".OrphHome"
+            android:label="My Profile"
+            android:windowSoftInputMode="adjustPan" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
