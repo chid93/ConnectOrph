@@ -112,7 +112,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
 
             // Check your log cat for JSON reponse
             Log.d("All Donations: ", json.toString());
-            Log.d("Email: ", params.toString());
+            Log.d("OrphanageClaimedDonationsFeedFragment Email: ", params.toString());
 
             try {
                 // Checking for SUCCESS TAG

@@ -1,6 +1,7 @@
 package com.hprotcennoc.frostic3.connectorph.launch_view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -144,6 +146,11 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
+            //Close keyboard before displaying toast for visibility concerns (Thank you Zoho Rep Mani for identifying this bug)
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
             //If login error occurs, display the error
             if(flag == 1) {
                 Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);

@@ -49,7 +49,7 @@ public class AddDonation extends ActionBarActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.donation_add);
+        setContentView(R.layout.add_donation);
 
         demail = getIntent().getStringExtra("email");
         state = (Spinner) findViewById(R.id.donation_add_state_spinner);
