@@ -31,12 +31,14 @@
 		<item>Male-greater than 40</item>
 		<item>Male-between 18 to 40</item>
 		<item>Male-less than 18</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_Baby_Learning_Toys">
          <item>Children\'s book</item>
         <item>Learning Toys</item>
          <item>Toys</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_Beauty_Personal_Care">
@@ -47,11 +49,13 @@
 		<item>Nail Care</item>
 		<item>Skin Care</item>
 		<item>Men\'s Grooming</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_Sports_and_Fitness">
         <item>Exercise and Fitness</item>
         <item>Sports and Outdoors</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_Gourmet_Food">
@@ -59,6 +63,7 @@
 		<item>Chocolate </item>
         <item>Green Tea</item>
         <item>Sugar Free </item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_Electronics">
@@ -66,6 +71,7 @@
         <item>Computers</item>
         <item>Fans and Tube lights</item>
 		<item>Television</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_Books_Music_and_DVDs">
@@ -73,7 +79,8 @@
 		<item>DVD\'s</item>
 		<item>Magazine Subscriptions</item>
 		<item>Music</item>
-		<item>Video</item>       
+		<item>Video</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="subCategories_household_items">
@@ -81,6 +88,7 @@
         <item>Chairs</item>
 		<item>Kitchen and Housewares</item>
 		<item>Furniture</item>
+        <item>Others</item>
     </string-array>
 
 </resources>
