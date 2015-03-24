@@ -53,6 +53,7 @@ public class UserMyDonations extends ActionBarActivity implements android.suppor
         //TABS CONTINUES LATER
     }
 
+    //Handle Up button as Back button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

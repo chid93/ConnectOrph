@@ -184,29 +184,29 @@
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
 
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
-                <TextView
-                    android:id="@+id/LT_orphCity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/LT_orphState"
-                    android:paddingLeft="@dimen/feed_item_profile_info_padd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
+                    <TextView
+                        android:id="@+id/LT_orphCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/LT_orphState"
+                        android:paddingLeft="@dimen/feed_item_profile_info_padd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/LT_orphPhoneNumber"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"/>
+                <TextView
+                    android:id="@+id/LT_orphPhoneNumber"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
