@@ -16,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.hprotcennoc.frostic3.connectorph.fragments.UserDonateFeedFragment;
-import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.UserFindOrphanageFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
@@ -64,10 +64,12 @@ public class UserHome extends ActionBarActivity{
         // adding nav drawer items to array
         // Donation Feed
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0]));
-        // Browse Orphanages
+        // My Donations
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1]));
-        // Profile Settings
+        // Orphanages Near You
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2]));
+        // Find Orphanages
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3]));
 
 
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -153,7 +155,7 @@ public class UserHome extends ActionBarActivity{
         menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
-
+    static int previousPosition = 0;
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
@@ -162,29 +164,31 @@ public class UserHome extends ActionBarActivity{
         Fragment fragment = null;
         switch (position) {
             case 0:
+                previousPosition = position;
                 fragment = new UserDonateFeedFragment();
                 break;
             case 1:
                 Intent UserMyDonationsIntent = new Intent(this, UserMyDonations.class);
                 UserMyDonationsIntent.putExtra("email", demail);
                 startActivity(UserMyDonationsIntent);
-                mDrawerList.setItemChecked(0, true);
-                mDrawerList.setSelection(0);
-                setTitle(navMenuTitles[0]);
+                mDrawerList.setItemChecked(previousPosition, true);
+                mDrawerList.setSelection(previousPosition);
+                setTitle(navMenuTitles[previousPosition]);
                 mDrawerLayout.closeDrawers();
                 break;
             case 2:
-                Intent OrphanagesNearYouFragmentActivity = new Intent(this, FindOrphanages.class);
+                Intent OrphanagesNearYouFragmentActivity = new Intent(this, FindNearbyOrphanages.class);
                 OrphanagesNearYouFragmentActivity.putExtra("position", position);
                 OrphanagesNearYouFragmentActivity.putExtra("email", demail);
                 startActivity(OrphanagesNearYouFragmentActivity);
-                mDrawerList.setItemChecked(0, true);
-                mDrawerList.setSelection(0);
-                setTitle(navMenuTitles[0]);
+                mDrawerList.setItemChecked(previousPosition, true);
+                mDrawerList.setSelection(previousPosition);
+                setTitle(navMenuTitles[previousPosition]);
                 mDrawerLayout.closeDrawers();
                 break;
             case 3:
-                fragment = new UserProfileSettingsFragment();
+                previousPosition = position;
+                fragment = new UserFindOrphanageFragment();
                 break;
 
             default:

@@ -28,14 +28,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.hprotcennoc.frostic3.connectorph.fragments.UserProfileSettingsFragment;
+import com.hprotcennoc.frostic3.connectorph.fragments.UserFindOrphanageFragment;
 import com.hprotcennoc.frostic3.connectorph.google_places.GooglePlacesReadTask;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
 import java.util.ArrayList;
 
-public class FindOrphanages extends ActionBarActivity implements LocationListener {
+public class FindNearbyOrphanages extends ActionBarActivity implements LocationListener {
 
     private static final String GOOGLE_API_KEY = "AIzaSyABxEhA3abVcf0BbWXzBZTKKvmclx9Ibak";
     SupportMapFragment fragmentGM;
@@ -72,7 +72,7 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
         super.onCreate(savedInstanceState);
         //show error dialog if GoolglePlayServices not available
         if (!isGooglePlayServicesAvailable()) {
-            Toast.makeText(FindOrphanages.this, "Google Play Services is not available!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(FindNearbyOrphanages.this, "Google Play Services is not available!!", Toast.LENGTH_LONG).show();
             finish();
         }
         setContentView(R.layout.orphanages_find);
@@ -98,11 +98,12 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
         // adding nav drawer items to array
         // Donation Feed
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0]));
-        // Browse Orphanages
+        // My Donations
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1]));
-        // Profile Settings
+        // Orphanages Near You
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2]));
-
+        // Find Orphanages
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3]));
 
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
@@ -159,14 +160,14 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
 
         Location location = locationManager.getLastKnownLocation(bestProvider);
         if (location != null) {
-            Toast.makeText(FindOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FindNearbyOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
             onLocationChanged(location);
         }
 
         //If Location is not enabled, then prompt the user to enable it by taking them to the location settings.
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             //All location services are disabled
-            AlertDialog.Builder builder = new AlertDialog.Builder(FindOrphanages.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(FindNearbyOrphanages.this);
             builder.setTitle("Location must be ON for this feature to work!");
             builder.setMessage("Would you like to enable it now?"); // Want to enable?
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -179,7 +180,7 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
             return;
         }
         else{
-            Toast.makeText(FindOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FindNearbyOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
         }
 
         //Refresh every 180 seconds!!
@@ -265,7 +266,7 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
             case 3:
                 locationManager.removeUpdates(this);
                 ft.hide(fragmentGM).commit();
-                fragment = new UserProfileSettingsFragment();
+                fragment = new UserFindOrphanageFragment();
                 break;
 
             default:
@@ -341,7 +342,7 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
 
         Log.i("Google Places Chid url", googlePlacesUrl.toString());
 
-        GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask(FindOrphanages.this);
+        GooglePlacesReadTask googlePlacesReadTask = new GooglePlacesReadTask(FindNearbyOrphanages.this);
         Object[] toPass = new Object[2];
         toPass[0] = googleMap;
         toPass[1] = googlePlacesUrl.toString();
@@ -362,6 +363,5 @@ public class FindOrphanages extends ActionBarActivity implements LocationListene
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
     }
 }
