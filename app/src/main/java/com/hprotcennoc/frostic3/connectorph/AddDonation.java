@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -171,6 +172,17 @@ public class AddDonation extends ActionBarActivity implements AdapterView.OnItem
         }
 
     }
+    //Handle Up button as Back button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return(super.onOptionsItemSelected(item));
+    }
+
     //state/city loader
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
