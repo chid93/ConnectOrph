@@ -41,7 +41,7 @@ public class OrphanageProfileDetailsFragment extends Fragment {
     private static final String TAG_ORPH_STATE = "orphanageState";
     private static final String TAG_ORPH_CITY = "orphanageCity";
     String orphNameS, orphAddress1S, orphAddress2S, orphPhoneNumberS, orphCityS, orphStateS, orphMissionS, orphWebsiteS;
-    TextView orphName, orphAddress1, orphAddress2, orphPhoneNumber, orphCity, orphState, orphMission, orphWebsite;
+    TextView orphName, orphEmail, orphAddress1, orphAddress2, orphPhoneNumber, orphCity, orphState, orphMission, orphWebsite;
     View rootView;
     String demail;
 
@@ -60,6 +60,7 @@ public class OrphanageProfileDetailsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         orphName = (TextView) getActivity().findViewById(R.id.orphName_TV);
+        orphEmail = (TextView) getActivity().findViewById(R.id.orphEmail_TV);
         orphWebsite = (TextView) getActivity().findViewById(R.id.orphWebsite_TV);
         orphMission = (TextView) getActivity().findViewById(R.id.orphMission_TV);
         orphAddress1 = (TextView) getActivity().findViewById(R.id.orphAddress1_TV);
@@ -145,6 +146,7 @@ public class OrphanageProfileDetailsFragment extends Fragment {
             }
             else{
                 orphName.setText(orphNameS);
+                orphEmail.setText(demail);
                 orphWebsite.setText(orphWebsiteS);
                 orphMission.setText(orphMissionS);
                 orphAddress1.setText(orphAddress1S);
