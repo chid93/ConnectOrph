@@ -104,7 +104,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             if(tag.equals(login_tag))
                 pDialog.setMessage("Logging in..");
             else
-                pDialog.setMessage("We are resetting your password..");
+                pDialog.setMessage("Loading.. Please wait.");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
