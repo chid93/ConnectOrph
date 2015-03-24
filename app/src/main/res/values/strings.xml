@@ -72,6 +72,12 @@
     <string name="orphHome">Home</string>
     <string name="orphanagesNearYou">Orphanages Near You</string>
 
+    <!-- Edit/Delete items -->
+    <string-array name="list_view_options">
+        <item >Edit</item>
+        <item >Delete</item>
+    </string-array>
+
     <!-- Filter list view -->
     <string name="filterByName">search by name</string>
     <string name="filterByState">search by state</string>

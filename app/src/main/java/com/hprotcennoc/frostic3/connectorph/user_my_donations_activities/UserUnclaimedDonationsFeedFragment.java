@@ -5,11 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hprotcennoc.frostic3.connectorph.R;
@@ -34,15 +40,14 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
 
     // url to get all products list
     private static String url_feed_user_my_donation = "http://192.168.0.101/connectorph_php/user_my_donation_feed.php";
+    private static String url_delete_donation = "http://192.168.0.101/connectorph_php/edit_donation.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     private static final String TAG_CLAIMED_DONATIONS = "claimedDonations";
-    private static final String TAG_CLAIM_CODE = "claim_code";
     private static final String TAG_DONATIONID = "donationid";
     private static final String TAG_CREATED_AT = "created_at";
-    private static final String TAG_CLAIMED_AT = "claimed_at";
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_SUB_CATEGORY = "subCategory";
     private static final String TAG_DESC = "description";
@@ -52,11 +57,13 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
     private static final String TAG_ADDRESS_LINE_2 = "caddress2";
     private static final String TAG_STATE = "cstate";
     private static final String TAG_CITY = "ccity";
-    private static final String tag = "MyUnclaimedDonations";
+    private static String tag = "MyUnclaimedDonations";
     // products JSONArray
     JSONArray donationsArray = null;
-
+    ListView lv;
+    ListAdapter adapter;
     View rootView;
+    TextView did;
     private static String demail;
 
     public UserUnclaimedDonationsFeedFragment(){}
@@ -77,7 +84,37 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Get listview
-        //ListView lv = getListView();
+        lv = getListView();
+        registerForContextMenu(lv);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId()==lv.getId()) {
+            //AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            String[] menuItems = getResources().getStringArray(R.array.list_view_options);
+            for (int i = 0; i<menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        String[] menuItems = getResources().getStringArray(R.array.list_view_options);
+        did = (TextView) lv.getChildAt(info.position).findViewById(R.id.LT_donationid);
+        //lv.findViewById() adapter.getItem(info.position).toString()
+        if(item.toString().equals("Delete")){
+            tag = "delete_donation";
+            new LoadAllProducts().execute();
+        }
+
+        /*String listItemName = Countries[info.position];
+        TextView text = (TextView) getActivity().findViewById(R.id.footer);
+        text.setText(String.format("Selected %s for item %s", menuItemName, listItemName));*/
+        return true;
     }
 
     /**
@@ -106,10 +143,18 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("tag",tag));
+            JSONObject json;
             // getting JSON string from URL
-            JSONObject json = JSONParser.makeHttpRequest(url_feed_user_my_donation, "POST", params);
+            if(tag.equals("delete_donation")){
+                params.add(new BasicNameValuePair(TAG_DONATIONID, did.getText().toString()));
+                json = JSONParser.makeHttpRequest(url_delete_donation, "POST", params);
+                tag = "MyUnclaimedDonations";
+            }
+
+            params.add(new BasicNameValuePair("email", demail));
+            json = JSONParser.makeHttpRequest(url_feed_user_my_donation, "POST", params);
+
 
             // Check your log cat for JSON reponse
             Log.d("All Donations: ", json.toString());
@@ -118,6 +163,7 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
             try {
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
+                donationsList.clear();
 
                 if (success == 1) {
                     // products found
@@ -180,10 +226,8 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
-            if(flag == 1) {
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-            }
 
             // updating UI from Background Thread
             getActivity().runOnUiThread(new Runnable() {
@@ -191,7 +235,7 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
                     /**
                      * Updating parsed JSON data into ListView
                      * */
-                    ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_user_my_un_claimed_donation_feed,
+                    adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_user_my_un_claimed_donation_feed,
                             new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_PHONE_NUMBER,
                                     TAG_ADDRESS_LINE_1, TAG_ADDRESS_LINE_2, TAG_CITY, TAG_STATE, TAG_CREATED_AT},
                             new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems,

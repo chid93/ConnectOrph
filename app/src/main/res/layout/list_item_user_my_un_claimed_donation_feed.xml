@@ -31,13 +31,19 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <CheckBox
+                    <!-- <ImageButton
+                        android:src="@drawable/ic_action_edit"
+                        android:id="@+id/edit_button"
+                        android:layout_width="36dp"
+                        android:layout_height="33dp"
+                        android:layout_gravity="start"/> -->
+                    <!-- <CheckBox
                         android:id="@+id/LT_checkbox"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:clickable="false" />
+                        android:clickable="false" /> -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
