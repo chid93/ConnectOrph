@@ -18,7 +18,6 @@ import android.widget.ListView;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageClaimedDonationsFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageNeedFeedFragment;
-import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageMyProfileFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerListAdapter;
 
@@ -158,6 +157,7 @@ public class OrphHome extends ActionBarActivity {
         menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
+    static int previousPosition = 0;
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
@@ -168,22 +168,25 @@ public class OrphHome extends ActionBarActivity {
 
         switch (position) {
             case 0:
+                previousPosition = position;
                 fragment = new OrphanageDonateFeedFragment();
                 break;
             case 1:
+                previousPosition = position;
                 fragment = new OrphanageClaimedDonationsFeedFragment();
                 break;
             case 2:
+                previousPosition = position;
                 fragment = new OrphanageNeedFeedFragment();
                 break;
             case 3:
-                Intent OrphanageMyProfileFragment = new Intent(this, OrphanageMyProfileFragment.class);
+                Intent OrphanageMyProfileFragment = new Intent(this, OrphanageMyProfile.class);
                 OrphanageMyProfileFragment.putExtra("position", position);
                 OrphanageMyProfileFragment.putExtra("email", demail);
                 startActivity(OrphanageMyProfileFragment);
-                mDrawerList.setItemChecked(0, true);
-                mDrawerList.setSelection(0);
-                setTitle(navMenuTitles[0]);
+                mDrawerList.setItemChecked(previousPosition, true);
+                mDrawerList.setSelection(previousPosition);
+                setTitle(navMenuTitles[previousPosition]);
                 mDrawerLayout.closeDrawers();
                 break;
 

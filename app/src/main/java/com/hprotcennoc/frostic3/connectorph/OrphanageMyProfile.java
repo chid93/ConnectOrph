@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.fragments;
+package com.hprotcennoc.frostic3.connectorph;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,11 +9,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.hprotcennoc.frostic3.connectorph.R;
 import com.hprotcennoc.frostic3.connectorph.ophanage_profile_fragments.OrphanageProfileDetailsFragment;
 import com.hprotcennoc.frostic3.connectorph.ophanage_profile_fragments.OrphanageProfileNeedsFragment;
 
-public class OrphanageMyProfileFragment extends ActionBarActivity{
+public class OrphanageMyProfile extends ActionBarActivity{
 
     MyAdapter mAdapter;
     ViewPager mPager;
