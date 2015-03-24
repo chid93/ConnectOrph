@@ -50,6 +50,24 @@
                             android:textColor="@color/timestamp"
                             android:textSize="@dimen/feed_item_inner_elements"
                             android:gravity="end" />
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="end">
+                            <TextView
+                                android:id="@+id/LT_city"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:textColor="@color/timestamp"
+                                android:textSize="@dimen/feed_item_inner_elements"/>
+                            <TextView
+                                android:id="@+id/LT_state"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:textColor="@color/timestamp"
+                                android:textSize="@dimen/feed_item_inner_elements"/>
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="fill_parent"

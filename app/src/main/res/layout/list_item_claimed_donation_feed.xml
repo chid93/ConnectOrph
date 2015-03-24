@@ -120,59 +120,93 @@
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
 
-                <TextView
-                    android:text="@string/phoneNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/feed_item_profile_name"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="2dp" />
-
-                <TextView
-                    android:id="@+id/LT_phoneNumber"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
-
-                <TextView
-                    android:text="@string/address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/feed_item_profile_name"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="2dp" />
-
-                <TextView
-                    android:id="@+id/LT_addressLine1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
-                <TextView
-                    android:id="@+id/LT_addressLine2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
-
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
-                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
-                    <TextView
-                        android:id="@+id/LT_city"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:id="@+id/LT_state"
-                        android:paddingLeft="@dimen/feed_item_profile_info_padd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/bg_child_rectangle_corner"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+                    android:layout_marginLeft="@dimen/feed_large_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_large_inner_item_padding_left_right"
+                    android:layout_marginTop="@dimen/feed_item_margin">
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/feed_large_inner_item_padding_left_right"
+                        android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
+
+                        <TextView
+                            android:text="@string/donorContactLT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/feed_item_profile_name"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="2dp" />
+
+
+                        <!-- <TextView
+                            android:text="@string/phoneNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/feed_item_profile_name"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="2dp" />
+                        <TextView
+                            android:text="@string/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/feed_item_profile_name"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="2dp" /> -->
+
+                        <TextView
+                            android:id="@+id/LT_donorName"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                            android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+                        <TextView
+                            android:id="@+id/LT_addressLine1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                            android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+                        <TextView
+                            android:id="@+id/LT_addressLine2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                            android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                            android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
+                            <TextView
+                                android:id="@+id/LT_city"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/LT_state"
+                                android:paddingLeft="@dimen/feed_item_profile_info_padd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/LT_phoneNumber"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                            android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"/>
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

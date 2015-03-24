@@ -54,8 +54,6 @@ public class OrphanageDonateFeedFragment extends ListFragment {
     private static final String TAG_DESC = "description";
     private static final String TAG_NUM_OF_ITEMS = "numberOfItems";
     private static final String TAG_PHONE_NUMBER = "phoneNumber";
-    private static final String TAG_ADDRESS_LINE_1 = "caddress1";
-    private static final String TAG_ADDRESS_LINE_2 = "caddress2";
     private static final String TAG_STATE = "cstate";
     private static final String TAG_CITY = "ccity";
     // products JSONArray
@@ -182,11 +180,8 @@ public class OrphanageDonateFeedFragment extends ListFragment {
                         String subCategory = c.optString(TAG_SUB_CATEGORY);
                         String desc = c.optString(TAG_DESC);
                         String numOfItems = c.optString(TAG_NUM_OF_ITEMS);
-                        String address1 = c.optString(TAG_ADDRESS_LINE_1);
-                        String address2 = c.optString(TAG_ADDRESS_LINE_2);
                         String state = c.optString(TAG_STATE);
-                        String city = c.optString(TAG_CITY);
-
+                        String city = c.optString(TAG_CITY) + ", ";
 
                         // Converting timestamp into x ago format
                         //Subtract 4.5 hours to get the right time!!!
@@ -204,8 +199,6 @@ public class OrphanageDonateFeedFragment extends ListFragment {
                         map.put(TAG_SUB_CATEGORY, subCategory);
                         map.put(TAG_DESC, desc);
                         map.put(TAG_NUM_OF_ITEMS, numOfItems);
-                        map.put(TAG_ADDRESS_LINE_1, address1);
-                        map.put(TAG_ADDRESS_LINE_2, address2);
                         map.put(TAG_STATE, state);
                         map.put(TAG_CITY, city);
 
@@ -240,8 +233,9 @@ public class OrphanageDonateFeedFragment extends ListFragment {
                      * Updating parsed JSON data into ListView
                      * */
                      ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_orphanage_donation_feed,
-                            new String[] { TAG_DONATIONID, TAG_CREATED_AT, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS},
-                            new int[] { R.id.LT_donationid, R.id.LT_timestamp, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems });
+                            new String[] { TAG_DONATIONID, TAG_CREATED_AT, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_CITY, TAG_STATE},
+                            new int[] { R.id.LT_donationid, R.id.LT_timestamp, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems,
+                                    R.id.LT_city, R.id.LT_state });
                     // updating listview
                     setListAdapter(adapter);
                 }

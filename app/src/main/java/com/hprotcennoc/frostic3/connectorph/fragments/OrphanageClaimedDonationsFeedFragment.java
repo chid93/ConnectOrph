@@ -42,6 +42,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
     private static final String TAG_CLAIMED_DONATIONS = "claimedDonations";
     private static final String TAG_CLAIM_CODE = "claim_code";
     private static final String TAG_DONATIONID = "donationid";
+    private static final String TAG_DONORNAME = "donorName";
     private static final String TAG_CREATED_AT = "created_at";
     private static final String TAG_CLAIMED_AT = "claimed_at";
     private static final String TAG_CATEGORY = "category";
@@ -141,6 +142,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
                         String address2 = c.optString(TAG_ADDRESS_LINE_2);
                         String state = c.optString(TAG_STATE);
                         String city = c.optString(TAG_CITY);
+                        String donorName = c.optString(TAG_DONORNAME);
 
 
                         // Converting timestamp into x ago format
@@ -169,6 +171,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
                         map.put(TAG_ADDRESS_LINE_2, address2);
                         map.put(TAG_STATE, state);
                         map.put(TAG_CITY, city);
+                        map.put(TAG_DONORNAME, donorName);
 
                         // adding HashList to ArrayList
                         donationsList.add(map);
@@ -202,10 +205,10 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
                      * */
                      ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_claimed_donation_feed,
                             new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_PHONE_NUMBER, TAG_CLAIM_CODE,
-                            TAG_ADDRESS_LINE_1, TAG_ADDRESS_LINE_2, TAG_CITY, TAG_STATE, TAG_CLAIMED_AT},
+                            TAG_ADDRESS_LINE_1, TAG_ADDRESS_LINE_2, TAG_CITY, TAG_STATE, TAG_CLAIMED_AT, TAG_DONORNAME},
                             new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems,
                                     R.id.LT_phoneNumber, R.id.LT_claimCode, R.id.LT_addressLine1, R.id.LT_addressLine2, R.id.LT_city, R.id.LT_state,
-                                    R.id.LT_timestamp });
+                                    R.id.LT_timestamp, R.id.LT_donorName });
                     // updating listview
                     setListAdapter(adapter);
                 }

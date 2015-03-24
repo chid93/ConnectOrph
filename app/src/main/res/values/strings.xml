@@ -66,6 +66,7 @@
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
     <string name="orphanageContactLT">Orphanage Contact details</string>
+    <string name="donorContactLT">Donor Contact details</string>
     <string name="orphanageContact">Contact details</string>
     <string name="userHome">Home</string>
     <string name="orphHome">Home</string>
