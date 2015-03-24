@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -262,6 +263,17 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
 
     }
     //DATABASE ENDS HERE
+
+    //Handle Up button as Back button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return(super.onOptionsItemSelected(item));
+    }
 
     //STATE/CITY DATA LOADER STARTS HERE
     @Override

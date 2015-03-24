@@ -116,8 +116,8 @@ public class OrphRegForm extends ActionBarActivity{
             OrphRegFormIntent1.putExtra("name", name.getText().toString());
             OrphRegFormIntent1.putExtra("email", email.getText().toString());
             OrphRegFormIntent1.putExtra("password", password.getText().toString());
-            startActivity(OrphRegFormIntent1);
-            finish();
+            startActivity(OrphRegFormIntent1); //Change to startActivityForResult
+            //finish();
         }
         else{
             clientSideCheck(name);
