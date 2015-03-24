@@ -74,7 +74,7 @@
             android:label="@string/addNeed"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".FindOrphanages"
+            android:name=".FindNearbyOrphanages"
             android:parentActivityName=".UserHome"
             android:label="@string/orphanagesNearYou"
             android:windowSoftInputMode="adjustPan" />
@@ -84,7 +84,7 @@
             android:label="My Donations"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".fragments.OrphanageMyProfileFragment"
+            android:name=".OrphanageMyProfile"
             android:parentActivityName=".OrphHome"
             android:label="My Profile"
             android:windowSoftInputMode="adjustPan" />

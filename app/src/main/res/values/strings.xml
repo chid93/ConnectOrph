@@ -72,6 +72,11 @@
     <string name="orphHome">Home</string>
     <string name="orphanagesNearYou">Orphanages Near You</string>
 
+    <!-- Filter list view -->
+    <string name="filterByName">search by name</string>
+    <string name="filterByState">search by state</string>
+    <string name="filterByCity">search by city</string>
+
     <!-- Profile Details -->
     <string name="addressPD">address</string>
     <string name="phonePD">phone</string>
@@ -83,7 +88,8 @@
         <item >Donation Feed</item>
         <item >My Donations</item>
         <item >Orphanages Near You</item>
-        <item >Profile Settings</item>
+        <item >Find Orphanages</item>
+        <item >My Profile</item>
     </string-array>
 
     <!-- Nav Drawer Menu Items -->

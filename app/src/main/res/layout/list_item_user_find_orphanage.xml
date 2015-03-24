@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Orphanage id (oid) - will be HIDDEN - used to pass to other activity -->
+    <TextView
+        android:id="@+id/LT_orphEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/feed_item_margin"
+        android:background="@drawable/bg_parent_cards"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/feed_item_padding_top_bottom" >
+
+        <TextView
+            android:id="@+id/orphName_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textSize="@dimen/feed_item_title"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/feed_item_padding_top_bottom"
+            android:paddingBottom="@dimen/feed_item_padding_top_bottom" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/feed_medium_inner_item_padding_left_right"
+                android:layout_marginRight="@dimen/feed_medium_inner_item_padding_left_right" >
+
+                <TextView
+                    android:text="@string/missionSolo"
+                    android:textColor="@color/sa_dark_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp" />
+
+                <TextView
+                    android:id="@+id/orphMission_TV"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+
+                <TextView
+                    android:text="@string/address"
+                    android:textColor="@color/sa_dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_inner_elements"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp" />
+                <TextView
+                    android:id="@+id/orphAddress1_TV"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+                <TextView
+                    android:id="@+id/orphAddress2_TV"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
+                    <TextView
+                        android:id="@+id/orphCity_TV"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/orphState_TV"
+                        android:textStyle="bold"
+                        android:paddingLeft="@dimen/feed_item_profile_info_padd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
