@@ -22,16 +22,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.Bluewhite" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowActionModeOverlay">true</item>
         <item name="android:actionBarItemBackground" tools:ignore="NewApi">@drawable/selectable_background_bluewhite</item>
         <item name="android:popupMenuStyle" tools:ignore="NewApi">@style/PopupMenu.Bluewhite</item>
         <item name="android:dropDownListViewStyle" tools:ignore="NewApi">@style/DropDownListView.Bluewhite</item>
         <item name="android:actionBarTabStyle" tools:ignore="NewApi">@style/ActionBarTabStyle.Bluewhite</item>
         <item name="android:actionDropDownStyle" tools:ignore="NewApi">@style/DropDownNav.Bluewhite</item>
         <item name="android:actionBarStyle" tools:ignore="NewApi">@style/ActionBar.Solid.Bluewhite</item>
-        <item name="android:actionModeBackground" tools:ignore="NewApi">@drawable/cab_background_top_bluewhite</item>
-        <item name="android:actionModeSplitBackground" tools:ignore="NewApi">@drawable/cab_background_bottom_bluewhite</item>
-        <item name="android:actionModeCloseButtonStyle" tools:ignore="NewApi">@style/ActionButton.CloseMode.Bluewhite</item>
+        <item name="android:actionModeStyle" tools:ignore="NewApi">@style/MyActionMode</item>
         <item name="android:actionBarWidgetTheme" tools:ignore="NewApi">@style/Theme.Bluewhite.Widget</item>
+        <item name="android:actionModeCloseDrawable" tools:ignore="NewApi">@drawable/ic_action_accept</item>
+        <item name="android:actionModeCloseButtonStyle" tools:ignore="NewApi">@style/ActionButton.CloseMode.Bluewhite</item>
 
         <item name="actionBarItemBackground">@drawable/selectable_background_bluewhite</item>
         <item name="popupMenuStyle">@style/PopupMenu.Bluewhite</item>
@@ -39,11 +40,36 @@
         <item name="actionBarTabStyle">@style/ActionBarTabStyle.Bluewhite</item>
         <item name="actionDropDownStyle">@style/DropDownNav.Bluewhite</item>
         <item name="actionBarStyle">@style/ActionBar.Solid.Bluewhite</item>
-        <item name="actionModeBackground">@drawable/cab_background_top_bluewhite</item>
-        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_bluewhite</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Bluewhite</item>
+        <item name="actionModeStyle">@style/MyActionMode</item>
         <item name="actionBarWidgetTheme" >@style/Theme.Bluewhite.Widget</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_action_accept</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Bluewhite</item>
     </style>
+
+    <!-- Conventional action bar - ACTION MODE STARTS-->
+    <style name="MyActionMode" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="android:height" tools:ignore="NewApi">?attr/actionBarSize</item>
+        <item name="android:titleTextStyle" tools:ignore="NewApi">@style/Textstyle</item>
+        <item name="android:subtitleTextStyle" tools:ignore="NewApi">@style/subtitleTextstyle</item>
+        <item name="android:background" tools:ignore="NewApi">@drawable/ab_solid_bluewhite</item>
+        <item name="android:backgroundStacked" tools:ignore="NewApi">@drawable/cab_background_bottom_bluewhite</item>
+
+        <item name="height">?attr/actionBarSize</item>
+        <item name="titleTextStyle">@style/Textstyle</item>
+        <item name="subtitleTextStyle">@style/Textstyle</item>
+        <item name="background">@drawable/ab_solid_bluewhite</item>
+        <item name="backgroundStacked">@drawable/cab_background_bottom_bluewhite</item>
+    </style>
+
+    <style name="Textstyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="subtitleTextstyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- Conventional action bar - ACTION MODE ENDS -->
 
     <style name="ActionBar.Solid.Bluewhite" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:background" tools:ignore="NewApi">@drawable/ab_solid_bluewhite</item>

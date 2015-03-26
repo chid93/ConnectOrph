@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.view.ContextMenu;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserUnclaimedDonationsFeedFragment extends ListFragment {
+public class UserUnclaimedDonationsFeedFragment extends ListFragment{
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -64,7 +64,9 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
     ListAdapter adapter;
     View rootView;
     TextView did;
+    static int currentSelection;
     private static String demail;
+    private ActionMode.Callback modeCallBack;
 
     public UserUnclaimedDonationsFeedFragment(){}
     @Override
@@ -85,36 +87,50 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         // Get listview
         lv = getListView();
-        registerForContextMenu(lv);
-    }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        if (v.getId()==lv.getId()) {
-            //AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            String[] menuItems = getResources().getStringArray(R.array.list_view_options);
-            for (int i = 0; i<menuItems.length; i++) {
-                menu.add(Menu.NONE, i, i, menuItems[i]);
+        modeCallBack = new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu){
+            return false;
             }
-        }
-    }
+            public void onDestroyActionMode(ActionMode mode) {
+                mode = null;
+            }
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                mode.setTitle("Options");
+                mode.getMenuInflater().inflate(R.menu.menu_actionbar, menu);
+                return true;
+            }
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.delete: {
+                        Log.i("UserUnclaimedDonationFeedFragment", "delete");
+                        tag = "delete_donation";
+                        did = (TextView) lv.getChildAt(currentSelection).findViewById(R.id.LT_donationid);
+                        new LoadAllProducts().execute();
+                        //Toast.makeText(getActivity(), item.toString(), Toast.LENGTH_LONG).show();
+                        mode.finish();
+                    }
+                    case R.id.edit: {
+                        Log.i("UserUnclaimedDonationFeedFragment", "edit");
+                        tag = "edit_donation";
+                        mode.finish();
+                    }
+                    default:
+                        return false;
+                }
+            }
+        };
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-        String[] menuItems = getResources().getStringArray(R.array.list_view_options);
-        did = (TextView) lv.getChildAt(info.position).findViewById(R.id.LT_donationid);
-        //lv.findViewById() adapter.getItem(info.position).toString()
-        if(item.toString().equals("Delete")){
-            tag = "delete_donation";
-            new LoadAllProducts().execute();
-        }
-
-        /*String listItemName = Countries[info.position];
-        TextView text = (TextView) getActivity().findViewById(R.id.footer);
-        text.setText(String.format("Selected %s for item %s", menuItemName, listItemName));*/
-        return true;
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick (AdapterView parent, View view, int position, long id) {
+                System.out.println("Long click");
+                currentSelection = position;
+                getActivity().startActionMode(modeCallBack);
+                view.setSelected(true);
+                return true;
+            }
+        });
     }
 
     /**
@@ -226,7 +242,8 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
-            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            if(message!=null)
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
 
             // updating UI from Background Thread

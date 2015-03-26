@@ -4,6 +4,8 @@
     <string name="app_name">ConnectOrph</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
     <!-- Form Registeration -->
     <string name="nameRequired">Name*</string>
     <string name="nameOrphRequired">Name of Orphanage*</string>
