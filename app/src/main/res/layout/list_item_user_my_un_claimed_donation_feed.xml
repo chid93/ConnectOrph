@@ -31,24 +31,22 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <!-- <ImageButton
-                        android:src="@drawable/ic_action_edit"
-                        android:id="@+id/edit_button"
+                    <ImageButton
+                        style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
+                        android:contentDescription="@string/save_action"
+                        android:src="@drawable/ic_action_save"
+                        android:id="@+id/save_button"
+                        android:layout_weight="0"
                         android:layout_width="36dp"
-                        android:layout_height="33dp"
-                        android:layout_gravity="start"/> -->
-                    <!-- <CheckBox
-                        android:id="@+id/LT_checkbox"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:clickable="false" /> -->
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="start"
+                        android:visibility="gone"/>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/LT_timestamp"
                             android:layout_width="fill_parent"
@@ -74,6 +72,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
                                 android:textSize="@dimen/feed_item_profile_name" />
+                            <EditText
+                                style="@android:style/Widget.Holo.EditText"
+                                android:gravity="end"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:paddingLeft="@dimen/feed_item_profile_info_padd"
+                                android:id="@+id/ET_numOfItems"
+                                android:textSize="@dimen/feed_item_profile_name"
+                                android:hint="Count"
+                                android:maxLength="4"
+                                android:inputType="number"
+                                android:visibility="gone" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -93,7 +103,6 @@
                     android:textSize="@dimen/feed_item_inner_elements"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
-
                 <TextView
                     android:id="@+id/LT_subCategory"
                     android:layout_width="fill_parent"
@@ -101,6 +110,28 @@
                     android:textSize="@dimen/feed_item_inner_elements"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                    >
+                    <Spinner
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_category"
+                        android:layout_weight="1" android:visibility="gone"/>
+
+                    <Spinner
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_subCategory"
+                        android:layout_weight="1" android:visibility="gone"/>
+                </LinearLayout>
 
                 <TextView
                     android:text="@string/donateDesc"
@@ -115,8 +146,24 @@
                     android:id="@+id/LT_description"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_inner_elements"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+                <EditText
+                    style="@android:style/Widget.Holo.EditText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/ET_description"
+                    android:hint="@string/descHint"
+                    android:lines="2"
+                    android:minLines="2"
+                    android:maxLength="500"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:text="@string/phoneNumber"
@@ -131,8 +178,19 @@
                     android:id="@+id/LT_phoneNumber"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_inner_elements"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
+                <EditText
+                    style="@android:style/Widget.Holo.EditText"
+                    android:id="@+id/ET_phoneNumber"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                    android:inputType="phone"
+                    android:visibility="gone" />
 
                 <TextView
                     android:text="@string/address"
@@ -147,12 +205,14 @@
                     android:id="@+id/LT_addressLine1"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_profile_name"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
                 <TextView
                     android:id="@+id/LT_addressLine2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/feed_item_profile_name"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" />
 
@@ -160,6 +220,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:textSize="@dimen/feed_item_inner_elements"
                     android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
                     android:layout_marginRight="@dimen/feed_inner_item_padding_left_right" >
                     <TextView
@@ -173,6 +234,58 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
+                <!--Edit Text Address-->
+                <EditText
+                    style="@android:style/Widget.Holo.EditText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ET_addressLine1"
+                    android:hint="@string/addressLine1"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:inputType="textPostalAddress"
+                    android:maxLength="108"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                    android:visibility="gone"/>
+
+                <EditText
+                    style="@android:style/Widget.Holo.EditText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ET_addressLine2"
+                    android:hint="@string/addressLine2"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:layout_marginTop="5dp"
+                    android:inputType="textPostalAddress"
+                    android:maxLength="108"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                    android:visibility="gone"/>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                    android:layout_marginRight="@dimen/feed_inner_item_padding_left_right">
+                    <Spinner
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_state"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                        android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                        android:visibility="gone"/>
+                    <Spinner
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_city"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
+                        android:layout_marginRight="@dimen/feed_inner_item_padding_left_right"
+                        android:visibility="gone"/>
+                </LinearLayout>
             </LinearLayout>
     </LinearLayout>
 </LinearLayout>

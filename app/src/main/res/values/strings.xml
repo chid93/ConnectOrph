@@ -73,6 +73,7 @@
     <string name="userHome">Home</string>
     <string name="orphHome">Home</string>
     <string name="orphanagesNearYou">Orphanages Near You</string>
+    <string name="save_action">save</string>
 
     <!-- Edit/Delete items -->
     <string-array name="list_view_options">
