@@ -70,25 +70,6 @@ public class UserDonateFeedFragment extends ListFragment {
         // Loading products in Background Thread
         new LoadAllProducts().execute();
 
-        /*
-        // on seleting single product
-        // launching Edit Product Screen
-        lv.setOnItemClickListener(new View.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // getting values from selected ListItem
-                String donationid = ((TextView) view.findViewById(R.id.donationid)).getText()
-                        .toString();
-
-                // Starting new intent
-                Intent in = new Intent(getActivity(), EditProductActivity.class);
-                // sending pid to next activity
-                in.putExtra(TAG_DONATIONID, donationid);
-            }
-        }); */
-
         makeADontaion = (Button) rootView.findViewById(R.id.fragment_user_donate_feed_buttonbar);
         makeADontaion.setOnClickListener(new View.OnClickListener() {
 
@@ -107,7 +88,16 @@ public class UserDonateFeedFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Get listview
-        //ListView lv = getListView();
+        //Listview lv = getListView();
+        // on selecting single product
+        /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                getActivity().recreate();
+            }
+        });*/
     }
 
     /**
