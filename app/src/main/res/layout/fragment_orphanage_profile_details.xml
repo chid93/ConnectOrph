@@ -84,6 +84,7 @@
             <TextView
                 android:id="@+id/orphPhoneNumber_TV"
                 android:textStyle="bold"
+                android:autoLink="all"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"
@@ -100,6 +101,7 @@
             <TextView
                 android:id="@+id/orphEmail_TV"
                 android:textStyle="bold"
+                android:autoLink="all"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"

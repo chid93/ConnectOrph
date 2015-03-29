@@ -1,6 +1,8 @@
 package com.hprotcennoc.frostic3.connectorph.ophanage_profile_fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -72,6 +74,25 @@ public class OrphanageProfileDetailsFragment extends Fragment {
         orphPhoneNumber = (TextView) getActivity().findViewById(R.id.orphPhoneNumber_TV);
         orphCity = (TextView) getActivity().findViewById(R.id.orphCity_TV);
         orphState = (TextView) getActivity().findViewById(R.id.orphState_TV);
+
+        orphPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + orphPhoneNumber.getText().toString()));
+                startActivity(callIntent);
+            }
+        });
+        orphEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_VIEW);
+                emailIntent.setData(Uri.parse("mailto:" + orphEmail.getText().toString()));
+                startActivity(emailIntent);
+            }
+        });
+
+
     }
 
     /**
