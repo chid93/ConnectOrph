@@ -116,6 +116,7 @@
             <TextView
                 android:id="@+id/orphWebsite_TV"
                 android:textStyle="bold"
+                android:autoLink="web"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/feed_inner_item_padding_left_right"

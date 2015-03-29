@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,10 @@ public class OrphanageProfileDetailsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         orphName = (TextView) getActivity().findViewById(R.id.orphName_TV);
         orphEmail = (TextView) getActivity().findViewById(R.id.orphEmail_TV);
+
         orphWebsite = (TextView) getActivity().findViewById(R.id.orphWebsite_TV);
+        orphWebsite.setMovementMethod(LinkMovementMethod.getInstance()); //All hail stackoverflow!! This is to make websites launch!!
+
         orphMission = (TextView) getActivity().findViewById(R.id.orphMission_TV);
         orphAddress1 = (TextView) getActivity().findViewById(R.id.orphAddress1_TV);
         orphAddress2 = (TextView) getActivity().findViewById(R.id.orphAddress2_TV);
