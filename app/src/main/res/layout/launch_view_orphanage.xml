@@ -41,6 +41,16 @@
                 android:layout_below="@+id/view_orphanage_orph_id_ET"
                 android:layout_centerHorizontal="true" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/rounded_et"
+                android:text="@string/forgotPassword"
+                android:id="@+id/lv_donor_forgot_password_TV"
+                android:layout_marginTop="2dp"
+                android:layout_below="@+id/view_orphanage_password_ET" />
+
             <View
                 android:id="@+id/fake_view"
                 android:layout_width="5dp"

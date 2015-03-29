@@ -39,6 +39,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
     private static final String TAG_MESSAGE = "message";
     private static String tag;
     private static final String login_tag = "login";
+    private static final String databaseOnFocus = "users";
     private static final String forgotPassword_tag = "forgotPassword";
     //DATABASE CONTINUES LATER
 
@@ -124,6 +125,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             // Building Parameters
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("tag", tag));
+            params.add(new BasicNameValuePair("databaseOnFocus", databaseOnFocus));
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
 
@@ -149,6 +151,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
                     flag=0;
                     // Email found. Reset password mail sent. Go to page to enter code.
                     Intent ForgotPasswordIntent = new Intent(getActivity(), ResetPassword.class);
+                    ForgotPasswordIntent.putExtra("databaseOnFocus", databaseOnFocus);
                     ForgotPasswordIntent.putExtra("email", demail);
                     startActivity(ForgotPasswordIntent);
 

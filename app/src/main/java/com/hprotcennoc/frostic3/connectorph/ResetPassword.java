@@ -39,7 +39,7 @@ public class ResetPassword extends ActionBarActivity{
     TextView vCodeLabel;
     TextView resetPasswordLabel;
     Button btnbar;
-    String demail;
+    String demail, databaseOnFocus;
 
 
     @Override
@@ -48,11 +48,16 @@ public class ResetPassword extends ActionBarActivity{
         setContentView(R.layout.password_reset);
 
         demail = getIntent().getStringExtra("email");
+        databaseOnFocus = getIntent().getStringExtra("databaseOnFocus");
         vCodeLabel = (TextView) findViewById(R.id.password_reset_enter_code_TV);
         resetPasswordLabel = (TextView) findViewById(R.id.password_reset_label_password_TV);
         password = (EditText) findViewById(R.id.password_reset_password_ET);
         retypePassword = (EditText) findViewById(R.id.password_reset_retype_password_ET);
         btnbar = (Button) findViewById(R.id.password_reset_buttonbar);
+
+        password.setOnFocusChangeListener(mOnFocusChangeListener);
+        retypePassword.setOnFocusChangeListener(mOnFocusChangeListener);
+
         //Button Bar Listener
         btnbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +69,71 @@ public class ResetPassword extends ActionBarActivity{
                 }
                 else {
                     tag=resetPassword_tag;
-                    // get user details from email and password in background thread
-                    new getUserByEmailAndPassword().execute();
-                }
+                    if( clientSideCheck(password) && clientSideCheck(retypePassword) ) {
 
+                        new getUserByEmailAndPassword().execute();
+                    }
+                    else {
+                        clientSideCheck(password);
+                    }
+                }
             }
         });
     }
+
+    // VALIDATION STARTS HERE
+    public boolean clientSideCheck(EditText view) {
+        if(view.length() == 0) {
+            view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+            view.setError("Required");
+            return false;
+        }
+        else if(view == findViewById(R.id.password_reset_retype_password_ET)) {
+            EditText password = (EditText) findViewById(R.id.password_reset_password_ET);
+            if (!(view.getText().toString().equals(password.getText().toString()))) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Passwords does not match");
+                return false;
+            }
+        }
+        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+        view.setError(null);
+        return true;
+    }
+    private View.OnFocusChangeListener mOnFocusChangeListener
+            = new View.OnFocusChangeListener() {
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            //Get the view called and store it as an edit text
+            EditText view = (EditText) v;
+            if(!hasFocus){
+                //Check for Null value
+                if(view.length() == 0) {
+                    view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                    view.setError("Required");
+                }
+                //Check if both Passwords match
+                else if(v == findViewById(R.id.password_reset_retype_password_ET)){
+                    password = (EditText) findViewById(R.id.password_reset_password_ET);
+                    if(!(view.getText().toString().equals(password.getText().toString()))){
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Passwords does not match");
+                    }
+                    else{
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                        view.setError(null);
+                    }
+                }
+                //Clear error
+                else{
+                    view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
+                    view.setError(null);
+                }
+            }
+        }
+    };
+    // VALIDATION ENDS HERE
 
     //DATABASE CONTINUES HERE
     /**
@@ -109,6 +172,7 @@ public class ResetPassword extends ActionBarActivity{
             // Building Parameters
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("tag", tag));
+            params.add(new BasicNameValuePair("databaseOnFocus", databaseOnFocus));
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("vCode", dvCode));
             params.add(new BasicNameValuePair("password", dPassword));

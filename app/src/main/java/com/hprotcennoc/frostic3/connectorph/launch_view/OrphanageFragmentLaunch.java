@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hprotcennoc.frostic3.connectorph.OrphHome;
 import com.hprotcennoc.frostic3.connectorph.R;
+import com.hprotcennoc.frostic3.connectorph.ResetPassword;
 import com.hprotcennoc.frostic3.connectorph.library.JSONParser;
 import com.hprotcennoc.frostic3.connectorph.registration_forms.OrphRegForm;
 
@@ -33,13 +35,19 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
     // Progress Dialog
     private ProgressDialog pDialog;
     private static String url_login_orph = "http://192.168.0.101/connectorph_php/login_orph.php";
+    private static String url_forgot_password = "http://192.168.0.101/connectorph_php/login_user.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+    private static final String login_tag = "login";
+    private static final String databaseOnFocus = "orphanages";
+    private static final String forgotPassword_tag = "forgotPassword";
     //DATABASE CONTINUES LATER
 
     View rootView;
+    private static String tag;
     Button btnlogin;
     Button btnreg;
+    TextView TVforgotpass;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,11 +56,13 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
 
         btnlogin = (Button) rootView.findViewById(R.id.lv_orphanage_login_button);
         btnreg = (Button) rootView.findViewById(R.id.lv_orphanage_register_button);
+        TVforgotpass = (TextView) rootView.findViewById(R.id.lv_donor_forgot_password_TV);
         //Login Listener
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 // get user details from email and password in background thread
+                tag=login_tag;
                 new getOrphByEmailAndPassword().execute();
             }
         });
@@ -62,6 +72,14 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
             public void onClick(View arg0) {
                 Intent OrphRegFormIntent = new Intent(getActivity(), OrphRegForm.class);
                 startActivity(OrphRegFormIntent);
+            }
+        });
+        TVforgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                tag=forgotPassword_tag;
+                // get email from user and check if it exists in database
+                new getOrphByEmailAndPassword().execute();
             }
         });
 
@@ -105,14 +123,23 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
 
             // Building Parameters
             List<NameValuePair> params = new ArrayList<>();
+            params.add(new BasicNameValuePair("tag", tag));
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("password", dpassword));
 
             Log.i("OrphanageFragmentLaunch","In doInBackground1");
             // getting JSON Object
             // Note that create product url accepts POST method
-            JSONObject json = JSONParser.makeHttpRequest(url_login_orph,
-                    "POST", params);
+            JSONObject json;
+            if (tag.equals(login_tag)) {
+                json = JSONParser.makeHttpRequest(url_login_orph,
+                        "POST", params);
+            }
+            else{
+                params.add(new BasicNameValuePair("databaseOnFocus", databaseOnFocus)); //By default, forgot password!!
+                json = JSONParser.makeHttpRequest(url_forgot_password,
+                        "POST", params);
+            }
 
             Log.i("OrphanageFragmentLaunch","In doInBackground2");
             // check log cat from response
@@ -121,12 +148,20 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
             // check for success tag
             try {
                 int success = json.getInt(TAG_SUCCESS);
-                if (success == 1) {
+                if (success == 1 && tag.equals(login_tag)) {
                     flag=0;
                     // successfully logged in
                     Intent UserProfileIntent = new Intent(getActivity(), OrphHome.class);
                     UserProfileIntent.putExtra("email", demail);
                     startActivity(UserProfileIntent);
+
+                } else if (success == 1 && tag.equals(forgotPassword_tag)) {
+                    flag=0;
+                    // Email found. Reset password mail sent. Go to page to enter code.
+                    Intent ForgotPasswordIntent = new Intent(getActivity(), ResetPassword.class);
+                    ForgotPasswordIntent.putExtra("databaseOnFocus", databaseOnFocus);
+                    ForgotPasswordIntent.putExtra("email", demail);
+                    startActivity(ForgotPasswordIntent);
 
                 } else {
                     // failed to login
