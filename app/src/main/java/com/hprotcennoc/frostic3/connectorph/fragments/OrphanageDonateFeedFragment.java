@@ -184,9 +184,8 @@ public class OrphanageDonateFeedFragment extends ListFragment {
                         String city = c.optString(TAG_CITY) + ", ";
 
                         // Converting timestamp into x ago format
-                        //Subtract 4.5 hours to get the right time!!!
                         CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
-                                Long.parseLong(created_at) * 1000 - 16176729,
+                                Long.parseLong(created_at) * 1000,
                                 System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
 
                         // creating new HashMap
