@@ -119,6 +119,7 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                         tag = "delete_donation";
                         new LoadAllProducts().execute();
                         mode.finish();
+                        return true;
                     }
                     case R.id.edit: {
                         Log.i("UserUnclaimedDonationFeedFragment", "edit");
@@ -193,7 +194,6 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                                 new LoadAllProducts().execute();
                             }
                         });
-
                         /*save_button.setOnTouchListener(new View.OnTouchListener(){
                             @Override
                             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -206,9 +206,9 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                                 return true;
                             }
                         });*/
-
                         //Toast.makeText(getActivity(), itemCount.getText().toString(), Toast.LENGTH_LONG).show();
                         mode.finish();
+                        return true;
                     }
                     default:
                         return false;
