@@ -87,7 +87,7 @@
         <activity
             android:name=".OrphanageMyProfile"
             android:parentActivityName=".OrphHome"
-            android:label="My Profile"
+            android:label="Profile"
             android:windowSoftInputMode="adjustPan" />
         <meta-data
             android:name="com.google.android.gms.version"
