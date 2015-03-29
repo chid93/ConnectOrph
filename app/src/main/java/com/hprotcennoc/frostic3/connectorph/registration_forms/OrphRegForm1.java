@@ -1,6 +1,8 @@
 package com.hprotcennoc.frostic3.connectorph.registration_forms;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -230,6 +232,9 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
                 if (success == 1) {
                     // successfully created a user
                     // closing this screen. Back to MainActivity
+                    Intent data = getIntent();
+                    data.putExtra("choice", "YES");
+                    OrphRegForm1.this.setResult(Activity.RESULT_OK, data);
                     finish();
                 } else {
                     // failed to create user
@@ -273,6 +278,14 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
                 return true;
         }
         return(super.onOptionsItemSelected(item));
+    }
+    //Handle Back button to return choice as NO to mean registration hasn't been completed.
+    @Override
+    public void onBackPressed() {
+        Intent data = getIntent();
+        data.putExtra("choice", "NO");
+        OrphRegForm1.this.setResult(Activity.RESULT_OK, data);
+        finish();
     }
 
     //STATE/CITY DATA LOADER STARTS HERE

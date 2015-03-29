@@ -116,8 +116,8 @@ public class OrphRegForm extends ActionBarActivity{
             OrphRegFormIntent1.putExtra("name", name.getText().toString());
             OrphRegFormIntent1.putExtra("email", email.getText().toString());
             OrphRegFormIntent1.putExtra("password", password.getText().toString());
-            startActivity(OrphRegFormIntent1); //Change to startActivityForResult
-            finish();
+            startActivityForResult(OrphRegFormIntent1, 1); //Change to startActivityForResult
+
         }
         else{
             clientSideCheck(name);
@@ -126,4 +126,14 @@ public class OrphRegForm extends ActionBarActivity{
             clientSideCheck(retypePass);
         }
     }
+
+    //Call finish() if OrphRegForm1 successfully registered a new orphanage
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            if(data.getStringExtra("choice").equals("YES"))
+                finish();
+        }
+    }
+
 }
