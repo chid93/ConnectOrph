@@ -42,7 +42,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     private ProgressDialog pDialog;
 
     // url to create new product
-    private static String url_new_user = "http://192.168.0.101/connectorph_php/new_user.php";
+    private static String url_new_user = "http://connectorph.byethost24.com/connectorph_php/new_user.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

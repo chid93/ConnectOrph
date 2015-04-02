@@ -39,7 +39,7 @@ public class UserFindOrphanageFragment extends ListFragment implements AdapterVi
     private ProgressDialog pDialog;
 
     // url to get all products list
-    private static String url_orph_feed = "http://192.168.0.101/connectorph_php/feed_orphanage.php";
+    private static String url_orph_feed = "http://connectorph.byethost24.com/connectorph_php/feed_orphanage.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

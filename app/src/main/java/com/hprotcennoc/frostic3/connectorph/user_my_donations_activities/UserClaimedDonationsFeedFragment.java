@@ -34,7 +34,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_user_my_donation = "http://192.168.0.101/connectorph_php/user_my_donation_feed.php";
+    private static String url_feed_user_my_donation = "http://connectorph.byethost24.com/connectorph_php/user_my_donation_feed.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
