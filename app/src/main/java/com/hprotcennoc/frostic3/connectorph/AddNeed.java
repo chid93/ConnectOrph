@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddNeed extends ActionBarActivity{
-
-
     Spinner categories;
     EditText desc;
     Button addNeed;
@@ -33,7 +32,6 @@ public class AddNeed extends ActionBarActivity{
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-
     // url to create new product
     private static String url_new_need = "http://connectorph.byethost24.com/connectorph_php/add_need.php";
 
@@ -69,10 +67,7 @@ public class AddNeed extends ActionBarActivity{
 
         int flag = 0;
         String message;
-
-
         //Before starting background thread Show Progress Dialog
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -84,8 +79,7 @@ public class AddNeed extends ActionBarActivity{
         }
 
 
-        //submitting donation
-
+        //submitting need
         protected String doInBackground(String... args) {
             String ddesc = desc.getText().toString();
             String dcategories = categories.getSelectedItem().toString();
@@ -123,11 +117,7 @@ public class AddNeed extends ActionBarActivity{
 
             return null;
         }
-
-
         //  After completing background task Dismiss the progress dialog
-
-
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
@@ -140,6 +130,15 @@ public class AddNeed extends ActionBarActivity{
                 toast.show();
             }
         }
-
+    }
+    //Handle Up button as Back button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return(super.onOptionsItemSelected(item));
     }
 }
