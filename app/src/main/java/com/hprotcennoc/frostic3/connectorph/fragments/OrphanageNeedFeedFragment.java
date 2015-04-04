@@ -1,5 +1,6 @@
 package com.hprotcennoc.frostic3.connectorph.fragments;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -91,11 +92,20 @@ public class OrphanageNeedFeedFragment extends ListFragment {
             public void onClick(View view) {
                 Intent AddNeedIntent = new Intent(getActivity(), AddNeed.class);
                 AddNeedIntent.putExtra("email", demail);
-                startActivity(AddNeedIntent);
+                startActivityForResult(AddNeedIntent, 1);
             }
         });
 
         return rootView;
+    }
+
+    //Recreate activity on Result
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if(data.getStringExtra("choice").equals("YES"))
+                getActivity().recreate();
+        }
     }
 
     @Override

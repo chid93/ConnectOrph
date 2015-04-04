@@ -1,6 +1,8 @@
 package com.hprotcennoc.frostic3.connectorph;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -141,6 +143,9 @@ public class AddDonation extends ActionBarActivity implements AdapterView.OnItem
 
                 if (success == 1) {
                     // successfully submitted donation
+                    Intent data = getIntent();
+                    data.putExtra("choice", "YES");
+                    AddDonation.this.setResult(Activity.RESULT_OK, data);
                     finish();
                 } else {
                     // failed to create user
