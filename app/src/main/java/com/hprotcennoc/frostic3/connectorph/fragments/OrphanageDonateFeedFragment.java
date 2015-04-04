@@ -2,6 +2,8 @@ package com.hprotcennoc.frostic3.connectorph.fragments;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -330,6 +332,10 @@ public class OrphanageDonateFeedFragment extends ListFragment {
                 // SMS send Close
                 toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
                 toast.show();
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setData(Uri.parse("sms:" + phoneNumber));
+                sendIntent.putExtra("sms_body", "Our representative will come collect your donation by [Specify Date]");
+                startActivity(sendIntent);
             }
         }
 
