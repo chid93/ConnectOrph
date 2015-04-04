@@ -40,7 +40,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_claimed_donation = "http://connectorph.byethost7.com/connectorph_php/claimed_donation_feed.php";
+    private static String url_feed_claimed_donation = "http://connectorph.byethost7.com/connectorph_php/orphanage_my_donation_feed.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
