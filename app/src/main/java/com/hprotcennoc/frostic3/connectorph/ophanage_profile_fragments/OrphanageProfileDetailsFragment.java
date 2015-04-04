@@ -30,7 +30,7 @@ public class OrphanageProfileDetailsFragment extends Fragment {
     private ProgressDialog pDialog;
 
     // url to get all products list
-    private static String url_orph_profile_details = "http://connectorph.byethost24.com/connectorph_php/orph_profile_details.php";
+    private static String url_orph_profile_details = "http://connectorph.byethost7.com/connectorph_php/orph_profile_details.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

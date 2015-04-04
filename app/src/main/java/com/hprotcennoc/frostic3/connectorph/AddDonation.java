@@ -40,7 +40,7 @@ public class AddDonation extends ActionBarActivity implements AdapterView.OnItem
     private ProgressDialog pDialog;
 
     // url to create new product
-    private static String url_new_donation = "http://connectorph.byethost24.com/connectorph_php/add_donation.php";
+    private static String url_new_donation = "http://connectorph.byethost7.com/connectorph_php/add_donation.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
