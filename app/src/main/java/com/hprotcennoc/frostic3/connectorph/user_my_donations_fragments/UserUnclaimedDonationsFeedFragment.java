@@ -280,6 +280,7 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                 tag = "MyUnclaimedDonations";
             }
 
+            params.add(new BasicNameValuePair("tag",tag));
             params.add(new BasicNameValuePair("email", demail));
             json = JSONParser.makeHttpRequest(url_feed_user_my_donation, "POST", params);
 
