@@ -1,5 +1,7 @@
 package com.hprotcennoc.frostic3.connectorph.orphanage_my_donations_fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.ListFragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -66,10 +68,11 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
     JSONArray donationsArray = null;
     ListView lv;
     TextView did;
+    String donorPhoneNumber;
     static int currentSelection;
     private ActionMode.Callback modeCallBack;
 
-    View rootView;
+    View rootView, currentItem;
     String demail;
 
     public OrphanageClaimedDonationsFeedFragment(){}
@@ -111,6 +114,8 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
                     case R.id.good: {
                         Log.i("OrphanageClaimedDonationFeedFragment", "action_good");
                         tag = "markAsDelivered";
+                        currentItem = lv.getChildAt(currentSelection);
+                        donorPhoneNumber = ((TextView) currentItem.findViewById(R.id.LT_phoneNumber)).getText().toString();
                         new LoadAllProducts().execute();
                         mode.finish();
                         return true;
@@ -139,7 +144,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
     class LoadAllProducts extends AsyncTask<String, String, String> {
 
         int flag=0;
-        boolean flagForRecreate = false;
+        boolean flagForRecreate = false, callSMSIntent = false;
         String message;
         /**
          * Before starting background thread Show Progress Dialog
@@ -171,6 +176,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
                 tag = "MyClaimedDonations";
                 Log.d("Mark Donation as Delivered: ", json.toString());
                 flagForRecreate = true;
+                callSMSIntent = true;
                 return null;
             }
 
@@ -266,6 +272,12 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
             }
             if(flagForRecreate)
                 getActivity().recreate();
+            if(callSMSIntent){
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setData(Uri.parse("sms:"+donorPhoneNumber));
+                sendIntent.putExtra("sms_body", "Thank you for your donation.");
+                startActivity(sendIntent);
+            }
             // updating UI from Background Thread
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
