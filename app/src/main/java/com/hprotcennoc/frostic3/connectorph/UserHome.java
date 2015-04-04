@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.hprotcennoc.frostic3.connectorph.fragments.UserDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.UserFindOrphanageFragment;
@@ -236,4 +238,30 @@ public class UserHome extends ActionBarActivity{
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     //NAVIGATION DRAWER ENDS HERE
+    //BACK BUTTON EXITS ON TWO CLICKS STARTS
+    private boolean doubleBackToExitPressedOnce;
+    private Handler mHandler = new Handler();
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to logout", Toast.LENGTH_SHORT).show();
+        mHandler.postDelayed(mRunnable, 2000);
+    }
+    //BACK BUTTON EXITS ON TWO CLICKS ENDS
 }
