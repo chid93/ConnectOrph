@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:textSize="@dimen/abc_text_size_headline_material"
-        android:text="@string/claimedTitle"
+        android:text="@string/deliveredTitle"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingLeft="@dimen/feed_inner_item_padding_left_right"
         android:paddingRight="@dimen/activity_horizontal_margin"

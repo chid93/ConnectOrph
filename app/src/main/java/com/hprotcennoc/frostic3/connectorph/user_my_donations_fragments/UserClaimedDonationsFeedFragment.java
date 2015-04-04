@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.user_my_donations_activities;
+package com.hprotcennoc.frostic3.connectorph.user_my_donations_fragments;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -34,15 +34,14 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_user_my_donation = "http://connectorph.byethost24.com/connectorph_php/user_my_donation_feed.php";
+    private static String url_feed_user_my_donation = "http://connectorph.byethost7.com/connectorph_php/user_my_donation_feed.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    private static final String TAG_CLAIMED_DONATIONS = "claimedDonations";
+    private static final String TAG_SELECTED_DONATIONS = "SelectedDonationsFeed";
     private static final String TAG_CLAIM_CODE = "claim_code";
     private static final String TAG_DONATIONID = "donationid";
-    private static final String TAG_CREATED_AT = "created_at";
     private static final String TAG_CLAIMED_AT = "claimed_at";
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_SUB_CATEGORY = "subCategory";
@@ -131,7 +130,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                 if (success == 1) {
                     // products found
                     // Getting Array of Donations
-                    donationsArray = json.getJSONArray(TAG_CLAIMED_DONATIONS);
+                    donationsArray = json.getJSONArray(TAG_SELECTED_DONATIONS);
                     Log.i("UserClaimedDonationsFeedFragment", donationsArray.toString());
 
                     // looping through All Donations
@@ -141,7 +140,6 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                         // Storing each json item in variable
                         String id = c.optString(TAG_DONATIONID);
                         String claim_code = c.optString(TAG_CLAIM_CODE);
-                        String created_at = c.optString(TAG_CREATED_AT);
                         String claimed_at = c.optString(TAG_CLAIMED_AT);
                         String category = c.optString(TAG_CATEGORY);
                         String subCategory = c.optString(TAG_SUB_CATEGORY);
@@ -165,12 +163,8 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                         }*/
 
                         // Converting timestamp into x ago format
-                        //Subtract 4.5 hours to get the right time!!!
-                        /*CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
-                                Long.parseLong(created_at) * 1000 - 16176729,
-                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);*/
                         CharSequence timeAgoClaim = DateUtils.getRelativeTimeSpanString(
-                                Long.parseLong(claimed_at) * 1000 - 16176729,
+                                Long.parseLong(claimed_at) * 1000,
                                 System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
 
                         // creating new HashMap
@@ -179,7 +173,6 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                         // adding each child node to HashMap key => value
                         map.put(TAG_DONATIONID, id);
                         map.put(TAG_CLAIM_CODE, claim_code);
-                        map.put(TAG_CREATED_AT, created_at);
                         map.put(TAG_CLAIMED_AT, timeAgoClaim.toString());
                         map.put(TAG_CATEGORY, category);
                         map.put(TAG_SUB_CATEGORY, subCategory);
@@ -236,7 +229,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                      * Updating parsed JSON data into ListView
                      * */
                     ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_user_my_claimed_donation_feed,
-                            new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_CLAIM_CODE, TAG_CREATED_AT,
+                            new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_CLAIM_CODE, TAG_CLAIMED_AT,
                                     TAG_ORPH_NAME, TAG_ORPH_PHONE_NUMBER, TAG_ORPH_ADDRESS_LINE_1, TAG_ORPH_ADDRESS_LINE_2, TAG_ORPH_CITY, TAG_ORPH_STATE},
                             new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems, R.id.LT_claimCode,
                                     R.id.LT_timestamp, R.id.LT_orphName, R.id.LT_orphPhoneNumber, R.id.LT_orphAddressLine1, R.id.LT_orphAddressLine2,

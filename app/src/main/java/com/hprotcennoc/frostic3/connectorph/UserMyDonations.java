@@ -1,56 +1,51 @@
 package com.hprotcennoc.frostic3.connectorph;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
-import com.hprotcennoc.frostic3.connectorph.library.TabsAdapterLaunchDonationFeed;
+import com.hprotcennoc.frostic3.connectorph.user_my_donations_fragments.UserClaimedDonationsFeedFragment;
+import com.hprotcennoc.frostic3.connectorph.user_my_donations_fragments.UserDeliveredDonationsFeedFragment;
+import com.hprotcennoc.frostic3.connectorph.user_my_donations_fragments.UserUnclaimedDonationsFeedFragment;
 
-public class UserMyDonations extends ActionBarActivity implements android.support.v7.app.ActionBar.TabListener {
+public class UserMyDonations extends ActionBarActivity {
 
-    private ViewPager tabsviewPager;
+    MyAdapter mAdapter;
+    ViewPager mPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_my_donations);
+        setContentView(R.layout.view_pager);
 
-        //TABS VIEWER STARTS HERE
-        tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
-        TabsAdapterLaunchDonationFeed mTabsAdapter = new TabsAdapterLaunchDonationFeed(getSupportFragmentManager());
+        // enabling action bar app icon and behaving it as toggle button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        tabsviewPager.setAdapter(mTabsAdapter);
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33B5E5")));
-        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.Tab donorstab = getSupportActionBar().newTab().setText("Claimed Donations").setTabListener(this);
-        ActionBar.Tab orphanagetab = getSupportActionBar().newTab().setText("Unclaimed Donations").setTabListener(this);
+        mAdapter = new MyAdapter(getSupportFragmentManager());
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setPadding(0, 0, 20, 0);
+        mPager.setClipToPadding(false);
+        mPager.setPageMargin(0);
+        mPager.setAdapter(mAdapter);
 
-        getSupportActionBar().addTab(donorstab);
-        getSupportActionBar().addTab(orphanagetab);
-
-        //This helps in providing swiping effect for v7 compat library
-        tabsviewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                getSupportActionBar().setSelectedNavigationItem(position);
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-
+        /*Button button = (Button) findViewById(R.id.first);
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mPager.setCurrentItem(0);
             }
         });
-        //TABS CONTINUES LATER
+        button = (Button) findViewById(R.id.last);
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mPager.setCurrentItem(ITEMS - 1);
+            }
+        });*/
     }
 
     //Handle Up button as Back button
@@ -64,19 +59,27 @@ public class UserMyDonations extends ActionBarActivity implements android.suppor
         return(super.onOptionsItemSelected(item));
     }
 
-    //TABS CONTINUE HERE
-    @Override
-    public void onTabReselected(ActionBar.Tab arg0, FragmentTransaction arg1) {
-    }
+    public static class MyAdapter extends FragmentPagerAdapter {
+        public MyAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab selectedtab, FragmentTransaction arg1) {
-        tabsviewPager.setCurrentItem(selectedtab.getPosition()); //update tab position on tap
-    }
+        @Override
+        public int getCount() {
+            return 3;
+        }
 
-    @Override
-    public void onTabUnselected(ActionBar.Tab arg0, FragmentTransaction arg1) {
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: // Fragment # 0 - This will show image
+                    return new UserClaimedDonationsFeedFragment();
+                case 1:// Fragment # 2-9 - Will show list
+                    return new UserUnclaimedDonationsFeedFragment();
+                default:
+                    return new UserDeliveredDonationsFeedFragment();
+            }
+        }
     }
-    //TABS ENDS HERE
 
 }

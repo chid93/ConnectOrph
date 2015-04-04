@@ -1,9 +1,10 @@
-package com.hprotcennoc.frostic3.connectorph.user_my_donations_activities;
+package com.hprotcennoc.frostic3.connectorph.user_my_donations_fragments;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -43,13 +44,13 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_user_my_donation = "http://connectorph.byethost24.com/connectorph_php/user_my_donation_feed.php";
-    private static String url_edit_delete_donation = "http://connectorph.byethost24.com/connectorph_php/edit_delete_donation.php";
+    private static String url_feed_user_my_donation = "http://connectorph.byethost7.com/connectorph_php/user_my_donation_feed.php";
+    private static String url_edit_delete_donation = "http://connectorph.byethost7.com/connectorph_php/edit_delete_donation.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    private static final String TAG_CLAIMED_DONATIONS = "claimedDonations";
+    private static final String TAG_SELECTED_DONATIONS = "SelectedDonationsFeed";
     private static final String TAG_DONATIONID = "donationid";
     private static final String TAG_CREATED_AT = "created_at";
     private static final String TAG_CATEGORY = "category";
@@ -294,7 +295,7 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                 if (success == 1) {
                     // products found
                     // Getting Array of Donations
-                    donationsArray = json.getJSONArray(TAG_CLAIMED_DONATIONS);
+                    donationsArray = json.getJSONArray(TAG_SELECTED_DONATIONS);
 
                     // looping through All Donations
                     for (int i = 0; i < donationsArray.length(); i++) {
@@ -302,9 +303,7 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
 
                         // Storing each json item in variable
                         String id = c.optString(TAG_DONATIONID);
-                        //String claim_code = c.optString(TAG_CLAIM_CODE);
                         String created_at = c.optString(TAG_CREATED_AT);
-                        //String claimed_at = c.optString(TAG_CLAIMED_AT);
                         String category = c.optString(TAG_CATEGORY);
                         String subCategory = c.optString(TAG_SUB_CATEGORY);
                         String desc = c.optString(TAG_DESC);
@@ -315,12 +314,17 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                         String state = c.optString(TAG_STATE);
                         String city = c.optString(TAG_CITY);
 
+                        // Converting timestamp into x ago format
+                        CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
+                                Long.parseLong(created_at) * 1000,
+                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<>();
 
                         // adding each child node to HashMap key => value
                         map.put(TAG_DONATIONID, id);
-                        map.put(TAG_CREATED_AT, created_at);
+                        map.put(TAG_CREATED_AT, timeAgo.toString());
                         map.put(TAG_CATEGORY, category);
                         map.put(TAG_SUB_CATEGORY, subCategory);
                         map.put(TAG_DESC, desc);

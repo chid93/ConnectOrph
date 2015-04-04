@@ -65,6 +65,9 @@
     <string name="addNeed">Add Need</string>
     <string name="profileDetailsTitle">Profile Details</string>
     <string name="needsTitle">Needs</string>
+    <string name="claimedTitle">Claimed Donations</string>
+    <string name="unclaimedTitle">Unclaimed Donations</string>
+    <string name="deliveredTitle">Delivered Donations</string>
     <string name="registerOrphanage">Register as an Orphanage</string>
     <string name="registerDonor">Register as a Donor</string>
     <string name="orphanageContactLT">Orphanage Contact details</string>
@@ -104,7 +107,7 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items_orphanage">
         <item >Donation Feed</item>
-        <item >Claimed Donations</item>
+        <item >My Donations</item>
         <item >Needs List</item>
         <item >My Profile</item>
     </string-array>
