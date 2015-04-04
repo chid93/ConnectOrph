@@ -139,6 +139,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
     class LoadAllProducts extends AsyncTask<String, String, String> {
 
         int flag=0;
+        boolean flagForRecreate = false;
         String message;
         /**
          * Before starting background thread Show Progress Dialog
@@ -169,7 +170,8 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
                 json = JSONParser.makeHttpRequest(url_feed_claimed_donation, "POST", params);
                 tag = "MyClaimedDonations";
                 Log.d("Mark Donation as Delivered: ", json.toString());
-
+                flagForRecreate = true;
+                return null;
             }
 
             params.add(new BasicNameValuePair("tag",tag));
@@ -262,6 +264,8 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
             if(flag == 1) {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
             }
+            if(flagForRecreate)
+                getActivity().recreate();
             // updating UI from Background Thread
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {

@@ -248,8 +248,8 @@ public class OrphanageDonateFeedFragment extends ListFragment {
     class claimDonation extends AsyncTask<String, String, String> {
 
         int flag = 0;
+        boolean flagForRecreate = false;
         String message;
-
 
         //Before starting background thread Show Progress Dialog
         @Override
@@ -269,23 +269,20 @@ public class OrphanageDonateFeedFragment extends ListFragment {
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair(TAG_DONATIONID, donationid.getText().toString()));
-
             // getting JSON Object
             // Note that create product url accepts POST method
             JSONObject json = JSONParser.makeHttpRequest(url_claim_donation, "POST", params);
-
             // check log cat from response
             Log.d("Create Response", json.toString());
-
             // check for success tag
             try {
                 int success = json.getInt(TAG_SUCCESS);
                 message = json.getString(TAG_MESSAGE);
-
                 if (success == 1) {
                     // successfully claimed donation. View Claimed Donations
                     phoneNumber = json.getString(TAG_PHONE_NUMBER);
                     smsBody = json.getString(TAG_SMS_BODY);
+                    flagForRecreate = true;
                 } else {
                     // failed to create user
                     Log.d("Failed to claim donation", json.toString());
@@ -294,7 +291,6 @@ public class OrphanageDonateFeedFragment extends ListFragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 
@@ -306,6 +302,8 @@ public class OrphanageDonateFeedFragment extends ListFragment {
             // dismiss the dialog once done
             pDialog.dismiss();
             Toast toast;
+            if(flagForRecreate)
+                getActivity().recreate();
             if (flag == 1) {
                 toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
                 toast.show();
