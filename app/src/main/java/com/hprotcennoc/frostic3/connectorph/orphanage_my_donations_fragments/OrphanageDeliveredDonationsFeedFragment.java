@@ -1,4 +1,4 @@
-package com.hprotcennoc.frostic3.connectorph.user_my_donations_fragments;
+package com.hprotcennoc.frostic3.connectorph.orphanage_my_donations_fragments;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserDeliveredDonationsFeedFragment extends ListFragment {
+public class OrphanageDeliveredDonationsFeedFragment extends ListFragment {
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -34,7 +34,7 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_user_my_donation = "http://connectorph.byethost7.com/connectorph_php/user_my_donation_feed.php";
+    private static String url_feed_claimed_donation = "http://connectorph.byethost7.com/connectorph_php/claimed_donation_feed.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -54,14 +54,7 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
     private static final String TAG_ADDRESS_LINE_2 = "caddress2";
     private static final String TAG_STATE = "cstate";
     private static final String TAG_CITY = "ccity";
-
-    private static final String TAG_ORPH_NAME = "orphanageName";
-    private static final String TAG_ORPH_PHONE_NUMBER = "orphanagePhoneNumber";
-    private static final String TAG_ORPH_ADDRESS_LINE_1 = "orphanageAddress1";
-    private static final String TAG_ORPH_ADDRESS_LINE_2 = "orphanageAddress2";
-    private static final String TAG_ORPH_STATE = "orphanageState";
-    private static final String TAG_ORPH_CITY = "orphanageCity";
-
+    private static final String TAG_DONORNAME = "donorName";
     private static final String tag = "MyDeliveredDonations";
     // products JSONArray
     JSONArray donationsArray = null;
@@ -69,7 +62,7 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
     View rootView;
     private static String demail;
 
-    public UserDeliveredDonationsFeedFragment(){}
+    public OrphanageDeliveredDonationsFeedFragment(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_user_my_delivered_donation_feed, container, false);
@@ -118,8 +111,9 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("email", demail));
             params.add(new BasicNameValuePair("tag",tag));
+            Log.d("OrphanageDeliveredDonationsFeedFragment Email/Tag: ", params.toString());
             // getting JSON string from URL
-            JSONObject json = JSONParser.makeHttpRequest(url_feed_user_my_donation, "POST", params);
+            JSONObject json = JSONParser.makeHttpRequest(url_feed_claimed_donation, "POST", params);
 
             // Check your log cat for JSON reponse
             Log.d("All Donations: ", json.toString());
@@ -154,27 +148,15 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
                         String address2 = c.optString(TAG_ADDRESS_LINE_2);
                         String state = c.optString(TAG_STATE);
                         String city = c.optString(TAG_CITY);
-
-                        String orphName = c.optString(TAG_ORPH_NAME);
-                        String orphPhoneNumber = c.optString(TAG_ORPH_PHONE_NUMBER);
-                        String orphAddress1 = c.optString(TAG_ORPH_ADDRESS_LINE_1);
-                        String orphAddress2 = c.optString(TAG_ORPH_ADDRESS_LINE_2);
-                        String orphState = c.optString(TAG_ORPH_STATE);
-                        String orphCity = c.optString(TAG_ORPH_CITY);
-
-                        /*if(claim_code.equals("null")){
-                            claim_code="NOT YET CLAIMED";
-                        }*/
+                        String donorName = c.optString(TAG_DONORNAME);
 
                         // Converting timestamp into x ago format
-                        //Subtract 4.5 hours to get the right time!!!
-                        /*CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
+                        CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
                                 Long.parseLong(created_at) * 1000,
-                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);*/
+                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
                         CharSequence timeAgoClaim = DateUtils.getRelativeTimeSpanString(
                                 Long.parseLong(claimed_at) * 1000,
                                 System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-
                         CharSequence timeAgoDelivered = DateUtils.getRelativeTimeSpanString(
                                 Long.parseLong(delivered_at) * 1000,
                                 System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
@@ -185,7 +167,7 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
                         // adding each child node to HashMap key => value
                         map.put(TAG_DONATIONID, id);
                         map.put(TAG_CLAIM_CODE, claim_code);
-                        map.put(TAG_CREATED_AT, created_at);
+                        map.put(TAG_CREATED_AT, timeAgo.toString());
                         map.put(TAG_CLAIMED_AT, timeAgoClaim.toString());
                         map.put(TAG_DELIVERED_AT, timeAgoDelivered.toString());
                         map.put(TAG_CATEGORY, category);
@@ -197,13 +179,7 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
                         map.put(TAG_ADDRESS_LINE_2, address2);
                         map.put(TAG_STATE, state);
                         map.put(TAG_CITY, city);
-
-                        map.put(TAG_ORPH_NAME, orphName);
-                        map.put(TAG_ORPH_PHONE_NUMBER, orphPhoneNumber);
-                        map.put(TAG_ORPH_ADDRESS_LINE_1, orphAddress1);
-                        map.put(TAG_ORPH_ADDRESS_LINE_2, orphAddress2);
-                        map.put(TAG_ORPH_STATE, orphState);
-                        map.put(TAG_ORPH_CITY, orphCity);
+                        map.put(TAG_DONORNAME, donorName);
 
                         // adding HashList to ArrayList
                         donationsList.add(map);
@@ -242,12 +218,12 @@ public class UserDeliveredDonationsFeedFragment extends ListFragment {
                     /**
                      * Updating parsed JSON data into ListView
                      * */
-                    ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_user_my_claimed_donation_feed,
-                            new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_CLAIM_CODE, TAG_DELIVERED_AT,
-                                    TAG_ORPH_NAME, TAG_ORPH_PHONE_NUMBER, TAG_ORPH_ADDRESS_LINE_1, TAG_ORPH_ADDRESS_LINE_2, TAG_ORPH_CITY, TAG_ORPH_STATE},
-                            new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems, R.id.LT_claimCode,
-                                    R.id.LT_timestamp, R.id.LT_orphName, R.id.LT_orphPhoneNumber, R.id.LT_orphAddressLine1, R.id.LT_orphAddressLine2,
-                                    R.id.LT_orphCity, R.id.LT_orphState});
+                    ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_claimed_donation_feed,
+                            new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_PHONE_NUMBER, TAG_CLAIM_CODE,
+                                    TAG_ADDRESS_LINE_1, TAG_ADDRESS_LINE_2, TAG_CITY, TAG_STATE, TAG_DELIVERED_AT, TAG_DONORNAME},
+                            new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems,
+                                    R.id.LT_phoneNumber, R.id.LT_claimCode, R.id.LT_addressLine1, R.id.LT_addressLine2, R.id.LT_city, R.id.LT_state,
+                                    R.id.LT_timestamp, R.id.LT_donorName });
                     // updating listview
                     setListAdapter(adapter);
                 }

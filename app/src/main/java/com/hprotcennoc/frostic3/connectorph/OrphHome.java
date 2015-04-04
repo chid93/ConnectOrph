@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageClaimedDonationsFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageDonateFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.fragments.OrphanageNeedFeedFragment;
 import com.hprotcennoc.frostic3.connectorph.library.model.NavDrawerItem;
@@ -125,7 +124,6 @@ public class OrphHome extends ActionBarActivity {
             displayView(position);
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -172,8 +170,13 @@ public class OrphHome extends ActionBarActivity {
                 fragment = new OrphanageDonateFeedFragment();
                 break;
             case 1:
-                previousPosition = position;
-                fragment = new OrphanageClaimedDonationsFeedFragment();
+                Intent UserMyDonationsIntent = new Intent(this, OrphanageMyDonations.class);
+                UserMyDonationsIntent.putExtra("email", demail);
+                startActivity(UserMyDonationsIntent);
+                mDrawerList.setItemChecked(previousPosition, true);
+                mDrawerList.setSelection(previousPosition);
+                setTitle(navMenuTitles[previousPosition]);
+                mDrawerLayout.closeDrawers();
                 break;
             case 2:
                 previousPosition = position;

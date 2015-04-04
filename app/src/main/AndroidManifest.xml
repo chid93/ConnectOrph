@@ -85,6 +85,11 @@
             android:label="My Donations"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".OrphanageMyDonations"
+            android:parentActivityName=".UserHome"
+            android:label="My Donations"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".OrphanageMyProfile"
             android:parentActivityName=".OrphHome"
             android:label="Profile"

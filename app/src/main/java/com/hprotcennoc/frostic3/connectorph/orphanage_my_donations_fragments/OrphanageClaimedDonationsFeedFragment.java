@@ -1,16 +1,22 @@
-package com.hprotcennoc.frostic3.connectorph.fragments;
+package com.hprotcennoc.frostic3.connectorph.orphanage_my_donations_fragments;
 
-import android.app.ListFragment;
+import android.support.v4.app.ListFragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hprotcennoc.frostic3.connectorph.R;
@@ -26,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
+public class OrphanageClaimedDonationsFeedFragment extends ListFragment{
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -34,12 +40,12 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_claimed_donation = "http://connectorph.byethost24.com/connectorph_php/claimed_donation_feed.php";
+    private static String url_feed_claimed_donation = "http://connectorph.byethost7.com/connectorph_php/claimed_donation_feed.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    private static final String TAG_CLAIMED_DONATIONS = "claimedDonations";
+    private static final String TAG_SELECTED_DONATIONS = "SelectedDonationsFeed";
     private static final String TAG_CLAIM_CODE = "claim_code";
     private static final String TAG_DONATIONID = "donationid";
     private static final String TAG_DONORNAME = "donorName";
@@ -54,8 +60,14 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
     private static final String TAG_ADDRESS_LINE_2 = "caddress2";
     private static final String TAG_STATE = "cstate";
     private static final String TAG_CITY = "ccity";
+
+    private static String tag = "MyClaimedDonations";
     // products JSONArray
     JSONArray donationsArray = null;
+    ListView lv;
+    TextView did;
+    static int currentSelection;
+    private ActionMode.Callback modeCallBack;
 
     View rootView;
     String demail;
@@ -78,7 +90,47 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Get listview
-        //ListView lv = getListView();
+        lv = getListView();
+        //Contextual Action Bar STARTS here
+        modeCallBack = new ActionMode.Callback() {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu){
+                return false;
+            }
+            public void onDestroyActionMode(ActionMode mode) {
+                mode = null;
+            }
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                mode.setTitle("Options");
+                mode.getMenuInflater().inflate(R.menu.menu_actionbar_orphanage_claimed_donation, menu);
+                return true;
+            }
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                int id = item.getItemId();
+                did = (TextView) lv.getChildAt(currentSelection).findViewById(R.id.LT_donationid);
+                switch (id) {
+                    case R.id.good: {
+                        Log.i("OrphanageClaimedDonationFeedFragment", "action_good");
+                        tag = "markAsDelivered";
+                        new LoadAllProducts().execute();
+                        mode.finish();
+                        return true;
+                    }
+                    default:
+                        return false;
+                }
+            }
+        };
+        //Contextual Action Bar ENDS here
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick (AdapterView parent, View view, int position, long id) {
+                System.out.println("Long click");
+                currentSelection = position; //Get position of the item
+                getActivity().startActionMode(modeCallBack); //Call CAB on long click
+                view.setSelected(true);
+                return true;
+            }
+        });
     }
 
     /**
@@ -108,21 +160,35 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("email", demail));
+            Log.d("OrphanageClaimedDonationsFeedFragment Email/Tag: ", params.toString());
+            JSONObject json;
+
+            if(tag.equals("markAsDelivered")){
+                params.add(new BasicNameValuePair(TAG_DONATIONID, did.getText().toString()));
+                params.add(new BasicNameValuePair("tag",tag));
+                json = JSONParser.makeHttpRequest(url_feed_claimed_donation, "POST", params);
+                tag = "MyClaimedDonations";
+                Log.d("Mark Donation as Delivered: ", json.toString());
+
+            }
+
+            params.add(new BasicNameValuePair("tag",tag));
+            Log.d("OrphanageClaimedDonationsFeedFragment Email/Tag: ", params.toString());
             // getting JSON string from URL
-            JSONObject json = JSONParser.makeHttpRequest(url_feed_claimed_donation, "POST", params);
+            json = JSONParser.makeHttpRequest(url_feed_claimed_donation, "POST", params);
 
             // Check your log cat for JSON reponse
             Log.d("All Donations: ", json.toString());
-            Log.d("OrphanageClaimedDonationsFeedFragment Email: ", params.toString());
 
             try {
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
+                donationsList.clear();
 
                 if (success == 1) {
                     // products found
                     // Getting Array of Donations
-                    donationsArray = json.getJSONArray(TAG_CLAIMED_DONATIONS);
+                    donationsArray = json.getJSONArray(TAG_SELECTED_DONATIONS);
 
                     // looping through All Donations
                     for (int i = 0; i < donationsArray.length(); i++) {
@@ -212,9 +278,7 @@ public class OrphanageClaimedDonationsFeedFragment extends ListFragment {
                     setListAdapter(adapter);
                 }
             });
-
         }
-
     }
 
 }
