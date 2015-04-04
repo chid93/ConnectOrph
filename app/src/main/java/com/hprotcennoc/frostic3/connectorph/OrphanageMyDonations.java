@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hprotcennoc.frostic3.connectorph.orphanage_my_donations_fragments.OrphanageClaimedDonationsFeedFragment;
@@ -47,6 +48,12 @@ public class OrphanageMyDonations extends ActionBarActivity {
         });*/
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
     //Handle Up button as Back button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -54,8 +61,14 @@ public class OrphanageMyDonations extends ActionBarActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.action_logout:
+                finish();
+                break;
+            case R.id.action_refresh:
+                this.recreate();
+                break;
         }
-        return(super.onOptionsItemSelected(item));
+        return super.onOptionsItemSelected(item);
     }
 
     public static class MyAdapter extends FragmentPagerAdapter {

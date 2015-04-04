@@ -50,6 +50,7 @@ public class FindNearbyOrphanages extends ActionBarActivity implements LocationL
     //NAVIGATION DRAWER STARTS HERE
     private static String demail;
     private static int positionFromIntent;
+    boolean flag = false;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -179,9 +180,6 @@ public class FindNearbyOrphanages extends ActionBarActivity implements LocationL
             builder.create().show();
             return;
         }
-        else{
-            Toast.makeText(FindNearbyOrphanages.this, "Retrieving Location..", Toast.LENGTH_SHORT).show();
-        }
 
         //Refresh every 180 seconds!!
         //locationManager.requestLocationUpdates(bestProvider, 60000, 0, this);
@@ -221,9 +219,17 @@ public class FindNearbyOrphanages extends ActionBarActivity implements LocationL
         switch (item.getItemId()) {
             case R.id.action_logout:
                 finish();
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
+            case R.id.action_refresh:
+                if(previousPosition == 3) {
+                    flag = true;
+                    displayView(previousPosition);
+                }
+                else
+                    this.recreate();
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /* *
@@ -236,7 +242,7 @@ public class FindNearbyOrphanages extends ActionBarActivity implements LocationL
         menu.findItem(R.id.action_logout).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
-
+    static int previousPosition = 2;
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
@@ -259,13 +265,19 @@ public class FindNearbyOrphanages extends ActionBarActivity implements LocationL
                 mDrawerLayout.closeDrawers();
                 break;
             case 2:
+                previousPosition = position;
                 mDrawerLayout.closeDrawer(mDrawerList);
-                locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null);
-                locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null);
+                startActivity(getIntent());
+                finish();
+                overridePendingTransition(0,0);
                 break;
             case 3:
-                locationManager.removeUpdates(this);
-                ft.hide(fragmentGM).commit();
+                if(!flag) {
+                    previousPosition = position;
+                    locationManager.removeUpdates(this);
+                    ft.hide(fragmentGM).commit();
+                }
+                flag = true;
                 fragment = new UserFindOrphanageFragment();
                 break;
 

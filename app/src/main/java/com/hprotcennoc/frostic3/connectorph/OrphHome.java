@@ -110,6 +110,8 @@ public class OrphHome extends ActionBarActivity {
             // on first time display view for first nav item
             displayView(0);
         }
+        else
+            setTitle(navMenuTitles[previousPosition]);
         //NAVIGATION DRAWER CONTINUES LATER
     }
 
@@ -142,9 +144,10 @@ public class OrphHome extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_logout:
                 finish();
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.action_refresh:
+                this.recreate();
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /* *

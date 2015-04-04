@@ -50,6 +50,7 @@ public class UserHome extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_user);
 
+
         //NAVIGATION DRAWER CONTINUES HERE
         demail = getIntent().getStringExtra("email");
         mTitle = mDrawerTitle = getTitle();
@@ -108,6 +109,11 @@ public class UserHome extends ActionBarActivity{
         if (savedInstanceState == null) {
             // on first time display view for first nav item
             displayView(0);
+            Log.e("UserHOME", "saved instance is NULL");
+        }
+        else {
+            setTitle(navMenuTitles[previousPosition]);
+            Log.e("UserHOME", "saved instance is NOT NULL");
         }
         //NAVIGATION DRAWER CONTINUES LATER
     }
@@ -142,9 +148,12 @@ public class UserHome extends ActionBarActivity{
         switch (item.getItemId()) {
             case R.id.action_logout:
                 finish();
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
+            case R.id.action_refresh:
+                this.recreate();
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /* *
