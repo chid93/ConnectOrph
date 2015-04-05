@@ -38,7 +38,7 @@ public class OrphanageNeedFeedFragment extends ListFragment {
     ArrayList<HashMap<String, String>> needsList;
 
     // url to get all products list
-    private static String url_feed_needs = "http://connectorph.byethost7.com/connectorph_php/feed_needs.php";
+    private static String url_feed_needs = "http://connectorph.byethost11.com/connectorph_php/feed_needs.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

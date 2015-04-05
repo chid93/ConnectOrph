@@ -44,8 +44,8 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
     ArrayList<HashMap<String, String>> donationsList;
 
     // url to get all products list
-    private static String url_feed_user_my_donation = "http://connectorph.byethost7.com/connectorph_php/user_my_donation_feed.php";
-    private static String url_edit_delete_donation = "http://connectorph.byethost7.com/connectorph_php/edit_delete_donation.php";
+    private static String url_feed_user_my_donation = "http://connectorph.byethost11.com/connectorph_php/user_my_donation_feed.php";
+    private static String url_edit_delete_donation = "http://connectorph.byethost11.com/connectorph_php/edit_delete_donation.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

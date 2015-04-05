@@ -25,7 +25,7 @@ public class ResetPassword extends ActionBarActivity{
     //DATABASE STARTS HERE
     // Progress Dialog
     private ProgressDialog pDialog;
-    private static String url_login_user = "http://connectorph.byethost7.com/connectorph_php/login_user.php";
+    private static String url_login_user = "http://connectorph.byethost11.com/connectorph_php/login_user.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     private static String tag;

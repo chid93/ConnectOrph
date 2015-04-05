@@ -47,7 +47,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     private ProgressDialog pDialog;
 
     // url to create new product
-    private static String url_new_orph = "http://connectorph.byethost7.com/connectorph_php/new_orph.php";
+    private static String url_new_orph = "http://connectorph.byethost11.com/connectorph_php/new_orph.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
