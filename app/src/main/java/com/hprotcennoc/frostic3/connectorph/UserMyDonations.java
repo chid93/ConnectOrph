@@ -1,5 +1,6 @@
 package com.hprotcennoc.frostic3.connectorph;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -62,9 +63,13 @@ public class UserMyDonations extends ActionBarActivity {
                 onBackPressed();
                 return true;
             case R.id.action_logout:
-                finish();
+                Intent logout = new Intent(this, MainActivity.class);
+                logout.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(logout);
+                break;
             case R.id.action_refresh:
                 this.recreate();
+                break;
         }
         return(super.onOptionsItemSelected(item));
     }

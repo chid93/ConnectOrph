@@ -34,6 +34,7 @@
         <item name="android:actionModeCloseDrawable" tools:ignore="NewApi">@drawable/ic_action_accept</item>
         <item name="android:actionModeCloseButtonStyle" tools:ignore="NewApi">@style/ActionButton.CloseMode.Bluewhite</item>
 
+        <!-- <item name="android:windowAnimationStyle">@null</item> -->
         <item name="actionBarItemBackground">@drawable/selectable_background_bluewhite</item>
         <item name="popupMenuStyle">@style/PopupMenu.Bluewhite</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Bluewhite</item>

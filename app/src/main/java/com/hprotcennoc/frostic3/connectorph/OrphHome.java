@@ -143,9 +143,13 @@ public class OrphHome extends ActionBarActivity {
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.action_logout:
-                finish();
+                Intent logout = new Intent(this, MainActivity.class);
+                logout.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(logout);
+                break;
             case R.id.action_refresh:
                 this.recreate();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
