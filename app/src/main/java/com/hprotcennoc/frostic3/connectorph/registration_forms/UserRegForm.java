@@ -60,30 +60,44 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     public static boolean isValidEmail(CharSequence target) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
-
+    // validate first name
+    public static boolean isValidName( String Name ) {
+        return Name.matches( "[a-zA-Z ]+" );
+    }
     public boolean clientSideCheck(EditText view) {
         if(view.length() == 0) {
             view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
             view.setError("Required");
             return false;
-        }
-        else if(view == findViewById(R.id.fr_user_email_ET)) {
+        } else if(view == findViewById(R.id.fr_user_name_ET)) {
+            String nameText = view.getText().toString();
+            if (!isValidName(nameText)) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Name shouldn't contain special characters");
+                return false;
+            }
+        } else if(view == findViewById(R.id.fr_user_email_ET)) {
             String emailText = view.getText().toString();
             if (!isValidEmail(emailText)) {
                 view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
                 view.setError("Invalid Email");
                 return false;
             }
-        }
-        else if(view == findViewById(R.id.fr_user_retype_password_ET)) {
+        } else if(view == findViewById(R.id.fr_user_password_ET)) {
+            EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
+            if (password.length()<6) {
+                view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                view.setError("Passwords is too short! Use at least 8 characters.");
+                return false;
+            }
+        } else if(view == findViewById(R.id.fr_user_retype_password_ET)) {
             EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
             if (!(view.getText().toString().equals(password.getText().toString()))) {
                 view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
                 view.setError("Passwords does not match");
                 return false;
             }
-        }
-        else if(view == findViewById(R.id.fr_user_phone_number_ET)) {
+        } else if(view == findViewById(R.id.fr_user_phone_number_ET)) {
             String phoneNumber = view.getText().toString();
             if (phoneNumber.length() < 8) {
                 view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
@@ -108,8 +122,13 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
                 if(view.length() == 0) {
                     view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
                     view.setError("Required");
-                }
-                //Check if it is a valid Email id
+                }else if(view == findViewById(R.id.fr_user_name_ET)) {
+                    String nameText = view.getText().toString();
+                    if (!isValidName(nameText)) {
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Name shouldn't contain special characters");
+                    }
+                } //Check if it is a valid Email id
                 else if(v == findViewById(R.id.fr_user_email_ET)){
                     String emailText = view.getText().toString();
                     if(!isValidEmail(emailText)){
@@ -120,9 +139,13 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
                         view.setBackground(getResources().getDrawable(R.drawable.rounded_edittext));
                         view.setError(null);
                     }
-                }
-                //Check if both Passwords match
-                else if(v == findViewById(R.id.fr_user_retype_password_ET)){
+                }else if(view == findViewById(R.id.fr_user_password_ET)) {
+                    EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
+                    if (password.length()<6) {
+                        view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
+                        view.setError("Passwords is too short! Use at least 8 characters.");
+                    }
+                } else if(v == findViewById(R.id.fr_user_retype_password_ET)){
                     password = (EditText) findViewById(R.id.fr_user_password_ET);
                     if(!(view.getText().toString().equals(password.getText().toString()))){
                         view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
