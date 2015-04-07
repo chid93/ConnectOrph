@@ -316,16 +316,16 @@ public class UserUnclaimedDonationsFeedFragment extends ListFragment implements 
                         String city = c.optString(TAG_CITY);
 
                         // Converting timestamp into x ago format
-                        CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
+                        /*CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
                                 Long.parseLong(created_at) * 1000,
-                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);*/
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<>();
 
                         // adding each child node to HashMap key => value
                         map.put(TAG_DONATIONID, id);
-                        map.put(TAG_CREATED_AT, timeAgo.toString());
+                        map.put(TAG_CREATED_AT, created_at);
                         map.put(TAG_CATEGORY, category);
                         map.put(TAG_SUB_CATEGORY, subCategory);
                         map.put(TAG_DESC, desc);

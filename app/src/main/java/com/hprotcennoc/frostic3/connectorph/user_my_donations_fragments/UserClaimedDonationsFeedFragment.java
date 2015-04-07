@@ -47,6 +47,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
     private static final String TAG_SUB_CATEGORY = "subCategory";
     private static final String TAG_DESC = "description";
     private static final String TAG_PHONE_NUMBER = "phoneNumber";
+    private static final String TAG_CREATED_AT = "created_at";
     private static final String TAG_NUM_OF_ITEMS = "numberOfItems";
     private static final String TAG_ADDRESS_LINE_1 = "caddress1";
     private static final String TAG_ADDRESS_LINE_2 = "caddress2";
@@ -140,7 +141,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                         // Storing each json item in variable
                         String id = c.optString(TAG_DONATIONID);
                         String claim_code = c.optString(TAG_CLAIM_CODE);
-                        String claimed_at = c.optString(TAG_CLAIMED_AT);
+                        String created_at = c.optString(TAG_CREATED_AT);
                         String category = c.optString(TAG_CATEGORY);
                         String subCategory = c.optString(TAG_SUB_CATEGORY);
                         String desc = c.optString(TAG_DESC);
@@ -163,9 +164,9 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                         }*/
 
                         // Converting timestamp into x ago format
-                        CharSequence timeAgoClaim = DateUtils.getRelativeTimeSpanString(
+                        /*CharSequence timeAgoClaim = DateUtils.getRelativeTimeSpanString(
                                 Long.parseLong(claimed_at) * 1000,
-                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+                                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);*/
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<>();
@@ -173,7 +174,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                         // adding each child node to HashMap key => value
                         map.put(TAG_DONATIONID, id);
                         map.put(TAG_CLAIM_CODE, claim_code);
-                        map.put(TAG_CLAIMED_AT, timeAgoClaim.toString());
+                        map.put(TAG_CREATED_AT, created_at);
                         map.put(TAG_CATEGORY, category);
                         map.put(TAG_SUB_CATEGORY, subCategory);
                         map.put(TAG_DESC, desc);
@@ -229,7 +230,7 @@ public class UserClaimedDonationsFeedFragment extends ListFragment {
                      * Updating parsed JSON data into ListView
                      * */
                     ListAdapter adapter = new SimpleAdapter( getActivity(), donationsList, R.layout.list_item_user_my_claimed_donation_feed,
-                            new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_CLAIM_CODE, TAG_CLAIMED_AT,
+                            new String[] { TAG_DONATIONID, TAG_CATEGORY, TAG_SUB_CATEGORY, TAG_DESC, TAG_NUM_OF_ITEMS, TAG_CLAIM_CODE, TAG_CREATED_AT,
                                     TAG_ORPH_NAME, TAG_ORPH_PHONE_NUMBER, TAG_ORPH_ADDRESS_LINE_1, TAG_ORPH_ADDRESS_LINE_2, TAG_ORPH_CITY, TAG_ORPH_STATE},
                             new int[] { R.id.LT_donationid, R.id.LT_category, R.id.LT_subCategory, R.id.LT_description, R.id.LT_numOfItems, R.id.LT_claimCode,
                                     R.id.LT_timestamp, R.id.LT_orphName, R.id.LT_orphPhoneNumber, R.id.LT_orphAddressLine1, R.id.LT_orphAddressLine2,
