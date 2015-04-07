@@ -109,7 +109,10 @@ public class OrphanageFragmentLaunch extends android.support.v4.app.Fragment {
             Log.i("OrphanageFragmentLaunch", "In onPreExecute");
             super.onPreExecute();
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Logging in..");
+            if(tag.equals(login_tag))
+                pDialog.setMessage("Logging in..");
+            else
+                pDialog.setMessage("Loading.. Please wait.");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
