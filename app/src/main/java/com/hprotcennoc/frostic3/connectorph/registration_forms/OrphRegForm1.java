@@ -2,7 +2,10 @@ package com.hprotcennoc.frostic3.connectorph.registration_forms;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -25,6 +28,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,7 +161,7 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
             public void onClick(View view) {
                 if( clientSideCheck(address1) && clientSideCheck(phoneNumber) && clientSideCheck(state) && clientSideCheck(city)) {
                     // creating new product in background thread
-                    new CreateNewProduct().execute();
+                    new NetCheck().execute();
                 }
                 else{
                     clientSideCheck(address1);
@@ -370,4 +377,54 @@ public class OrphRegForm1 extends ActionBarActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    //NETCHECK STARTS HERE
+    class NetCheck extends AsyncTask<String,String,Boolean> {
+        private ProgressDialog nDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            nDialog = new ProgressDialog(OrphRegForm1.this);
+            nDialog.setMessage("Checking Network..");
+            nDialog.setIndeterminate(false);
+            nDialog.setCancelable(true);
+            nDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... args) {
+            ConnectivityManager cm = (ConnectivityManager) OrphRegForm1.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://www.google.com");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean connectivity) {
+
+            if (connectivity) {
+                nDialog.dismiss();
+                Log.i("NetCheck", "Connection Successful");
+                new CreateNewProduct().execute();
+            } else {
+                nDialog.dismiss();
+                Log.i("NetCheck", "No connectivity");
+                Toast.makeText(OrphRegForm1.this, "Error in Network Connection", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    //NETCHECK ENDS HERE
 }

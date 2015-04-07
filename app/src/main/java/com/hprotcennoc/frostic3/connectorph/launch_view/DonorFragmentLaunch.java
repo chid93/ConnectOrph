@@ -3,6 +3,8 @@ package com.hprotcennoc.frostic3.connectorph.launch_view;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +67,7 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
             public void onClick(View arg0) {
                 // get user details from email and password in background thread
                 tag=login_tag;
-                new getUserByEmailAndPassword().execute();
+                new NetCheck().execute();
             }
         });
         //Register Listener
@@ -75,9 +81,9 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
         TVforgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                tag=forgotPassword_tag;
                 // get email from user and check if it exists in database
-                new getUserByEmailAndPassword().execute();
+                tag=forgotPassword_tag;
+                new NetCheck().execute();
             }
         });
 
@@ -192,5 +198,56 @@ public class DonorFragmentLaunch extends android.support.v4.app.Fragment{
 
     }
     //DATABASE ENDS HERE
+    //NETCHECK STARTS HERE
+    class NetCheck extends AsyncTask<String,String,Boolean> {
+        private ProgressDialog nDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            nDialog = new ProgressDialog(getActivity());
+            nDialog.setMessage("Loading..");
+            nDialog.setMessage("Checking Network..");
+            nDialog.setIndeterminate(false);
+            nDialog.setCancelable(true);
+            nDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... args) {
+            ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://www.google.com");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean connectivity) {
+
+            if (connectivity) {
+                nDialog.dismiss();
+                Log.i("NetCheck", "Connection Successful");
+                new getUserByEmailAndPassword().execute();
+            } else {
+                nDialog.dismiss();
+                Log.i("NetCheck", "No connectivity");
+                Toast.makeText(getActivity(), "Error in Network Connection", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    //NETCHECK ENDS HERE
 
 }

@@ -1,6 +1,9 @@
 package com.hprotcennoc.frostic3.connectorph.registration_forms;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +24,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,7 +193,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
             public void onClick(View view) {
                 if( clientSideCheck(name) && clientSideCheck(email) && clientSideCheck(password) && clientSideCheck(retypePass) && clientSideCheck(phoneNumber) ) {
                     // creating new product in background thread
-                    new CreateNewProduct().execute();
+                    new NetCheck().execute();
                 }
                 else {
                     clientSideCheck(name);
@@ -377,5 +384,54 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    //STATE/CITY DATA LOADER ENDS HERE
+    //STATE/CITY DATA LOADER ENDS HERE//NETCHECK STARTS HERE
+    class NetCheck extends AsyncTask<String,String,Boolean> {
+        private ProgressDialog nDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            nDialog = new ProgressDialog(UserRegForm.this);
+            nDialog.setMessage("Checking Network..");
+            nDialog.setIndeterminate(false);
+            nDialog.setCancelable(true);
+            nDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... args) {
+            ConnectivityManager cm = (ConnectivityManager) UserRegForm.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://www.google.com");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean connectivity) {
+
+            if (connectivity) {
+                nDialog.dismiss();
+                Log.i("NetCheck", "Connection Successful");
+                new CreateNewProduct().execute();
+            } else {
+                nDialog.dismiss();
+                Log.i("NetCheck", "No connectivity");
+                Toast.makeText(UserRegForm.this, "Error in Network Connection", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    //NETCHECK ENDS HERE
 }
