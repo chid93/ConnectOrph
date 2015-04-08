@@ -47,7 +47,7 @@ public class OrphRegForm extends ActionBarActivity{
             EditText password = (EditText) findViewById(R.id.fr_orph_password_ET);
             if (password.length()<6) {
                 view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
-                view.setError("Passwords is too short! Use at least 8 characters.");
+                view.setError("Passwords is too short! Use at least 6 characters.");
                 return false;
             }
         } else if(view == findViewById(R.id.fr_orph_retype_password_ET)) {
@@ -95,7 +95,7 @@ public class OrphRegForm extends ActionBarActivity{
                     EditText password = (EditText) findViewById(R.id.fr_orph_password_ET);
                     if (password.length()<6) {
                         view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
-                        view.setError("Passwords is too short! Use at least 8 characters.");
+                        view.setError("Passwords is too short! Use at least 6 characters.");
                     }
                 }
                 //Check if both Passwords match

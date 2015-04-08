@@ -87,7 +87,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
             EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
             if (password.length()<6) {
                 view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
-                view.setError("Passwords is too short! Use at least 8 characters.");
+                view.setError("Passwords is too short! Use at least 6 characters.");
                 return false;
             }
         } else if(view == findViewById(R.id.fr_user_retype_password_ET)) {
@@ -143,7 +143,7 @@ public class UserRegForm extends ActionBarActivity implements AdapterView.OnItem
                     EditText password = (EditText) findViewById(R.id.fr_user_password_ET);
                     if (password.length()<6) {
                         view.setBackground(getResources().getDrawable(R.drawable.rounded_errortext));
-                        view.setError("Passwords is too short! Use at least 8 characters.");
+                        view.setError("Passwords is too short! Use at least 6 characters.");
                     }
                 } else if(v == findViewById(R.id.fr_user_retype_password_ET)){
                     password = (EditText) findViewById(R.id.fr_user_password_ET);
